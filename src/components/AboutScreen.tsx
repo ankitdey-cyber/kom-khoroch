@@ -453,15 +453,20 @@ export const AboutScreen: React.FC<AboutScreenProps> = ({ lang, onSetLang }) => 
               suburban rail, underground metro stations, buses, shared autos,
               and Ganga ferry ghats.
             </p>
-            <div className="mt-4 flex items-center gap-2 rounded-xl bg-surface-container-low p-3.5 text-xs text-on-surface">
-              <CheckCircle2
-                className="h-4 w-4 shrink-0 text-secondary"
-                aria-hidden="true"
-              />
-              <span>
-                <strong>Disclaimer:</strong> Fares are approximate. Always check
-                official railway, metro, or operator counters before travel.
-              </span>
+            <div className="mt-4 flex flex-col gap-1.5 rounded-xl bg-surface-container-low p-3.5 text-xs text-on-surface">
+              <div className="flex items-center gap-2">
+                <CheckCircle2
+                  className="h-4 w-4 shrink-0 text-secondary"
+                  aria-hidden="true"
+                />
+                <span>
+                  <strong>Disclaimer:</strong> Fares are approximate. Always check
+                  official railway, metro, or operator counters before travel.
+                </span>
+              </div>
+              <p className="pl-6 font-semibold text-secondary">
+                Your location stays on your phone.
+              </p>
             </div>
           </div>
         </div>

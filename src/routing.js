@@ -78,6 +78,14 @@ export function minutes(modeCfg, mode, km, opts = {}) {
   return Math.max(1, Math.round(travelMin + waitMin));
 }
 
+function formatWalkDistance(km) {
+  if (km < 1) {
+    const meters = Math.max(50, Math.round((km * 1000) / 50) * 50);
+    return `${meters} m`;
+  }
+  return `${km.toFixed(1)} km`;
+}
+
 function lineSegmentKm(stopMap, stopIds, i, j) {
   const step = i < j ? 1 : -1;
   let total = 0;
@@ -122,7 +130,27 @@ export function createPlanner(network) {
     return null;
   }
 
-  function runDijkstra(fromId, toId, opts, timeValuePerMin) {
+  function findNearestStops(lat, lng, k = 3) {
+    if (
+      typeof lat !== 'number' ||
+      typeof lng !== 'number' ||
+      !Number.isFinite(lat) ||
+      !Number.isFinite(lng) ||
+      k <= 0
+    ) {
+      return [];
+    }
+    const origin = { lat, lng };
+    return stops
+      .map((s) => ({
+        ...s,
+        km: haversineKm(origin, s),
+      }))
+      .sort((a, b) => a.km - b.km)
+      .slice(0, k);
+  }
+
+  function runDijkstra(fromId, toId, opts, timeValuePerMin, originPoint = null) {
     const {
       peak = false,
       smartCard = false,
@@ -207,15 +235,55 @@ export function createPlanner(network) {
       }
     }
 
+    // Temporary "ME" origin edges (walk within maxWalkKm, shared auto/toto up to 3 km)
+    if (originPoint) {
+      for (const s of stops) {
+        const km = haversineKm(originPoint, s);
+        if (km <= maxWalkKm) {
+          const min = minutes(modes, 'walk', km, { peak, includeWait: false });
+          addEdge('ME', {
+            mode: 'walk',
+            lineId: null,
+            lineName: `Walk ${formatWalkDistance(km)} to ${s.name}`,
+            from: 'ME',
+            to: s.id,
+            fromName: originPoint.name,
+            toName: s.name,
+            via: ['ME', s.id],
+            km: Number(km.toFixed(2)),
+            fare: 0,
+            minutes: min,
+          });
+        }
+        if (!avoidSet.has('auto') && km <= 3) {
+          const autoFare = fare('auto', km, { smartCard, peak });
+          const autoMin = minutes(modes, 'auto', km, {
+            peak,
+            includeWait: true,
+          });
+          addEdge('ME', {
+            mode: 'auto',
+            lineId: null,
+            lineName: `Toto to ${s.name}`,
+            from: 'ME',
+            to: s.id,
+            fromName: originPoint.name,
+            toName: s.name,
+            via: ['ME', s.id],
+            km: Number(km.toFixed(2)),
+            fare: autoFare,
+            minutes: autoMin,
+          });
+        }
+      }
+    }
+
     // Point-to-point cab and bike taxi edges (direct or from/to major hubs)
     const directModes = ['bike', 'cab'].filter((m) => !avoidSet.has(m));
     if (directModes.length > 0) {
-      const candidateHubs = new Set([fromId, toId]);
-      for (const s of stops) {
-        if (s.place) candidateHubs.add(s.id);
-      }
+      const originStops = originPoint ? [originPoint, ...stops] : stops;
 
-      for (const sA of stops) {
+      for (const sA of originStops) {
         for (const sB of stops) {
           if (sA.id === sB.id) continue;
           const isDirectOD = sA.id === fromId && sB.id === toId;
@@ -330,10 +398,44 @@ export function createPlanner(network) {
   }
 
   function planTrip(from, to, opts = {}) {
-    const fromId = stopMap[from] ? from : findStop(from);
+    const isPointOrigin = Boolean(
+      from &&
+        typeof from === 'object' &&
+        typeof from.lat === 'number' &&
+        typeof from.lng === 'number' &&
+        Number.isFinite(from.lat) &&
+        Number.isFinite(from.lng)
+    );
     const toId = stopMap[to] ? to : findStop(to);
-    if (!fromId || !toId || fromId === toId) {
-      return { options: [], cab: null };
+    if (!toId) {
+      return { options: [], cab: null, outsideArea: false };
+    }
+
+    let fromId;
+    let originPoint = null;
+    if (isPointOrigin) {
+      const nearest = findNearestStops(from.lat, from.lng, 1);
+      if (nearest.length === 0 || nearest[0].km > 30) {
+        return {
+          options: [],
+          cab: null,
+          outsideArea: true,
+          error: "You're outside our Kolkata area",
+        };
+      }
+      fromId = 'ME';
+      originPoint = {
+        id: 'ME',
+        name: 'My location',
+        lat: from.lat,
+        lng: from.lng,
+        place: false,
+      };
+    } else {
+      fromId = stopMap[from] ? from : findStop(from);
+      if (!fromId || fromId === toId) {
+        return { options: [], cab: null, outsideArea: false };
+      }
     }
 
     const peak = Boolean(opts.peak);
@@ -348,7 +450,8 @@ export function createPlanner(network) {
         ? opts.timeValuePer10Min
         : 20;
 
-    const directKm = haversineKm(stopMap[fromId], stopMap[toId]);
+    const originStop = originPoint || stopMap[fromId];
+    const directKm = haversineKm(originStop, stopMap[toId]);
     const cab = {
       fare: fare('cab', directKm, { peak, smartCard }),
       minutes: minutes(modes, 'cab', directKm, { peak, includeWait: true }),
@@ -366,7 +469,8 @@ export function createPlanner(network) {
         fromId,
         toId,
         { peak, smartCard, avoid, maxWalkKm },
-        preset.tvPerMin
+        preset.tvPerMin,
+        originPoint
       );
       if (!legs || legs.length === 0) continue;
       const summary = summarizeLegs(legs, preset.label);
@@ -384,12 +488,13 @@ export function createPlanner(network) {
       (a, b) => a.totalFare - b.totalFare || a.totalMinutes - b.totalMinutes
     );
 
-    return { options, cab };
+    return { options, cab, outsideArea: false };
   }
 
   return {
     planTrip,
     findStop,
+    findNearestStops,
     stops,
     lines,
   };

@@ -81,9 +81,24 @@ export interface CabReference {
   minutes: number;
 }
 
+export interface NearestStop extends Stop {
+  km: number;
+}
+
+export interface GpsOrigin {
+  lat: number;
+  lng: number;
+  nearestStopId: string;
+  nearestStopName: string;
+  distanceKm: number;
+  displayLabel: string;
+}
+
 export interface PlanTripResult {
   options: RouteOption[];
   cab: CabReference | null;
+  outsideArea?: boolean;
+  error?: string;
 }
 
 export interface SavedCommute {

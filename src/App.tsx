@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { AboutScreen } from './components/AboutScreen';
 import { BottomNav } from './components/BottomNav';
 import { Footer } from './components/Footer';
@@ -8,6 +8,7 @@ import { ResultsScreen } from './components/ResultsScreen';
 import { RouteDetail } from './components/RouteDetail';
 import { SavedScreen } from './components/SavedScreen';
 import type {
+  GpsOrigin,
   LangKey,
   PlanTripResult,
   RouteOption,
@@ -18,6 +19,7 @@ import type {
 } from './types';
 import {
   STOP_MAP,
+  formatKm,
   getModeSummary,
   loadSavedCommutes,
   network,
@@ -76,6 +78,13 @@ export const App: React.FC = () => {
     null
   );
 
+  // In-memory only: never persisted to localStorage or sent to any server
+  const [gpsOrigin, setGpsOrigin] = useState<GpsOrigin | null>(null);
+  const [isLocating, setIsLocating] = useState<boolean>(false);
+  const [locationError, setLocationError] = useState<string | null>(null);
+  const locateRequestIdRef = useRef<number>(0);
+  const preLocateFromRef = useRef<string>('Serampore');
+
   const [savedCommutes, setSavedCommutes] = useState<SavedCommute[]>(() =>
     loadSavedCommutes()
   );
@@ -89,17 +98,117 @@ export const App: React.FC = () => {
     }
   }, [theme]);
 
+  const usingGps = Boolean(
+    gpsOrigin && fromText === gpsOrigin.displayLabel
+  );
+
+  const handleChangeFrom = (nextValue: string) => {
+    locateRequestIdRef.current += 1;
+    setIsLocating(false);
+    setLocationError(null);
+    setGpsOrigin(null);
+    setFromText(nextValue);
+  };
+
+  const requestCurrentLocation = () => {
+    if (typeof navigator === 'undefined' || !navigator.geolocation) {
+      setLocationError("Couldn't get your location. Type a stop instead.");
+      return;
+    }
+
+    const reqId = ++locateRequestIdRef.current;
+    const prevFrom =
+      fromText === 'Finding you...' ? preLocateFromRef.current : fromText;
+    preLocateFromRef.current = prevFrom;
+
+    setIsLocating(true);
+    setLocationError(null);
+    setFromText('Finding you...');
+
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        if (locateRequestIdRef.current !== reqId) return;
+        const { latitude: lat, longitude: lng } = pos.coords;
+        const nearest = planner.findNearestStops(lat, lng, 3);
+        setIsLocating(false);
+
+        if (!nearest.length || nearest[0].km > 30) {
+          setGpsOrigin(null);
+          setFromText(prevFrom);
+          setLocationError("You're outside our Kolkata area");
+          return;
+        }
+
+        const top = nearest[0];
+        const displayLabel = `My location (near ${top.name}, ${formatKm(top.km)})`;
+        setGpsOrigin({
+          lat,
+          lng,
+          nearestStopId: top.id,
+          nearestStopName: top.name,
+          distanceKm: top.km,
+          displayLabel,
+        });
+        setFromText(displayLabel);
+        setSelectedSignature(null);
+      },
+      (err) => {
+        if (locateRequestIdRef.current !== reqId) return;
+        setIsLocating(false);
+        setGpsOrigin(null);
+        setFromText(prevFrom);
+
+        if (err && err.code === 1) {
+          setLocationError(
+            'Location blocked. Allow it in browser settings or type a stop.'
+          );
+        } else {
+          setLocationError("Couldn't get your location. Type a stop instead.");
+        }
+      },
+      { enableHighAccuracy: true, timeout: 10000 }
+    );
+  };
+
   const resolvedStops = useMemo(() => {
-    const fromId = planner.findStop(fromText);
+    const fromId = usingGps ? 'ME' : planner.findStop(fromText);
     const toId = planner.findStop(toText);
     return { fromId, toId };
-  }, [fromText, toText]);
+  }, [fromText, toText, usingGps]);
 
   const { error, tripResult } = useMemo<{
     error: string | null;
     tripResult: PlanTripResult | null;
   }>(() => {
+    if (isLocating && fromText === 'Finding you...') {
+      return { error: null, tripResult: null };
+    }
+
     const { fromId, toId } = resolvedStops;
+
+    if (usingGps && gpsOrigin) {
+      if (!toId) {
+        return {
+          error: toText.trim()
+            ? `Couldn't find "${toText}". Pick a stop or place from the suggestions.`
+            : 'Enter a destination.',
+          tripResult: null,
+        };
+      }
+      const result = planner.planTrip(
+        { lat: gpsOrigin.lat, lng: gpsOrigin.lng },
+        toId,
+        options
+      );
+      if (result.outsideArea) {
+        return {
+          error: result.error ?? "You're outside our Kolkata area",
+          tripResult: null,
+        };
+      }
+      return { error: null, tripResult: result };
+    }
+
     if (!fromId || !toId) {
       const missing = !fromId ? fromText : toText;
       return {
@@ -117,7 +226,15 @@ export const App: React.FC = () => {
     }
     const result = planner.planTrip(fromId, toId, options);
     return { error: null, tripResult: result };
-  }, [resolvedStops, fromText, toText, options]);
+  }, [
+    isLocating,
+    resolvedStops,
+    usingGps,
+    gpsOrigin,
+    fromText,
+    toText,
+    options,
+  ]);
 
   const budgetAmount = useMemo(() => {
     if (budget.trim() === '') return null;
@@ -139,20 +256,29 @@ export const App: React.FC = () => {
     );
   }, [tripResult, selectedSignature]);
 
-  const fromName = resolvedStops.fromId
-    ? STOP_MAP[resolvedStops.fromId]?.name ?? fromText
-    : fromText;
+  const fromName =
+    usingGps && gpsOrigin
+      ? gpsOrigin.displayLabel
+      : resolvedStops.fromId
+        ? STOP_MAP[resolvedStops.fromId]?.name ?? fromText
+        : fromText;
   const toName = resolvedStops.toId
     ? STOP_MAP[resolvedStops.toId]?.name ?? toText
     : toText;
 
+  // Never persist GPS coordinates in localStorage: map GPS origin to nearest stop ID
+  const saveFromId =
+    usingGps && gpsOrigin ? gpsOrigin.nearestStopId : resolvedStops.fromId;
+  const saveFromName =
+    usingGps && gpsOrigin ? gpsOrigin.nearestStopName : fromName;
+
   const findSavedMatch = (opt: RouteOption | null): SavedCommute | null => {
-    if (!resolvedStops.fromId || !resolvedStops.toId || !opt) return null;
+    if (!saveFromId || !resolvedStops.toId || !opt) return null;
     const summary = getModeSummary(opt);
     return (
       savedCommutes.find(
         (s) =>
-          s.fromId === resolvedStops.fromId &&
+          s.fromId === saveFromId &&
           s.toId === resolvedStops.toId &&
           optionsMatch(s.options, options) &&
           s.modeSummary === summary
@@ -162,12 +288,12 @@ export const App: React.FC = () => {
 
   const savedSignatureSet = useMemo(() => {
     const set = new Set<string>();
-    if (!tripResult || !resolvedStops.fromId || !resolvedStops.toId) return set;
+    if (!tripResult || !saveFromId || !resolvedStops.toId) return set;
     for (const opt of tripResult.options) {
       const summary = getModeSummary(opt);
       const matched = savedCommutes.some(
         (s) =>
-          s.fromId === resolvedStops.fromId &&
+          s.fromId === saveFromId &&
           s.toId === resolvedStops.toId &&
           optionsMatch(s.options, options) &&
           s.modeSummary === summary
@@ -175,10 +301,10 @@ export const App: React.FC = () => {
       if (matched) set.add(opt.signature);
     }
     return set;
-  }, [tripResult, savedCommutes, resolvedStops, options]);
+  }, [tripResult, savedCommutes, saveFromId, resolvedStops.toId, options]);
 
   const handleToggleSaveOption = (opt: RouteOption) => {
-    if (!resolvedStops.fromId || !resolvedStops.toId) return;
+    if (!saveFromId || !resolvedStops.toId) return;
     const existing = findSavedMatch(opt);
     if (existing) {
       const next = savedCommutes.filter((s) => s.id !== existing.id);
@@ -188,9 +314,9 @@ export const App: React.FC = () => {
     }
 
     const newEntry: SavedCommute = {
-      id: `${resolvedStops.fromId}-${resolvedStops.toId}-${Date.now()}`,
-      fromId: resolvedStops.fromId,
-      fromName,
+      id: `${saveFromId}-${resolvedStops.toId}-${Date.now()}`,
+      fromId: saveFromId,
+      fromName: saveFromName,
       toId: resolvedStops.toId,
       toName,
       options: { ...options, avoid: [...options.avoid] },
@@ -220,12 +346,22 @@ export const App: React.FC = () => {
   };
 
   const handleSwap = () => {
+    locateRequestIdRef.current += 1;
+    setIsLocating(false);
+    setLocationError(null);
+    if (usingGps && gpsOrigin) {
+      setFromText(toText);
+      setToText(gpsOrigin.nearestStopName);
+      setGpsOrigin(null);
+      return;
+    }
+    setGpsOrigin(null);
     setFromText(toText);
     setToText(fromText);
   };
 
   const handleFindRoutes = () => {
-    if (error) return;
+    if (error || isLocating) return;
     setPlanSubView('results');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -237,6 +373,10 @@ export const App: React.FC = () => {
   };
 
   const handleReplanSaved = (item: SavedCommute) => {
+    locateRequestIdRef.current += 1;
+    setIsLocating(false);
+    setLocationError(null);
+    setGpsOrigin(null);
     setFromText(STOP_MAP[item.fromId]?.name ?? item.fromName);
     setToText(STOP_MAP[item.toId]?.name ?? item.toName);
     setOptions({ ...item.options, avoid: [...item.options.avoid] });
@@ -265,6 +405,11 @@ export const App: React.FC = () => {
     ? savedSignatureSet.has(activeOption.signature)
     : false;
 
+  const activeOriginPoint =
+    usingGps && gpsOrigin
+      ? { lat: gpsOrigin.lat, lng: gpsOrigin.lng }
+      : null;
+
   return (
     <div className="flex min-h-screen flex-col bg-surface text-on-surface">
       <Header
@@ -286,7 +431,7 @@ export const App: React.FC = () => {
             toText={toText}
             fromName={fromName}
             toName={toName}
-            onChangeFrom={setFromText}
+            onChangeFrom={handleChangeFrom}
             onChangeTo={setToText}
             onSwap={handleSwap}
             options={options}
@@ -299,6 +444,9 @@ export const App: React.FC = () => {
             onSubmit={handleFindRoutes}
             onSelectOption={handleSelectOption}
             onGoToAbout={() => handleTabChange('about')}
+            onUseMyLocation={requestCurrentLocation}
+            isLocating={isLocating}
+            locationError={locationError}
             lang={lang}
           />
         )}
@@ -319,6 +467,9 @@ export const App: React.FC = () => {
               setPlanSubView('plan');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
+            onUseMyLocation={requestCurrentLocation}
+            isLocating={isLocating}
+            locationError={locationError}
             lang={lang}
           />
         )}
@@ -331,6 +482,7 @@ export const App: React.FC = () => {
               toName={toName}
               option={activeOption}
               cab={tripResult?.cab ?? null}
+              originPoint={activeOriginPoint}
               isSaved={activeIsSaved}
               onSave={() => handleToggleSaveOption(activeOption)}
               onBack={() => {

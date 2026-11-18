@@ -29,7 +29,8 @@ ${stopListText}
 
 Rules:
 - Map origin and destination places/areas to the exact stop ID from the list above whenever mentioned (e.g. "Sector V" or "Salt Lake Sector 5" -> "SC5", "Serampore" -> "SRP", "Howrah" -> "HWH", "Sealdah" -> "SDH", "Airport" -> "APT", "BBD Bag" or "Dalhousie" -> "DLP", "Garia" -> "GRB", "New Garia" -> "KVS", "Tollygunge" -> "MHG", "New Town" -> "NWT").
-- Only populate fromStopId / toStopId if the user explicitly states an origin or destination. Otherwise leave them empty string "".
+- fromCurrentLocation: true if the user says origin is their current GPS location (e.g. "from here", "from my location", "my current location", "near me", "এখান থেকে"); otherwise false. When fromCurrentLocation is true, leave fromStopId empty string "".
+- Only populate fromStopId / toStopId if the user explicitly states a named origin or destination stop. Otherwise leave them empty string "".
 - avoid: array of modes to exclude, restricted strictly to ["cab", "bike", "bus", "auto", "ferry"]. For example "no bus" -> ["bus"], "avoid cab and bike" -> ["cab", "bike"]. Only include modes the user asked to avoid.
 - peak: true if user mentions peak/rush hour, false if off-peak/afternoon/late night, omit/null if unspecified.
 - smartCard: true if user mentions smart card, false if "no smart card", omit/null if unspecified.
@@ -101,9 +102,13 @@ async function startServer() {
             responseSchema: {
               type: Type.OBJECT,
               properties: {
+                fromCurrentLocation: {
+                  type: Type.BOOLEAN,
+                  description: 'True if user asked to travel from here / from my location, otherwise false.',
+                },
                 fromStopId: {
                   type: Type.STRING,
-                  description: 'Matched origin stop ID from network, or empty string if not specified.',
+                  description: 'Matched origin stop ID from network, or empty string if not specified or if fromCurrentLocation is true.',
                 },
                 toStopId: {
                   type: Type.STRING,

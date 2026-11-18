@@ -33,6 +33,7 @@ interface RouteDetailProps {
   toName: string;
   option: RouteOption;
   cab: CabReference | null;
+  originPoint?: { lat: number; lng: number } | null;
   isSaved: boolean;
   onSave: () => void;
   onBack: () => void;
@@ -44,6 +45,7 @@ export const RouteDetail: React.FC<RouteDetailProps> = ({
   toName,
   option,
   cab,
+  originPoint = null,
   isSaved,
   onSave,
   onBack,
@@ -347,11 +349,12 @@ export const RouteDetail: React.FC<RouteDetailProps> = ({
                         >
                           {network.modes[leg.mode].label}
                         </span>
-                        {leg.lineName !== network.modes[leg.mode].label && (
-                          <span className="text-xs font-semibold text-on-surface-variant">
-                            {leg.lineName}
-                          </span>
-                        )}
+                        {leg.from !== 'ME' &&
+                          leg.lineName !== network.modes[leg.mode].label && (
+                            <span className="text-xs font-semibold text-on-surface-variant">
+                              {leg.lineName}
+                            </span>
+                          )}
                       </div>
 
                       <div className="flex items-center gap-2 text-xs font-semibold text-on-surface-variant tabular-nums">
@@ -450,7 +453,7 @@ export const RouteDetail: React.FC<RouteDetailProps> = ({
               </span>
             </div>
 
-            <RouteMap option={option} />
+            <RouteMap option={option} originPoint={originPoint} />
           </div>
 
           {cab && cabMonthly !== null && (

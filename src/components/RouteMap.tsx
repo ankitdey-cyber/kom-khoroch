@@ -4,18 +4,29 @@ import { LINE_MAP, STOP_MAP, getLegColor, network } from '../utils/transit';
 
 interface RouteMapProps {
   option: RouteOption;
+  originPoint?: { lat: number; lng: number } | null;
 }
 
 const K = 1000;
 const COS = Math.cos((22.6 * Math.PI) / 180);
 
-function project(stopId: string): [number, number] {
-  const s = STOP_MAP[stopId];
-  if (!s) return [0, 0];
-  return [(s.lng - 88.28) * COS * K, (22.95 - s.lat) * K];
+function projectCoords(lat: number, lng: number): [number, number] {
+  return [(lng - 88.28) * COS * K, (22.95 - lat) * K];
 }
 
-export const RouteMap: React.FC<RouteMapProps> = ({ option }) => {
+export const RouteMap: React.FC<RouteMapProps> = ({
+  option,
+  originPoint = null,
+}) => {
+  const project = (stopId: string): [number, number] => {
+    if (stopId === 'ME' && originPoint) {
+      return projectCoords(originPoint.lat, originPoint.lng);
+    }
+    const s = STOP_MAP[stopId];
+    if (!s) return [0, 0];
+    return projectCoords(s.lat, s.lng);
+  };
+
   const svgData = useMemo(() => {
     const pts = option.legs.flatMap((leg) => leg.via.map(project));
     if (pts.length === 0) return null;
@@ -94,7 +105,7 @@ export const RouteMap: React.FC<RouteMapProps> = ({ option }) => {
       endpointIds,
       legend: Array.from(legendMap.entries()),
     };
-  }, [option]);
+  }, [option, originPoint]);
 
   if (!svgData) return null;
 
@@ -187,7 +198,7 @@ export const RouteMap: React.FC<RouteMapProps> = ({ option }) => {
           {/* Labels for leg endpoints */}
           {endpointIds.map((id, idx) => {
             const [x, y] = project(id);
-            const name = STOP_MAP[id]?.name ?? id;
+            const name = id === 'ME' ? 'My location' : (STOP_MAP[id]?.name ?? id);
             const onRightSide = x > x0 + w * 0.62;
             const yOffset = idx % 2 === 0 ? -fs * 0.3 : fs * 0.7;
             return (

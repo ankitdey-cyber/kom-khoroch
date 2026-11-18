@@ -89,19 +89,34 @@ export function getModeSummary(option: RouteOption): string {
   const rides = option.legs.filter((l) => l.mode !== 'walk');
   if (!rides.length) return 'Walk';
   return rides
-    .map((l) =>
-      l.lineId
+    .map((l) => {
+      if (l.from === 'ME' && l.mode === 'auto') return 'Toto';
+      return l.lineId
         ? l.lineName.replace(' local', '').replace(' Metro', '')
-        : network.modes[l.mode].label
-    )
+        : network.modes[l.mode].label;
+    })
     .join(' → ');
 }
 
 export function describeLeg(leg: RouteLeg): { title: string; subtitle: string } {
   if (leg.mode === 'walk') {
     return {
-      title: `Walk to ${leg.toName}`,
-      subtitle: `${formatKm(leg.km)} on foot`,
+      title:
+        leg.from === 'ME' && leg.lineName.startsWith('Walk ')
+          ? leg.lineName
+          : `Walk ${formatKm(leg.km)} to ${leg.toName}`,
+      subtitle:
+        leg.from === 'ME'
+          ? `${formatKm(leg.km)} on foot from your location`
+          : `${formatKm(leg.km)} on foot`,
+    };
+  }
+  if (leg.from === 'ME' && leg.mode === 'auto') {
+    return {
+      title: leg.lineName.startsWith('Toto ')
+        ? leg.lineName
+        : `Toto to ${leg.toName}`,
+      subtitle: `${formatKm(leg.km)} shared auto / toto`,
     };
   }
   if (leg.mode === 'cab' || leg.mode === 'bike') {

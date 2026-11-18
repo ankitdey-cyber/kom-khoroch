@@ -13,6 +13,7 @@ import {
   Car,
   CheckCircle2,
   CreditCard,
+  Crosshair,
   Footprints,
   IndianRupee,
   TrendingDown,
@@ -35,6 +36,9 @@ interface ResultsScreenProps {
   onSelectOption: (signature: string) => void;
   onSaveOption: (option: RouteOption) => void;
   onBackToPlan: () => void;
+  onUseMyLocation: () => void;
+  isLocating: boolean;
+  locationError: string | null;
   lang: LangKey;
 }
 
@@ -50,6 +54,9 @@ export const ResultsScreen: React.FC<ResultsScreenProps> = ({
   onSelectOption,
   onSaveOption,
   onBackToPlan,
+  onUseMyLocation,
+  isLocating,
+  locationError,
   lang,
 }) => {
   const [sortBy, setSortBy] = useState<SortKey>('fare');
@@ -231,7 +238,27 @@ export const ResultsScreen: React.FC<ResultsScreenProps> = ({
               Smart Card {options.smartCard ? 'Active (-10%)' : 'Off'}
             </span>
           </button>
+
+          <button
+            type="button"
+            disabled={isLocating}
+            onClick={onUseMyLocation}
+            className="inline-flex min-h-[38px] items-center gap-1.5 rounded-full bg-surface-container-lowest px-3.5 py-1.5 text-xs font-bold text-primary shadow-[var(--shadow-sm)] transition-colors hover:bg-primary-fixed disabled:opacity-60"
+          >
+            <Crosshair className="h-3.5 w-3.5" aria-hidden="true" />
+            <span>{isLocating ? 'Finding you...' : 'Where am I?'}</span>
+          </button>
         </div>
+
+        {locationError && (
+          <p
+            role="status"
+            aria-live="polite"
+            className="mt-2 text-xs font-semibold text-error"
+          >
+            {locationError}
+          </p>
+        )}
       </section>
 
       {/* Main 2-Column Layout: Route Cards (8 Cols) vs Cost Matrix (4 Cols) */}

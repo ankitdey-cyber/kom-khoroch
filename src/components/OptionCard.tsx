@@ -56,6 +56,9 @@ export const OptionCard: React.FC<OptionCardProps> = ({
       : 'bg-tertiary-container text-on-tertiary-container';
 
   const rideLegs = option.legs.filter((l) => l.mode !== 'walk');
+  const displayLegs = option.legs.filter(
+    (l) => l.mode !== 'walk' || l.from === 'ME'
+  );
   const walkLegs = option.legs.filter((l) => l.mode === 'walk');
 
   const fareBreakdownText = rideLegs
@@ -199,9 +202,10 @@ export const OptionCard: React.FC<OptionCardProps> = ({
 
         {/* Leg Detail Badges */}
         <div className="mt-3 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
-          {rideLegs.map((leg, i) => {
-            const { subtitle } = describeLeg(leg);
+          {displayLegs.map((leg, i) => {
+            const { title, subtitle } = describeLeg(leg);
             const color = getLegColor(leg);
+            const isMeOrigin = leg.from === 'ME';
             return (
               <div
                 key={`${leg.from}-${leg.to}-${i}`}
@@ -216,14 +220,16 @@ export const OptionCard: React.FC<OptionCardProps> = ({
                 <div className="min-w-0 flex-1">
                   <div className="flex flex-wrap items-center gap-1.5">
                     <span className="truncate text-xs font-bold text-on-surface">
-                      {leg.fromName} → {leg.toName}
+                      {isMeOrigin ? title : `${leg.fromName} → ${leg.toName}`}
                     </span>
-                    <span className="rounded bg-surface-container-high px-1.5 py-0.5 text-[10px] font-bold text-on-surface-variant">
-                      {leg.lineName}
-                    </span>
+                    {!isMeOrigin && (
+                      <span className="rounded bg-surface-container-high px-1.5 py-0.5 text-[10px] font-bold text-on-surface-variant">
+                        {leg.lineName}
+                      </span>
+                    )}
                   </div>
                   <span className="mt-0.5 block text-[11px] text-on-surface-variant">
-                    {formatRupee(leg.fare)} · {leg.minutes} min · {subtitle}
+                    {leg.fare > 0 ? formatRupee(leg.fare) : 'Free'} · {leg.minutes} min · {subtitle}
                   </span>
                 </div>
               </div>

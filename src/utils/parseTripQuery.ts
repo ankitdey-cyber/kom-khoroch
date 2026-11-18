@@ -4,6 +4,7 @@ import { STOP_MAP, planner } from './transit';
 export interface ParsedTripQuery {
   fromName?: string;
   toName?: string;
+  useCurrentLocation?: boolean;
   avoid?: AvoidableMode[];
   timeValuePer10Min?: number;
   peak?: boolean;
@@ -15,6 +16,7 @@ export interface ParsedTripQuery {
 }
 
 interface ServerParseResponse {
+  fromCurrentLocation?: boolean;
   fromStopId?: string;
   toStopId?: string;
   avoid?: string[];
@@ -80,7 +82,16 @@ export async function parseTripQueryWithApi(
   const summaryParts: string[] = [];
   const parsed: ParsedTripQuery = { summaryParts };
 
-  if (data.fromStopId) {
+  const asksForCurrentLocation =
+    Boolean(data.fromCurrentLocation) ||
+    (!data.fromStopId &&
+      /\b(?:from\s+here|from\s+my\s+(?:current\s+)?location|current\s+location)\b/i.test(
+        query
+      ));
+
+  if (asksForCurrentLocation) {
+    parsed.useCurrentLocation = true;
+  } else if (data.fromStopId) {
     const resolvedId = STOP_MAP[data.fromStopId]
       ? data.fromStopId
       : planner.findStop(data.fromStopId);
@@ -98,7 +109,11 @@ export async function parseTripQueryWithApi(
     }
   }
 
-  if (parsed.fromName && parsed.toName) {
+  if (parsed.useCurrentLocation && parsed.toName) {
+    summaryParts.push(`My location → ${parsed.toName}`);
+  } else if (parsed.useCurrentLocation) {
+    summaryParts.push('From my location');
+  } else if (parsed.fromName && parsed.toName) {
     summaryParts.push(`${parsed.fromName} → ${parsed.toName}`);
   } else if (parsed.fromName) {
     summaryParts.push(`From ${parsed.fromName}`);

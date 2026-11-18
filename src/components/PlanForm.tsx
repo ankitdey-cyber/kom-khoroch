@@ -58,6 +58,9 @@ interface PlanFormProps {
   onSubmit: () => void;
   onSelectOption: (signature: string) => void;
   onGoToAbout: () => void;
+  onUseMyLocation: () => void;
+  isLocating: boolean;
+  locationError: string | null;
   lang: LangKey;
 }
 
@@ -102,6 +105,9 @@ export const PlanForm: React.FC<PlanFormProps> = ({
   onSubmit,
   onSelectOption,
   onGoToAbout,
+  onUseMyLocation,
+  isLocating,
+  locationError,
   lang,
 }) => {
   const [phrase, setPhrase] = useState<string>('');
@@ -162,7 +168,11 @@ export const PlanForm: React.FC<PlanFormProps> = ({
       return;
     }
 
-    if (res.fromName) onChangeFrom(res.fromName);
+    if (res.useCurrentLocation) {
+      onUseMyLocation();
+    } else if (res.fromName) {
+      onChangeFrom(res.fromName);
+    }
     if (res.toName) onChangeTo(res.toName);
     if (res.budget !== undefined) onChangeBudget(res.budget);
 
@@ -450,6 +460,9 @@ export const PlanForm: React.FC<PlanFormProps> = ({
                 stops={stops}
                 placeholder="e.g. Serampore / Howrah / Dum Dum"
                 variant="origin"
+                onUseMyLocation={onUseMyLocation}
+                isLocating={isLocating}
+                locationError={locationError}
               />
 
               <div className="absolute right-3 top-1/2 z-20 -translate-y-1/2">
