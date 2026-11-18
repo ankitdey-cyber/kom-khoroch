@@ -3,6 +3,7 @@ import type { LangKey, ModeKey } from '../types';
 import {
   formatRupee,
   getModeColor,
+  getModeForeground,
   getModeSummary,
   network,
   planner,
@@ -109,7 +110,7 @@ export const AboutScreen: React.FC<AboutScreenProps> = ({ lang, onSetLang }) => 
               <button
                 type="button"
                 onClick={() => onSetLang('en')}
-                className={`min-h-[34px] rounded-md px-3 py-1 text-xs font-bold transition-colors ${
+                className={`min-h-[44px] min-w-[44px] rounded-md px-4 py-2 text-xs font-bold transition-colors ${
                   lang === 'en'
                     ? 'bg-primary text-on-primary'
                     : 'text-on-surface-variant hover:text-on-surface'
@@ -120,7 +121,7 @@ export const AboutScreen: React.FC<AboutScreenProps> = ({ lang, onSetLang }) => 
               <button
                 type="button"
                 onClick={() => onSetLang('bn')}
-                className={`min-h-[34px] rounded-md px-3 py-1 text-xs font-bold transition-colors ${
+                className={`min-h-[44px] min-w-[44px] rounded-md px-4 py-2 text-xs font-bold transition-colors ${
                   lang === 'bn'
                     ? 'bg-secondary text-on-secondary'
                     : 'text-on-surface-variant hover:text-on-surface'
@@ -387,6 +388,7 @@ export const AboutScreen: React.FC<AboutScreenProps> = ({ lang, onSetLang }) => 
             const cfg = network.modes[modeKey];
             const note = network.fareNotes[modeKey];
             const color = getModeColor(modeKey);
+            const fgColor = getModeForeground(modeKey);
             const isWalk = modeKey === 'walk';
 
             return (
@@ -399,12 +401,12 @@ export const AboutScreen: React.FC<AboutScreenProps> = ({ lang, onSetLang }) => 
                     <div className="flex items-center gap-2.5">
                       <span
                         className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ${
-                          isWalk ? 'border-2 border-dashed' : 'text-white'
+                          isWalk ? 'border-2 border-dashed' : ''
                         }`}
                         style={
                           isWalk
                             ? { borderColor: color, color }
-                            : { backgroundColor: color }
+                            : { backgroundColor: color, color: fgColor }
                         }
                       >
                         <ModeIcon mode={modeKey} className="h-4 w-4" />
@@ -480,29 +482,29 @@ export const AboutScreen: React.FC<AboutScreenProps> = ({ lang, onSetLang }) => 
             <h3 className="text-base font-bold text-on-surface">Commuter FAQ</h3>
           </div>
 
-          <details className="group rounded-xl bg-surface-container-low p-3 text-xs">
-            <summary className="flex cursor-pointer list-none items-center justify-between font-bold text-on-surface">
+          <details className="group rounded-xl bg-surface-container-low px-3 py-1 text-xs">
+            <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-between gap-2 rounded-md py-2 font-bold text-on-surface hover:text-primary">
               <span>Does it model walking transfers?</span>
               <ChevronDown
-                className="h-4 w-4 transition-transform group-open:rotate-180"
+                className="h-4 w-4 shrink-0 transition-transform group-open:rotate-180"
                 aria-hidden="true"
               />
             </summary>
-            <p className="mt-2 leading-relaxed text-on-surface-variant">
+            <p className="mb-2 mt-1 leading-relaxed text-on-surface-variant">
               Yes. Walking edges connect nearby stops up to your Max walk
               setting (0.5 to 2 km), while avoiding consecutive walks.
             </p>
           </details>
 
-          <details className="group rounded-xl bg-surface-container-low p-3 text-xs">
-            <summary className="flex cursor-pointer list-none items-center justify-between font-bold text-on-surface">
+          <details className="group rounded-xl bg-surface-container-low px-3 py-1 text-xs">
+            <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-between gap-2 rounded-md py-2 font-bold text-on-surface hover:text-primary">
               <span>How does the Time Value slider work?</span>
               <ChevronDown
-                className="h-4 w-4 transition-transform group-open:rotate-180"
+                className="h-4 w-4 shrink-0 transition-transform group-open:rotate-180"
                 aria-hidden="true"
               />
             </summary>
-            <p className="mt-2 leading-relaxed text-on-surface-variant">
+            <p className="mb-2 mt-1 leading-relaxed text-on-surface-variant">
               Set what saving 10 minutes is worth to you in rupees (₹0–₹100) to
               tune the Smart pick route between lowest fare and fastest arrival.
             </p>

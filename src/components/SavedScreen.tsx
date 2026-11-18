@@ -178,7 +178,7 @@ export const SavedScreen: React.FC<SavedScreenProps> = ({
         <button
           type="button"
           onClick={onGoToPlan}
-          className="inline-flex min-h-[42px] shrink-0 items-center gap-1.5 self-start rounded-lg bg-primary px-4 py-2 text-xs font-bold text-on-primary shadow-[var(--shadow-sm)] transition-colors hover:bg-primary-container md:self-auto"
+          className="inline-flex min-h-[44px] min-w-[44px] shrink-0 items-center gap-1.5 self-start rounded-lg bg-primary px-4 py-2 text-xs font-bold text-on-primary shadow-[var(--shadow-sm)] transition-colors hover:bg-primary-hover md:self-auto"
         >
           <Plus className="h-4 w-4" aria-hidden="true" />
           <span>Add New Route</span>
@@ -243,7 +243,7 @@ export const SavedScreen: React.FC<SavedScreenProps> = ({
           <button
             type="button"
             onClick={() => setFilter('all')}
-            className={`min-h-[38px] rounded-lg px-3.5 py-1.5 text-xs font-bold transition-colors ${
+            className={`min-h-[44px] min-w-[44px] rounded-lg px-4 py-2 text-xs font-bold transition-colors ${
               filter === 'all'
                 ? 'bg-primary text-on-primary shadow-[var(--shadow-sm)]'
                 : 'text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface'
@@ -254,7 +254,7 @@ export const SavedScreen: React.FC<SavedScreenProps> = ({
           <button
             type="button"
             onClick={() => setFilter('peak')}
-            className={`min-h-[38px] rounded-lg px-3.5 py-1.5 text-xs font-bold transition-colors ${
+            className={`min-h-[44px] min-w-[44px] rounded-lg px-4 py-2 text-xs font-bold transition-colors ${
               filter === 'peak'
                 ? 'bg-primary text-on-primary shadow-[var(--shadow-sm)]'
                 : 'text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface'
@@ -265,7 +265,7 @@ export const SavedScreen: React.FC<SavedScreenProps> = ({
           <button
             type="button"
             onClick={() => setFilter('offpeak')}
-            className={`min-h-[38px] rounded-lg px-3.5 py-1.5 text-xs font-bold transition-colors ${
+            className={`min-h-[44px] min-w-[44px] rounded-lg px-4 py-2 text-xs font-bold transition-colors ${
               filter === 'offpeak'
                 ? 'bg-primary text-on-primary shadow-[var(--shadow-sm)]'
                 : 'text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface'
@@ -305,7 +305,7 @@ export const SavedScreen: React.FC<SavedScreenProps> = ({
               <button
                 type="button"
                 onClick={onGoToPlan}
-                className="mt-5 inline-flex min-h-[42px] items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-xs font-bold text-on-primary shadow-[var(--shadow-sm)] transition-colors hover:bg-primary-container"
+                className="mt-5 inline-flex min-h-[44px] min-w-[44px] items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-xs font-bold text-on-primary shadow-[var(--shadow-sm)] transition-colors hover:bg-primary-hover"
               >
                 <span>Explore Routes on Plan</span>
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -336,12 +336,12 @@ export const SavedScreen: React.FC<SavedScreenProps> = ({
                       </span>
                     </div>
 
-                    <div className="flex items-center gap-1">
+                    <div className="flex shrink-0 items-center gap-1">
                       <button
                         type="button"
                         onClick={() => void handleShareSaved(item)}
                         aria-label={`Share ${item.fromName} to ${item.toName}`}
-                        className="flex h-8 w-8 items-center justify-center rounded-lg text-on-surface-variant transition-colors hover:bg-surface-container-high hover:text-on-surface"
+                        className="flex h-11 w-11 items-center justify-center rounded-lg text-on-surface-variant transition-colors hover:bg-surface-container-high hover:text-on-surface"
                       >
                         <Share2 className="h-4 w-4" aria-hidden="true" />
                       </button>
@@ -349,7 +349,7 @@ export const SavedScreen: React.FC<SavedScreenProps> = ({
                         type="button"
                         onClick={() => onDelete(item.id)}
                         aria-label={`Remove ${item.fromName} to ${item.toName}`}
-                        className="flex h-8 w-8 items-center justify-center rounded-lg text-on-surface-variant transition-colors hover:bg-error-container hover:text-error"
+                        className="flex h-11 w-11 items-center justify-center rounded-lg text-on-surface-variant transition-colors hover:bg-error-container hover:text-error"
                       >
                         <Trash2 className="h-4 w-4" aria-hidden="true" />
                       </button>
@@ -389,7 +389,7 @@ export const SavedScreen: React.FC<SavedScreenProps> = ({
                     <button
                       type="button"
                       onClick={() => onReplan(item)}
-                      className="inline-flex min-h-[38px] items-center gap-1.5 rounded-lg bg-primary px-4 py-2 text-xs font-bold text-on-primary shadow-[var(--shadow-sm)] transition-colors hover:bg-primary-container"
+                      className="inline-flex min-h-[44px] min-w-[44px] items-center gap-1.5 rounded-lg bg-primary px-4 py-2 text-xs font-bold text-on-primary shadow-[var(--shadow-sm)] transition-colors hover:bg-primary-hover"
                     >
                       <span>Plan now (রুট দেখুন)</span>
                       <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
@@ -488,7 +488,7 @@ export const SavedScreen: React.FC<SavedScreenProps> = ({
                     type="button"
                     disabled={p.alreadySaved || !p.option}
                     onClick={() => handleQuickAdd(p)}
-                    className="shrink-0 rounded-md bg-surface-container-lowest px-2.5 py-1.5 text-[11px] font-bold text-secondary shadow-[var(--shadow-sm)] transition-colors hover:bg-secondary-container hover:text-on-secondary-fixed disabled:opacity-50"
+                    className="min-h-[44px] min-w-[44px] shrink-0 rounded-lg bg-surface-container-lowest px-3.5 py-2 text-xs font-bold text-secondary shadow-[var(--shadow-sm)] transition-colors hover:bg-secondary-container hover:text-on-secondary-fixed disabled:opacity-50"
                   >
                     {p.alreadySaved ? 'Saved' : '+ Save'}
                   </button>

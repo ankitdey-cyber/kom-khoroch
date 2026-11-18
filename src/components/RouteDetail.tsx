@@ -7,6 +7,7 @@ import {
   formatKm,
   formatRupee,
   getLegColor,
+  getLegForeground,
   getModeSummary,
   network,
 } from '../utils/transit';
@@ -85,7 +86,7 @@ export const RouteDetail: React.FC<RouteDetailProps> = ({
           <button
             type="button"
             onClick={onBack}
-            className="group inline-flex min-h-[40px] items-center gap-1.5 text-sm font-bold text-primary transition-colors hover:text-primary-container"
+            className="group inline-flex min-h-[44px] min-w-[44px] items-center gap-1.5 rounded-lg px-1.5 text-left text-sm font-bold text-primary transition-colors hover:bg-surface-container-low"
           >
             <ArrowLeft
               className="h-4 w-4 transition-transform group-hover:-translate-x-0.5"
@@ -126,7 +127,7 @@ export const RouteDetail: React.FC<RouteDetailProps> = ({
             <button
               type="button"
               onClick={onSave}
-              className={`inline-flex min-h-[42px] items-center gap-2 rounded-lg px-4 py-2 text-xs font-bold shadow-[var(--shadow-sm)] transition-colors ${
+              className={`inline-flex min-h-[44px] min-w-[44px] items-center gap-2 rounded-lg px-4 py-2 text-xs font-bold shadow-[var(--shadow-sm)] transition-colors ${
                 isSaved
                   ? 'bg-secondary-container text-on-secondary-fixed'
                   : 'bg-surface-container-lowest text-on-surface hover:bg-surface-container'
@@ -150,7 +151,7 @@ export const RouteDetail: React.FC<RouteDetailProps> = ({
             <button
               type="button"
               onClick={() => void handleShare()}
-              className="inline-flex min-h-[42px] items-center gap-2 rounded-lg bg-secondary px-4 py-2 text-xs font-bold text-on-secondary shadow-[var(--shadow-sm)] transition-colors hover:bg-on-secondary-container"
+              className="inline-flex min-h-[44px] min-w-[44px] items-center gap-2 rounded-lg bg-secondary px-4 py-2 text-xs font-bold text-on-secondary shadow-[var(--shadow-sm)] transition-colors hover:opacity-90"
             >
               <Share2 className="h-4 w-4" aria-hidden="true" />
               <span>{lang === 'bn' ? 'শেয়ার করুন' : 'Share route'}</span>
@@ -312,6 +313,7 @@ export const RouteDetail: React.FC<RouteDetailProps> = ({
               const isWalk = leg.mode === 'walk';
               const tag = network.modes[leg.mode].tag;
               const color = getLegColor(leg);
+              const fgColor = getLegForeground(leg);
               const intermediateStops =
                 leg.via.length > 2 ? leg.via.slice(1, -1) : [];
 
@@ -320,9 +322,7 @@ export const RouteDetail: React.FC<RouteDetailProps> = ({
                   {/* Timeline Node Badge */}
                   <div
                     className={`absolute -left-7 top-2 flex h-6 w-6 items-center justify-center rounded-full text-[11px] font-extrabold shadow-[var(--shadow-sm)] sm:-left-9 ${
-                      isWalk
-                        ? 'border-2 border-dashed bg-surface-container-lowest'
-                        : 'text-white'
+                      isWalk ? 'border-2 border-dashed bg-surface-container-lowest' : ''
                     }`}
                     style={
                       isWalk
@@ -330,7 +330,7 @@ export const RouteDetail: React.FC<RouteDetailProps> = ({
                             borderColor: 'var(--c-walk)',
                             color: 'var(--c-walk)',
                           }
-                        : { backgroundColor: color }
+                        : { backgroundColor: color, color: fgColor }
                     }
                     aria-label={network.modes[leg.mode].label}
                   >
@@ -342,9 +342,10 @@ export const RouteDetail: React.FC<RouteDetailProps> = ({
                     <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
                       <div className="flex flex-wrap items-center gap-2">
                         <span
-                          className="rounded-full px-2.5 py-0.5 text-[11px] font-bold text-white"
+                          className="rounded-full px-2.5 py-0.5 text-[11px] font-bold"
                           style={{
                             backgroundColor: isWalk ? 'var(--c-walk)' : color,
+                            color: isWalk ? 'var(--c-on-walk)' : fgColor,
                           }}
                         >
                           {network.modes[leg.mode].label}
@@ -376,16 +377,16 @@ export const RouteDetail: React.FC<RouteDetailProps> = ({
                     </p>
 
                     {intermediateStops.length > 0 && (
-                      <details className="mt-3 rounded-lg bg-surface-container-low p-3 text-xs">
-                        <summary className="flex cursor-pointer list-none items-center justify-between font-bold text-on-surface hover:text-primary">
+                      <details className="mt-3 rounded-lg bg-surface-container-low px-3 py-1 text-xs">
+                        <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-between gap-2 rounded-md py-2 font-bold text-on-surface hover:text-primary">
                           <span>
                             {intermediateStops.length} intermediate{' '}
                             {intermediateStops.length === 1 ? 'stop' : 'stops'}{' '}
                             along {leg.lineName}
                           </span>
-                          <ChevronDown className="h-4 w-4" aria-hidden="true" />
+                          <ChevronDown className="h-4 w-4 shrink-0" aria-hidden="true" />
                         </summary>
-                        <div className="mt-2 grid grid-cols-1 gap-1.5 border-t border-outline-variant/30 pt-2 text-on-surface-variant sm:grid-cols-2">
+                        <div className="mb-2 mt-1 grid grid-cols-1 gap-1.5 border-t border-outline-variant/30 pt-2 text-on-surface-variant sm:grid-cols-2">
                           {intermediateStops.map((sid, sIdx) => (
                             <span key={sid}>
                               {sIdx + 1}. {STOP_MAP[sid]?.name ?? sid}

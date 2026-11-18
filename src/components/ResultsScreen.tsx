@@ -110,7 +110,7 @@ export const ResultsScreen: React.FC<ResultsScreenProps> = ({
               <button
                 type="button"
                 onClick={onBackToPlan}
-                className="inline-flex min-h-[36px] items-center gap-1.5 text-primary transition-colors hover:text-primary-container"
+                className="inline-flex min-h-[44px] min-w-[44px] items-center gap-1.5 rounded-lg px-1.5 text-primary transition-colors hover:bg-surface-container-low hover:text-primary"
               >
                 <ArrowLeft className="h-4 w-4" aria-hidden="true" />
                 <span>
@@ -139,7 +139,7 @@ export const ResultsScreen: React.FC<ResultsScreenProps> = ({
               <button
                 type="button"
                 onClick={onBackToPlan}
-                className="rounded-lg bg-surface-container px-2.5 py-1 text-xs font-bold text-on-surface-variant transition-colors hover:bg-surface-container-high hover:text-on-surface"
+                className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg bg-surface-container px-3.5 py-2 text-xs font-bold text-on-surface-variant transition-colors hover:bg-surface-container-high hover:text-on-surface"
               >
                 Edit
               </button>
@@ -186,7 +186,7 @@ export const ResultsScreen: React.FC<ResultsScreenProps> = ({
           <button
             type="button"
             onClick={() => setSortBy('fare')}
-            className={`inline-flex min-h-[38px] items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-bold transition-colors ${
+            className={`inline-flex min-h-[44px] min-w-[44px] items-center gap-1.5 rounded-full px-4 py-2 text-xs font-bold transition-colors ${
               sortBy === 'fare'
                 ? 'bg-primary-container text-on-primary-container shadow-[var(--shadow-sm)]'
                 : 'bg-surface-container-lowest text-on-surface hover:bg-surface-container-high shadow-[var(--shadow-sm)]'
@@ -199,7 +199,7 @@ export const ResultsScreen: React.FC<ResultsScreenProps> = ({
           <button
             type="button"
             onClick={() => setSortBy('rides')}
-            className={`inline-flex min-h-[38px] items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-bold transition-colors ${
+            className={`inline-flex min-h-[44px] min-w-[44px] items-center gap-1.5 rounded-full px-4 py-2 text-xs font-bold transition-colors ${
               sortBy === 'rides'
                 ? 'bg-primary-container text-on-primary-container shadow-[var(--shadow-sm)]'
                 : 'bg-surface-container-lowest text-on-surface hover:bg-surface-container-high shadow-[var(--shadow-sm)]'
@@ -211,7 +211,7 @@ export const ResultsScreen: React.FC<ResultsScreenProps> = ({
           <button
             type="button"
             onClick={() => setSortBy('walk')}
-            className={`inline-flex min-h-[38px] items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-bold transition-colors ${
+            className={`inline-flex min-h-[44px] min-w-[44px] items-center gap-1.5 rounded-full px-4 py-2 text-xs font-bold transition-colors ${
               sortBy === 'walk'
                 ? 'bg-primary-container text-on-primary-container shadow-[var(--shadow-sm)]'
                 : 'bg-surface-container-lowest text-on-surface hover:bg-surface-container-high shadow-[var(--shadow-sm)]'
@@ -227,7 +227,7 @@ export const ResultsScreen: React.FC<ResultsScreenProps> = ({
             onClick={() =>
               onChangeOptions({ ...options, smartCard: !options.smartCard })
             }
-            className={`inline-flex min-h-[38px] items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-bold transition-colors shadow-[var(--shadow-sm)] ${
+            className={`inline-flex min-h-[44px] min-w-[44px] items-center gap-1.5 rounded-full px-4 py-2 text-xs font-bold transition-colors shadow-[var(--shadow-sm)] ${
               options.smartCard
                 ? 'bg-secondary-container text-on-secondary-fixed'
                 : 'bg-surface-container-lowest text-secondary hover:bg-surface-container-high'
@@ -288,7 +288,7 @@ export const ResultsScreen: React.FC<ResultsScreenProps> = ({
               <button
                 type="button"
                 onClick={onBackToPlan}
-                className="mt-4 inline-flex min-h-[40px] items-center gap-1.5 rounded-lg bg-primary px-4 py-2 text-xs font-bold text-on-primary"
+                className="mt-4 inline-flex min-h-[44px] min-w-[44px] items-center gap-1.5 rounded-lg bg-primary px-4 py-2 text-xs font-bold text-on-primary transition-colors hover:bg-primary-hover"
               >
                 <ArrowLeft className="h-3.5 w-3.5" aria-hidden="true" />
                 <span>Adjust Filters</span>
@@ -354,7 +354,13 @@ export const ResultsScreen: React.FC<ResultsScreenProps> = ({
               {cab && (
                 <div className="flex items-center justify-between rounded-xl bg-surface-container-low p-3">
                   <div className="flex items-center gap-2.5">
-                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-surface-container text-on-surface-variant">
+                    <div
+                      className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg"
+                      style={{
+                        backgroundColor: 'var(--c-cab)',
+                        color: 'var(--c-on-cab)',
+                      }}
+                    >
                       <Car className="h-4 w-4" aria-hidden="true" />
                     </div>
                     <div>

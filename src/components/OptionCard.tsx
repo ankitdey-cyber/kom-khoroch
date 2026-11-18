@@ -5,6 +5,7 @@ import {
   formatKm,
   formatRupee,
   getLegColor,
+  getLegForeground,
   network,
 } from '../utils/transit';
 import {
@@ -101,7 +102,7 @@ export const OptionCard: React.FC<OptionCardProps> = ({
           onClick={() => onSaveOption(option)}
           aria-label={isSaved ? 'Remove from saved commutes' : 'Save route'}
           title={isSaved ? 'Saved' : 'Save Route'}
-          className={`flex h-9 w-9 items-center justify-center rounded-lg transition-colors ${
+          className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-lg transition-colors ${
             isSaved
               ? 'bg-secondary-container/50 text-secondary'
               : 'text-on-surface-variant hover:bg-surface-container-low hover:text-primary'
@@ -206,14 +207,15 @@ export const OptionCard: React.FC<OptionCardProps> = ({
             const { title, subtitle } = describeLeg(leg);
             const color = getLegColor(leg);
             const isMeOrigin = leg.from === 'ME';
+            const fgColor = getLegForeground(leg);
             return (
               <div
                 key={`${leg.from}-${leg.to}-${i}`}
                 className="flex items-start gap-2.5 rounded-lg bg-surface-container-low p-2.5"
               >
                 <div
-                  className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md text-white"
-                  style={{ backgroundColor: color }}
+                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md"
+                  style={{ backgroundColor: color, color: fgColor }}
                 >
                   <ModeIcon mode={leg.mode} className="h-4 w-4" />
                 </div>
@@ -250,14 +252,14 @@ export const OptionCard: React.FC<OptionCardProps> = ({
           <button
             type="button"
             onClick={() => onSaveOption(option)}
-            className="min-h-[40px] flex-1 rounded-lg bg-surface-container-highest px-4 py-2 text-xs font-bold text-on-surface transition-colors hover:bg-surface-container sm:flex-none"
+            className="min-h-[44px] min-w-[44px] flex-1 rounded-lg bg-surface-container-highest px-4 py-2 text-xs font-bold text-on-surface transition-colors hover:bg-surface-container sm:flex-none"
           >
             {isSaved ? 'Saved' : 'Save Route'}
           </button>
           <button
             type="button"
             onClick={onSelect}
-            className="inline-flex min-h-[40px] flex-1 items-center justify-center gap-1.5 rounded-lg bg-primary px-4 py-2 text-xs font-bold text-on-primary shadow-[var(--shadow-sm)] transition-colors hover:bg-primary-container sm:flex-none"
+            className="inline-flex min-h-[44px] min-w-[44px] flex-1 items-center justify-center gap-1.5 rounded-lg bg-primary px-4 py-2 text-xs font-bold text-on-primary shadow-[var(--shadow-sm)] transition-colors hover:bg-primary-hover sm:flex-none"
           >
             <span>
               {lang === 'bn' ? 'ধাপ দেখুন' : 'View Steps / ধাপ দেখুন'}

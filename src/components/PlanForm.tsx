@@ -334,13 +334,13 @@ export const PlanForm: React.FC<PlanFormProps> = ({
                 </span>
               </label>
               {isOnline ? (
-                <span className="text-[11px] font-semibold text-secondary">
+                <span className="shrink-0 whitespace-nowrap rounded-full bg-secondary-container/50 px-2.5 py-0.5 text-[11px] font-semibold text-on-secondary-fixed-variant">
                   AI Route Parser
                 </span>
               ) : (
                 <span
                   role="status"
-                  className="rounded-full bg-surface-container-high px-2.5 py-0.5 text-[11px] font-semibold text-on-surface-variant"
+                  className="shrink-0 whitespace-nowrap rounded-full bg-surface-container-high px-2.5 py-0.5 text-[11px] font-semibold text-on-surface-variant"
                 >
                   Needs internet
                 </span>
@@ -348,7 +348,7 @@ export const PlanForm: React.FC<PlanFormProps> = ({
             </div>
 
             <div
-              className={`flex items-center gap-2 rounded-xl bg-surface-container-low p-1.5 transition-all focus-within:ring-2 focus-within:ring-primary/25 ${
+              className={`flex items-center gap-2 rounded-xl bg-surface-container-low p-1.5 transition-all focus-within:ring-2 focus-within:ring-primary/40 ${
                 !isOnline ? 'cursor-not-allowed opacity-60' : ''
               }`}
             >
@@ -372,13 +372,13 @@ export const PlanForm: React.FC<PlanFormProps> = ({
                     ? 'cheapest way from Serampore to Sector V, no bus'
                     : 'Needs internet'
                 }
-                className="min-h-[40px] min-w-0 flex-1 bg-transparent px-2.5 text-sm text-on-surface placeholder:text-on-surface-variant/65 focus:outline-none disabled:cursor-not-allowed"
+                className="min-h-[44px] min-w-0 flex-1 rounded-lg bg-transparent px-2.5 text-sm text-on-surface placeholder:text-on-surface-variant/75 disabled:cursor-not-allowed"
               />
               <button
                 type="button"
                 disabled={analyzing || !isOnline}
                 onClick={() => void applyPhrase(phrase)}
-                className="inline-flex min-h-[40px] shrink-0 items-center gap-1.5 rounded-lg bg-primary px-3.5 py-2 text-xs font-bold text-on-primary shadow-[var(--shadow-sm)] transition-colors hover:bg-primary-container disabled:cursor-not-allowed disabled:opacity-60"
+                className="inline-flex min-h-[44px] min-w-[44px] shrink-0 items-center justify-center gap-1.5 rounded-lg bg-primary px-3.5 py-2 text-xs font-bold text-on-primary shadow-[var(--shadow-sm)] transition-colors hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-60"
               >
                 <span>
                   {!isOnline
@@ -407,7 +407,7 @@ export const PlanForm: React.FC<PlanFormProps> = ({
                     setPhrase(item.query);
                     void applyPhrase(item.query);
                   }}
-                  className="min-h-[32px] rounded-full bg-surface-container px-3 py-1 text-[11px] font-semibold text-on-surface transition-colors hover:bg-surface-container-high disabled:cursor-not-allowed disabled:opacity-60"
+                  className="min-h-[44px] min-w-[44px] rounded-full bg-surface-container px-3.5 py-2 text-xs font-semibold text-on-surface transition-colors hover:bg-surface-container-high disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {item.label}
                 </button>
@@ -465,13 +465,13 @@ export const PlanForm: React.FC<PlanFormProps> = ({
                 locationError={locationError}
               />
 
-              <div className="absolute right-3 top-1/2 z-20 -translate-y-1/2">
+              <div className="absolute right-2.5 top-1/2 z-20 -translate-y-1/2">
                 <button
                   type="button"
                   onClick={onSwap}
                   aria-label="Swap origin and destination"
                   title="Swap Origin and Destination"
-                  className="flex h-10 w-10 items-center justify-center rounded-full bg-surface-container-lowest text-primary shadow-[var(--shadow-md)] transition-transform hover:scale-105 active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
+                  className="flex h-11 w-11 items-center justify-center rounded-full bg-surface-container-lowest text-primary shadow-[var(--shadow-md)] transition-transform hover:scale-105 active:scale-95"
                 >
                   <ArrowUpDown className="h-4 w-4" aria-hidden="true" />
                 </button>
@@ -492,8 +492,8 @@ export const PlanForm: React.FC<PlanFormProps> = ({
             </div>
 
             {/* Frequent Quick Stops */}
-            <div className="flex flex-wrap items-center gap-1.5">
-              <span className="mr-1 text-[11px] font-semibold text-on-surface-variant">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="mr-0.5 text-[11px] font-semibold text-on-surface-variant">
                 {lang === 'bn' ? 'জনপ্রিয়:' : 'Frequent:'}
               </span>
               {FREQUENT_STOPS.map((item) => {
@@ -505,7 +505,7 @@ export const PlanForm: React.FC<PlanFormProps> = ({
                     key={item.id}
                     type="button"
                     onClick={() => onChangeTo(stopName)}
-                    className={`min-h-[34px] rounded-md px-2.5 py-1 text-xs font-semibold whitespace-nowrap transition-colors ${
+                    className={`min-h-[44px] min-w-[44px] rounded-lg px-3 py-2 text-xs font-semibold whitespace-nowrap transition-colors ${
                       active
                         ? 'bg-secondary-container text-on-secondary-fixed font-bold'
                         : 'bg-surface-container text-on-surface hover:bg-surface-container-high'
@@ -530,9 +530,9 @@ export const PlanForm: React.FC<PlanFormProps> = ({
                     onClick={() =>
                       onChangeOptions({ ...options, peak: !options.peak })
                     }
-                    className={`inline-flex min-h-[38px] items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-bold whitespace-nowrap transition-colors ${
+                    className={`inline-flex min-h-[44px] min-w-[44px] items-center gap-1.5 rounded-lg px-3.5 py-2 text-xs font-bold whitespace-nowrap transition-colors ${
                       options.peak
-                        ? 'bg-primary-fixed text-primary'
+                        ? 'bg-primary-fixed text-on-primary-fixed'
                         : 'bg-surface-container text-on-surface-variant hover:text-on-surface'
                     }`}
                   >
@@ -552,9 +552,9 @@ export const PlanForm: React.FC<PlanFormProps> = ({
                         smartCard: !options.smartCard,
                       })
                     }
-                    className={`inline-flex min-h-[38px] items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-bold whitespace-nowrap transition-colors ${
+                    className={`inline-flex min-h-[44px] min-w-[44px] items-center gap-1.5 rounded-lg px-3.5 py-2 text-xs font-bold whitespace-nowrap transition-colors ${
                       options.smartCard
-                        ? 'bg-secondary-container text-on-secondary-fixed-variant'
+                        ? 'bg-secondary-container text-on-secondary-fixed'
                         : 'bg-surface-container text-on-surface-variant hover:text-on-surface'
                     }`}
                   >
@@ -590,7 +590,7 @@ export const PlanForm: React.FC<PlanFormProps> = ({
                         type="button"
                         aria-pressed={isAvoided}
                         onClick={() => toggleAvoid(m.key)}
-                        className={`inline-flex min-h-[36px] items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-semibold whitespace-nowrap transition-colors ${
+                        className={`inline-flex min-h-[44px] min-w-[44px] items-center gap-1.5 rounded-full px-3.5 py-2 text-xs font-semibold whitespace-nowrap transition-colors ${
                           isAvoided
                             ? 'bg-error-container text-error font-bold'
                             : 'bg-surface-container text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface'
@@ -612,10 +612,10 @@ export const PlanForm: React.FC<PlanFormProps> = ({
 
             {/* Max walk & Optional Budget */}
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-              <div className="rounded-xl bg-surface-container-low px-3.5 py-2.5">
+              <div className="rounded-xl bg-surface-container-low px-3.5 py-2.5 focus-within:ring-2 focus-within:ring-primary/40">
                 <label
                   htmlFor="max-walk"
-                  className="mb-1 block text-[11px] font-semibold text-on-surface-variant"
+                  className="mb-0.5 block text-[11px] font-semibold text-on-surface-variant"
                 >
                   {lang === 'bn'
                     ? 'সর্বোচ্চ হাঁটার দূরত্ব'
@@ -630,19 +630,39 @@ export const PlanForm: React.FC<PlanFormProps> = ({
                       maxWalkKm: Number(e.target.value),
                     })
                   }
-                  className="min-h-[32px] w-full bg-transparent text-sm font-bold text-on-surface focus:outline-none"
+                  className="min-h-[44px] w-full rounded-md bg-transparent text-sm font-bold text-on-surface"
                 >
-                  <option value={0.5}>0.5 km (500 m)</option>
-                  <option value={1}>1 km</option>
-                  <option value={1.5}>1.5 km</option>
-                  <option value={2}>2 km</option>
+                  <option
+                    value={0.5}
+                    className="bg-surface-container-lowest text-on-surface"
+                  >
+                    0.5 km (500 m)
+                  </option>
+                  <option
+                    value={1}
+                    className="bg-surface-container-lowest text-on-surface"
+                  >
+                    1 km
+                  </option>
+                  <option
+                    value={1.5}
+                    className="bg-surface-container-lowest text-on-surface"
+                  >
+                    1.5 km
+                  </option>
+                  <option
+                    value={2}
+                    className="bg-surface-container-lowest text-on-surface"
+                  >
+                    2 km
+                  </option>
                 </select>
               </div>
 
-              <div className="rounded-xl bg-surface-container-low px-3.5 py-2.5">
+              <div className="rounded-xl bg-surface-container-low px-3.5 py-2.5 focus-within:ring-2 focus-within:ring-primary/40">
                 <label
                   htmlFor="trip-budget"
-                  className="mb-1 block text-[11px] font-semibold text-on-surface-variant"
+                  className="mb-0.5 block text-[11px] font-semibold text-on-surface-variant"
                 >
                   {lang === 'bn'
                     ? 'বাজেট (₹, ঐচ্ছিক)'
@@ -657,13 +677,13 @@ export const PlanForm: React.FC<PlanFormProps> = ({
                   placeholder="e.g. 50"
                   value={budget}
                   onChange={(e) => onChangeBudget(e.target.value)}
-                  className="min-h-[32px] w-full bg-transparent text-sm font-bold text-on-surface tabular-nums placeholder:text-on-surface-variant/60 focus:outline-none"
+                  className="min-h-[44px] w-full rounded-md bg-transparent text-sm font-bold text-on-surface tabular-nums placeholder:text-on-surface-variant/75"
                 />
               </div>
             </div>
 
             {/* Value-of-Time Slider */}
-            <div className="flex flex-col gap-2.5 rounded-xl bg-surface-container-low p-4">
+            <div className="flex flex-col gap-1.5 rounded-xl bg-surface-container-low p-4">
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <label
                   htmlFor="time-value"
@@ -697,7 +717,7 @@ export const PlanForm: React.FC<PlanFormProps> = ({
                     timeValuePer10Min: Number(e.target.value),
                   })
                 }
-                className="h-2 w-full cursor-pointer rounded-lg bg-surface-container-highest"
+                className="h-11 w-full cursor-pointer rounded-lg"
               />
 
               <div className="flex justify-between text-[11px] font-medium text-on-surface-variant tabular-nums">
@@ -718,7 +738,7 @@ export const PlanForm: React.FC<PlanFormProps> = ({
             <div className="flex flex-col gap-2 pt-1">
               <button
                 type="submit"
-                className="flex min-h-[52px] w-full items-center justify-center gap-2.5 rounded-xl bg-primary px-6 py-3.5 text-base font-bold text-on-primary shadow-[var(--shadow-md)] transition-all hover:bg-primary-container active:scale-[0.99]"
+                className="flex min-h-[52px] w-full items-center justify-center gap-2.5 rounded-xl bg-primary px-6 py-3.5 text-base font-bold text-on-primary shadow-[var(--shadow-md)] transition-all hover:bg-primary-hover active:scale-[0.99]"
               >
                 <span>
                   {lang === 'bn'
@@ -820,15 +840,15 @@ export const PlanForm: React.FC<PlanFormProps> = ({
                         ))}
                       </div>
 
-                      <div className="flex items-center justify-between gap-2 text-[11px] font-medium text-on-surface-variant">
+                      <div className="flex items-center justify-between gap-2 text-xs font-medium text-on-surface-variant">
                         <span className="truncate">{getModeSummary(opt)}</span>
                         <button
                           type="button"
                           onClick={() => onSelectOption(opt.signature)}
-                          className="inline-flex shrink-0 items-center gap-0.5 font-bold text-primary hover:underline"
+                          className="inline-flex min-h-[44px] min-w-[44px] shrink-0 items-center justify-end gap-0.5 rounded-lg px-2.5 font-bold text-primary transition-colors hover:bg-surface-container-high hover:underline"
                         >
                           <span>Steps</span>
-                          <ChevronRight className="h-3.5 w-3.5" aria-hidden="true" />
+                          <ChevronRight className="h-4 w-4" aria-hidden="true" />
                         </button>
                       </div>
                     </div>
@@ -838,7 +858,7 @@ export const PlanForm: React.FC<PlanFormProps> = ({
                 <button
                   type="button"
                   onClick={onSubmit}
-                  className="mt-1 flex min-h-[40px] w-full items-center justify-center gap-1.5 rounded-xl bg-surface-container-high px-4 py-2 text-xs font-bold text-on-surface transition-colors hover:bg-surface-container-highest"
+                  className="mt-1 flex min-h-[44px] w-full items-center justify-center gap-1.5 rounded-xl bg-surface-container-high px-4 py-2.5 text-xs font-bold text-on-surface transition-colors hover:bg-surface-container-highest"
                 >
                   <span>Compare All Options in Results</span>
                   <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
@@ -893,7 +913,9 @@ export const PlanForm: React.FC<PlanFormProps> = ({
                               ? 'var(--c-orange)'
                               : line.colorToken === 'purple'
                                 ? 'var(--c-purple)'
-                                : 'var(--c-blue)'
+                                : line.colorToken === 'yellow'
+                                  ? 'var(--c-yellow)'
+                                  : 'var(--c-blue)'
                           : line.mode === 'ferry'
                             ? 'var(--c-ferry)'
                             : 'var(--c-rail)'
@@ -959,7 +981,7 @@ export const PlanForm: React.FC<PlanFormProps> = ({
         <button
           type="button"
           onClick={onGoToAbout}
-          className="min-h-[40px] shrink-0 rounded-lg bg-surface-container-high px-4 py-2 text-xs font-bold text-on-surface transition-colors hover:bg-surface-container-highest"
+          className="min-h-[44px] min-w-[44px] shrink-0 rounded-lg bg-surface-container-high px-4 py-2.5 text-xs font-bold text-on-surface transition-colors hover:bg-surface-container-highest"
         >
           View Fare Matrix
         </button>

@@ -22,6 +22,7 @@
 
   /* Brand Primary (Warm Terracotta / Amber) */
   --primary: #8d4b00;
+  --primary-hover: #b15f00;
   --primary-container: #b15f00;
   --primary-fixed: #ffdcc3;
   --primary-fixed-dim: #ffb77d;
@@ -57,19 +58,33 @@
   --on-error: #ffffff;
   --on-error-container: #93000a;
 
-  /* Mode Strip Colors (DESIGN.md + Transit Lines) */
+  /* Mode Strip Colors (Exact data/network.json + Kolkata Metro Lines) */
   --c-blue: #2563c9;
   --c-green: #006c4e;
   --c-purple: #7c4dbb;
   --c-orange: #b15f00;
   --c-yellow: #c29400;
-  --c-rail: #8d4b00;
+  --c-rail: #8f3a28;
   --c-bus: #0e8585;
   --c-auto: #6f8200;
   --c-cab: #333a48;
   --c-bike: #cc3f84;
   --c-ferry: #2f93c2;
   --c-walk: #8a92a3;
+
+  /* Foreground ink on Mode Strip Colors (WCAG AA contrast) */
+  --c-on-blue: #ffffff;
+  --c-on-green: #ffffff;
+  --c-on-purple: #ffffff;
+  --c-on-orange: #ffffff;
+  --c-on-yellow: #111418;
+  --c-on-rail: #ffffff;
+  --c-on-bus: #ffffff;
+  --c-on-auto: #ffffff;
+  --c-on-cab: #ffffff;
+  --c-on-bike: #ffffff;
+  --c-on-ferry: #111418;
+  --c-on-walk: #111418;
 
   /* Schematic Map */
   --map-bg: #eef2f6;
@@ -107,7 +122,8 @@
 
   /* Brand Primary */
   --primary: #ffb77d;
-  --primary-container: #c96e0c;
+  --primary-hover: #ffc99e;
+  --primary-container: #9c4b00;
   --primary-fixed: #4a2500;
   --primary-fixed-dim: #ffb77d;
   --on-primary: #2d1400;
@@ -148,13 +164,27 @@
   --c-purple: #a584e8;
   --c-orange: #f59c56;
   --c-yellow: #eab925;
-  --c-rail: #e89658;
+  --c-rail: #e6826d;
   --c-bus: #2ec2c2;
   --c-auto: #adc722;
   --c-cab: #cad2de;
   --c-bike: #ea6aa9;
   --c-ferry: #52b8e8;
   --c-walk: #95a0b3;
+
+  /* Foreground ink on Mode Strip Colors (WCAG AA >= 6:1 in dark mode) */
+  --c-on-blue: #0f1419;
+  --c-on-green: #0f1419;
+  --c-on-purple: #0f1419;
+  --c-on-orange: #0f1419;
+  --c-on-yellow: #0f1419;
+  --c-on-rail: #0f1419;
+  --c-on-bus: #0f1419;
+  --c-on-auto: #0f1419;
+  --c-on-cab: #0f1419;
+  --c-on-bike: #0f1419;
+  --c-on-ferry: #0f1419;
+  --c-on-walk: #0f1419;
 
   /* Schematic Map */
   --map-bg: #121821;

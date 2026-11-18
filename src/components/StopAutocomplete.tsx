@@ -94,7 +94,7 @@ export const StopAutocomplete: React.FC<StopAutocompleteProps> = ({
 
         <div
           className={`flex min-w-0 flex-1 flex-col ${
-            showUseLocationRow ? 'pr-2' : 'pr-8'
+            showUseLocationRow ? 'pr-2' : 'pr-11'
           }`}
         >
           <label
@@ -148,7 +148,7 @@ export const StopAutocomplete: React.FC<StopAutocompleteProps> = ({
                 setOpen(false);
               }
             }}
-            className="min-h-[30px] w-full truncate bg-transparent text-base font-semibold text-on-surface placeholder:text-on-surface-variant/60 focus:outline-none"
+            className="min-h-[44px] w-full truncate rounded-md bg-transparent text-base font-semibold text-on-surface placeholder:text-on-surface-variant/75"
           />
         </div>
 
@@ -159,7 +159,7 @@ export const StopAutocomplete: React.FC<StopAutocompleteProps> = ({
             disabled={isLocating}
             aria-label="Use my location"
             title="Use my location"
-            className="mr-10 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-surface-container text-primary transition-colors hover:bg-primary-fixed disabled:opacity-60"
+            className="mr-10 flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-surface-container text-primary transition-colors hover:bg-primary-fixed disabled:opacity-60"
           >
             <Crosshair className="h-4 w-4" aria-hidden="true" />
           </button>

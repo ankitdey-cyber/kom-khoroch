@@ -61,6 +61,29 @@ const MODE_TO_CSS_VAR: Record<ModeKey, string> = {
   walk: 'var(--c-walk)',
 };
 
+const TOKEN_TO_ON_CSS_VAR: Record<string, string> = {
+  blue: 'var(--c-on-blue)',
+  green: 'var(--c-on-green)',
+  purple: 'var(--c-on-purple)',
+  orange: 'var(--c-on-orange)',
+  yellow: 'var(--c-on-yellow)',
+  rail: 'var(--c-on-rail)',
+  bus: 'var(--c-on-bus)',
+  auto: 'var(--c-on-auto)',
+  ferry: 'var(--c-on-ferry)',
+};
+
+const MODE_TO_ON_CSS_VAR: Record<ModeKey, string> = {
+  metro: 'var(--c-on-blue)',
+  rail: 'var(--c-on-rail)',
+  bus: 'var(--c-on-bus)',
+  auto: 'var(--c-on-auto)',
+  cab: 'var(--c-on-cab)',
+  bike: 'var(--c-on-bike)',
+  ferry: 'var(--c-on-ferry)',
+  walk: 'var(--c-on-walk)',
+};
+
 export function getLegColor(leg: RouteLeg): string {
   if (leg.lineId && LINE_MAP[leg.lineId]) {
     const token = LINE_MAP[leg.lineId].colorToken;
@@ -69,8 +92,20 @@ export function getLegColor(leg: RouteLeg): string {
   return MODE_TO_CSS_VAR[leg.mode];
 }
 
+export function getLegForeground(leg: RouteLeg): string {
+  if (leg.lineId && LINE_MAP[leg.lineId]) {
+    const token = LINE_MAP[leg.lineId].colorToken;
+    if (TOKEN_TO_ON_CSS_VAR[token]) return TOKEN_TO_ON_CSS_VAR[token];
+  }
+  return MODE_TO_ON_CSS_VAR[leg.mode];
+}
+
 export function getModeColor(mode: ModeKey): string {
   return MODE_TO_CSS_VAR[mode];
+}
+
+export function getModeForeground(mode: ModeKey): string {
+  return MODE_TO_ON_CSS_VAR[mode];
 }
 
 export function formatRupee(amount: number): string {
