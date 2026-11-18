@@ -1,0 +1,154 @@
+import networkJson from '../../data/network.json';
+import { createPlanner } from '../routing.js';
+import type {
+  AvoidableMode,
+  ModeKey,
+  NetworkData,
+  RouteLeg,
+  RouteOption,
+  SavedCommute,
+  Stop,
+  TransitLine,
+} from '../types';
+
+export const network = networkJson as NetworkData;
+export const planner = createPlanner(network);
+
+export const STOP_MAP: Record<string, Stop> = Object.fromEntries(
+  network.stops.map((s) => [s.id, s])
+);
+
+export const LINE_MAP: Record<string, TransitLine> = Object.fromEntries(
+  network.lines.map((l) => [l.id, l])
+);
+
+export const FREQUENT_STOPS: { id: string; label: string }[] = [
+  { id: 'HWH', label: 'Howrah Jn' },
+  { id: 'SDH', label: 'Sealdah' },
+  { id: 'ESP', label: 'Esplanade' },
+  { id: 'SC5', label: 'Sector V' },
+  { id: 'APT', label: 'Airport' },
+];
+
+export const AVOID_MODES: { key: AvoidableMode; label: string; bn: string }[] = [
+  { key: 'cab', label: 'Cab', bn: 'ক্যাব' },
+  { key: 'bike', label: 'Bike taxi', bn: 'বাইক' },
+  { key: 'bus', label: 'Bus', bn: 'বাস' },
+  { key: 'auto', label: 'Auto', bn: 'অটো' },
+  { key: 'ferry', label: 'Ferry', bn: 'ফেরি' },
+];
+
+const TOKEN_TO_CSS_VAR: Record<string, string> = {
+  blue: 'var(--c-blue)',
+  green: 'var(--c-green)',
+  purple: 'var(--c-purple)',
+  orange: 'var(--c-orange)',
+  yellow: 'var(--c-yellow)',
+  rail: 'var(--c-rail)',
+  bus: 'var(--c-bus)',
+  auto: 'var(--c-auto)',
+  ferry: 'var(--c-ferry)',
+};
+
+const MODE_TO_CSS_VAR: Record<ModeKey, string> = {
+  metro: 'var(--c-blue)',
+  rail: 'var(--c-rail)',
+  bus: 'var(--c-bus)',
+  auto: 'var(--c-auto)',
+  cab: 'var(--c-cab)',
+  bike: 'var(--c-bike)',
+  ferry: 'var(--c-ferry)',
+  walk: 'var(--c-walk)',
+};
+
+export function getLegColor(leg: RouteLeg): string {
+  if (leg.lineId && LINE_MAP[leg.lineId]) {
+    const token = LINE_MAP[leg.lineId].colorToken;
+    if (TOKEN_TO_CSS_VAR[token]) return TOKEN_TO_CSS_VAR[token];
+  }
+  return MODE_TO_CSS_VAR[leg.mode];
+}
+
+export function getModeColor(mode: ModeKey): string {
+  return MODE_TO_CSS_VAR[mode];
+}
+
+export function formatRupee(amount: number): string {
+  return '₹' + Math.round(amount).toLocaleString('en-IN');
+}
+
+export function formatKm(km: number): string {
+  if (km < 1) {
+    const meters = Math.max(50, Math.round((km * 1000) / 50) * 50);
+    return `${meters} m`;
+  }
+  return `${km.toFixed(1)} km`;
+}
+
+export function getModeSummary(option: RouteOption): string {
+  const rides = option.legs.filter((l) => l.mode !== 'walk');
+  if (!rides.length) return 'Walk';
+  return rides
+    .map((l) =>
+      l.lineId
+        ? l.lineName.replace(' local', '').replace(' Metro', '')
+        : network.modes[l.mode].label
+    )
+    .join(' → ');
+}
+
+export function describeLeg(leg: RouteLeg): { title: string; subtitle: string } {
+  if (leg.mode === 'walk') {
+    return {
+      title: `Walk to ${leg.toName}`,
+      subtitle: `${formatKm(leg.km)} on foot`,
+    };
+  }
+  if (leg.mode === 'cab' || leg.mode === 'bike') {
+    return {
+      title: `${network.modes[leg.mode].label}: ${leg.fromName} → ${leg.toName}`,
+      subtitle: `${formatKm(leg.km)} · app ride from ${leg.fromName}`,
+    };
+  }
+  const stopsCount = Math.max(1, leg.via.length - 1);
+  const wait = network.modes[leg.mode].wait;
+  return {
+    title: `${leg.lineName}: ${leg.fromName} → ${leg.toName}`,
+    subtitle: `${stopsCount} ${stopsCount === 1 ? 'stop' : 'stops'} · ${formatKm(leg.km)} · incl. ~${wait} min wait`,
+  };
+}
+
+export function buildShareText(
+  fromName: string,
+  toName: string,
+  option: RouteOption
+): string {
+  const header = `${fromName} → ${toName}: ~${formatRupee(option.totalFare)}, ~${option.totalMinutes} min`;
+  const lines = option.legs.map((leg, idx) => {
+    const { title } = describeLeg(leg);
+    const fareStr = leg.fare > 0 ? formatRupee(leg.fare) : 'Free';
+    return `${idx + 1}. ${title} (${fareStr}, ${leg.minutes} min)`;
+  });
+  return `${header}\n${lines.join('\n')}\nFares are approximate — Kom Khoroch`;
+}
+
+const SAVED_STORAGE_KEY = 'kom_khoroch_saved_v1';
+
+export function loadSavedCommutes(): SavedCommute[] {
+  try {
+    const raw = localStorage.getItem(SAVED_STORAGE_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
+
+export function persistSavedCommutes(items: SavedCommute[]): void {
+  try {
+    localStorage.setItem(SAVED_STORAGE_KEY, JSON.stringify(items));
+  } catch {
+    // Ignore storage errors gracefully
+  }
+}

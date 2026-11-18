@@ -1,0 +1,323 @@
+{
+  "note": "Approximate fare slabs and schematic stop coordinates for Kolkata & Hooghly.",
+  "modes": {
+    "metro": {
+      "label": "Kolkata Metro",
+      "speed": 34,
+      "peak": 32,
+      "wait": 5,
+      "detour": 1.08,
+      "tag": "M",
+      "color": "#2563c9"
+    },
+    "rail": {
+      "label": "Local Rail",
+      "speed": 38,
+      "peak": 34,
+      "wait": 8,
+      "detour": 1.1,
+      "tag": "R",
+      "color": "#8f3a28"
+    },
+    "bus": {
+      "label": "Bus",
+      "speed": 18,
+      "peak": 12,
+      "wait": 7,
+      "detour": 1.25,
+      "tag": "B",
+      "color": "#0e8585"
+    },
+    "auto": {
+      "label": "Shared Auto",
+      "speed": 20,
+      "peak": 15,
+      "wait": 4,
+      "detour": 1.2,
+      "tag": "A",
+      "color": "#6f8200"
+    },
+    "ferry": {
+      "label": "Hooghly Ferry",
+      "speed": 14,
+      "peak": 14,
+      "wait": 8,
+      "detour": 1.05,
+      "tag": "F",
+      "color": "#2f93c2"
+    },
+    "bike": {
+      "label": "Bike Taxi",
+      "speed": 26,
+      "peak": 21,
+      "wait": 4,
+      "detour": 1.22,
+      "tag": "BK",
+      "color": "#cc3f84"
+    },
+    "cab": {
+      "label": "App Cab",
+      "speed": 23,
+      "peak": 15,
+      "wait": 6,
+      "detour": 1.28,
+      "tag": "C",
+      "color": "#333a48"
+    },
+    "walk": {
+      "label": "Walk",
+      "speed": 4.5,
+      "peak": 4.5,
+      "wait": 0,
+      "detour": 1.18,
+      "tag": "W",
+      "color": "#8a92a3"
+    }
+  },
+  "fareNotes": {
+    "metro": "₹5 (0–2 km), ₹10 (2–5 km), ₹15 (5–8 km), ₹20 (8–11 km), ₹25 (11–16 km), ₹30 (>16 km); -10% with Smart Card",
+    "rail": "₹5 up to 15 km, ₹10 (15–35 km), ₹15 (>35 km) second-class suburban slab",
+    "bus": "₹10 up to 5 km, ₹15 (5–15 km), ₹20 (15–24 km), ₹25 (>24 km)",
+    "auto": "Shared route auto: ₹10 base (≤2.5 km), +₹5 per additional 2.5 km",
+    "ferry": "₹6 flat river launch ticket across Hooghly",
+    "bike": "₹25 base (≤2 km) + ₹8/km (+15% in peak hours)",
+    "cab": "₹55 base (≤2 km) + ₹18/km (+25% in peak hours)",
+    "walk": "Free on foot; interchanges capped by your max-walk setting"
+  },
+  "stops": [
+    { "id": "SRP", "name": "Serampore", "lat": 22.7528, "lng": 88.3422, "place": true },
+    { "id": "RSR", "name": "Rishra", "lat": 22.7124, "lng": 88.3496, "place": true },
+    { "id": "KON", "name": "Konnagar", "lat": 22.6962, "lng": 88.3522, "place": true },
+    { "id": "UTP", "name": "Uttarpara", "lat": 22.6682, "lng": 88.3484, "place": true },
+    { "id": "BLY", "name": "Bally", "lat": 22.6517, "lng": 88.3436, "place": true },
+    { "id": "BLR", "name": "Belur", "lat": 22.6339, "lng": 88.3425, "place": true },
+    { "id": "LLH", "name": "Liluah", "lat": 22.6203, "lng": 88.3401, "place": true },
+    { "id": "HWH", "name": "Howrah Jn", "lat": 22.5839, "lng": 88.3426, "place": true },
+    { "id": "HWM", "name": "Howrah Maidan", "lat": 22.5832, "lng": 88.3298, "place": true },
+    { "id": "BBG", "name": "Babughat", "lat": 22.5698, "lng": 88.3407, "place": true },
+    { "id": "DLP", "name": "BBD Bag / Dalhousie", "lat": 22.5734, "lng": 88.3485, "place": true },
+    { "id": "MHK", "name": "Mahakaran", "lat": 22.5724, "lng": 88.3504, "place": false },
+    { "id": "ESP", "name": "Esplanade", "lat": 22.5646, "lng": 88.3517, "place": true },
+    { "id": "CHW", "name": "Chandni Chowk", "lat": 22.5682, "lng": 88.3536, "place": false },
+    { "id": "CNT", "name": "Central", "lat": 22.5739, "lng": 88.3586, "place": false },
+    { "id": "MGR", "name": "MG Road", "lat": 22.5797, "lng": 88.3602, "place": false },
+    { "id": "GRP", "name": "Girish Park", "lat": 22.5872, "lng": 88.3631, "place": false },
+    { "id": "SVB", "name": "Shobhabazar Sutanuti", "lat": 22.5964, "lng": 88.3653, "place": false },
+    { "id": "SHB", "name": "Shyambazar", "lat": 22.6015, "lng": 88.3736, "place": true },
+    { "id": "BGC", "name": "Belgachia", "lat": 22.6062, "lng": 88.3863, "place": false },
+    { "id": "DUM", "name": "Dum Dum", "lat": 22.6209, "lng": 88.3932, "place": true },
+    { "id": "DDJ", "name": "Dum Dum Jn", "lat": 22.6219, "lng": 88.3948, "place": false },
+    { "id": "NPZ", "name": "Noapara", "lat": 22.6396, "lng": 88.3937, "place": false },
+    { "id": "BPN", "name": "Baranagar", "lat": 22.6435, "lng": 88.3788, "place": true },
+    { "id": "DKW", "name": "Dakshineswar", "lat": 22.6524, "lng": 88.3617, "place": true },
+    { "id": "BGH", "name": "Belghoria", "lat": 22.6606, "lng": 88.3849, "place": true },
+    { "id": "SDP", "name": "Sodepur", "lat": 22.6996, "lng": 88.3784, "place": true },
+    { "id": "BKP", "name": "Barrackpore", "lat": 22.7606, "lng": 88.3702, "place": true },
+    { "id": "DDC", "name": "Dum Dum Cantt", "lat": 22.6442, "lng": 88.4192, "place": true },
+    { "id": "JSR", "name": "Jessore Road", "lat": 22.6472, "lng": 88.4314, "place": false },
+    { "id": "APT", "name": "Kolkata Airport (Jai Hind)", "lat": 22.6525, "lng": 88.4423, "place": true },
+    { "id": "MDM", "name": "Madhyamgram", "lat": 22.6928, "lng": 88.4637, "place": true },
+    { "id": "BAR", "name": "Barasat", "lat": 22.7219, "lng": 88.4856, "place": true },
+    { "id": "SDH", "name": "Sealdah", "lat": 22.5681, "lng": 88.3706, "place": true },
+    { "id": "PHB", "name": "Phoolbagan", "lat": 22.5724, "lng": 88.3879, "place": true },
+    { "id": "ULT", "name": "Ultadanga / Bidhannagar Rd", "lat": 22.5924, "lng": 88.3865, "place": true },
+    { "id": "STN", "name": "Salt Lake Stadium", "lat": 22.5701, "lng": 88.4046, "place": true },
+    { "id": "BGL", "name": "Bengal Chemical", "lat": 22.5761, "lng": 88.4043, "place": false },
+    { "id": "CTY", "name": "City Centre", "lat": 22.5877, "lng": 88.4085, "place": true },
+    { "id": "CTL", "name": "Central Park", "lat": 22.5882, "lng": 88.4173, "place": false },
+    { "id": "KRM", "name": "Karunamoyee", "lat": 22.5847, "lng": 88.4265, "place": true },
+    { "id": "SC5", "name": "Salt Lake Sector V", "lat": 22.5799, "lng": 88.4328, "place": true },
+    { "id": "NBM", "name": "Technopolis / New Town Gate", "lat": 22.5786, "lng": 88.4487, "place": true },
+    { "id": "NWT", "name": "New Town (Biswa Bangla)", "lat": 22.5806, "lng": 88.4658, "place": true },
+    { "id": "CC2", "name": "City Centre 2 (New Town)", "lat": 22.6203, "lng": 88.4501, "place": true },
+    { "id": "PKS", "name": "Park Street", "lat": 22.5546, "lng": 88.3502, "place": true },
+    { "id": "MDN", "name": "Maidan", "lat": 22.5495, "lng": 88.3489, "place": false },
+    { "id": "RBS", "name": "Rabindra Sadan", "lat": 22.5416, "lng": 88.3474, "place": true },
+    { "id": "NBV", "name": "Netaji Bhavan", "lat": 22.5349, "lng": 88.3465, "place": false },
+    { "id": "JTP", "name": "Jatin Das Park", "lat": 22.5245, "lng": 88.3462, "place": false },
+    { "id": "KGH", "name": "Kalighat", "lat": 22.5174, "lng": 88.3461, "place": true },
+    { "id": "RSB", "name": "Rabindra Sarobar", "lat": 22.5072, "lng": 88.3458, "place": false },
+    { "id": "MHG", "name": "Tollygunge (M. Uttam Kumar)", "lat": 22.4951, "lng": 88.3454, "place": true },
+    { "id": "KVN", "name": "Kavi Nazrul (Garia Bazar)", "lat": 22.4673, "lng": 88.3822, "place": true },
+    { "id": "KVS", "name": "Kavi Subhash (New Garia)", "lat": 22.4718, "lng": 88.3991, "place": true },
+    { "id": "PKC", "name": "Park Circus", "lat": 22.5446, "lng": 88.3665, "place": true },
+    { "id": "BDG", "name": "Ballygunge Jn", "lat": 22.5262, "lng": 88.3663, "place": true },
+    { "id": "GRH", "name": "Gariahat", "lat": 22.5194, "lng": 88.3652, "place": true },
+    { "id": "JDV", "name": "Jadavpur", "lat": 22.4966, "lng": 88.3712, "place": true },
+    { "id": "GRB", "name": "Garia", "lat": 22.4666, "lng": 88.3917, "place": true },
+    { "id": "STR", "name": "Satyajit Ray (Hiland Park)", "lat": 22.4878, "lng": 88.3982, "place": false },
+    { "id": "RBY", "name": "Ruby / Hemanta Mukhopadhyay", "lat": 22.5137, "lng": 88.4017, "place": true },
+    { "id": "SCT", "name": "Science City", "lat": 22.5403, "lng": 88.3976, "place": true },
+    { "id": "BLG", "name": "Beliaghata", "lat": 22.5608, "lng": 88.4016, "place": false },
+    { "id": "MJH", "name": "Majerhat", "lat": 22.5103, "lng": 88.3204, "place": true },
+    { "id": "TRT", "name": "Taratala", "lat": 22.5023, "lng": 88.3161, "place": false },
+    { "id": "BHB", "name": "Behala Bazar", "lat": 22.4922, "lng": 88.3137, "place": false },
+    { "id": "BHC", "name": "Behala Chowrasta", "lat": 22.4827, "lng": 88.3125, "place": true },
+    { "id": "SKB", "name": "Sakher Bazar", "lat": 22.4733, "lng": 88.3106, "place": false },
+    { "id": "THK", "name": "Thakurpukur", "lat": 22.4618, "lng": 88.3081, "place": false },
+    { "id": "JKA", "name": "Joka", "lat": 22.4508, "lng": 88.3052, "place": true }
+  ],
+  "lines": [
+    {
+      "id": "M-BLUE",
+      "name": "Blue Line Metro",
+      "mode": "metro",
+      "colorToken": "blue",
+      "stops": [
+        "DKW", "BPN", "NPZ", "DUM", "BGC", "SHB", "SVB", "GRP", "MGR",
+        "CNT", "CHW", "ESP", "PKS", "MDN", "RBS", "NBV", "JTP", "KGH",
+        "RSB", "MHG", "KVN", "KVS"
+      ]
+    },
+    {
+      "id": "M-GREEN",
+      "name": "Green Line Metro",
+      "mode": "metro",
+      "colorToken": "green",
+      "stops": [
+        "HWM", "HWH", "MHK", "ESP", "SDH", "PHB", "STN", "BGL",
+        "CTY", "CTL", "KRM", "SC5"
+      ]
+    },
+    {
+      "id": "M-ORANGE",
+      "name": "Orange Line Metro",
+      "mode": "metro",
+      "colorToken": "orange",
+      "stops": ["KVS", "STR", "RBY", "SCT", "BLG", "SC5", "NWT"]
+    },
+    {
+      "id": "M-PURPLE",
+      "name": "Purple Line Metro",
+      "mode": "metro",
+      "colorToken": "purple",
+      "stops": ["JKA", "THK", "SKB", "BHC", "BHB", "TRT", "MJH"]
+    },
+    {
+      "id": "M-YELLOW",
+      "name": "Yellow Line Metro",
+      "mode": "metro",
+      "colorToken": "yellow",
+      "stops": ["NPZ", "DDC", "JSR", "APT"]
+    },
+    {
+      "id": "R-HWH-BND",
+      "name": "Howrah–Bandel local",
+      "mode": "rail",
+      "colorToken": "rail",
+      "stops": ["SRP", "RSR", "KON", "UTP", "BLY", "BLR", "LLH", "HWH"]
+    },
+    {
+      "id": "R-SDH-BKP",
+      "name": "Sealdah–Barrackpore local",
+      "mode": "rail",
+      "colorToken": "rail",
+      "stops": ["BKP", "SDP", "BGH", "DDJ", "ULT", "SDH"]
+    },
+    {
+      "id": "R-SDH-BAR",
+      "name": "Sealdah–Barasat local",
+      "mode": "rail",
+      "colorToken": "rail",
+      "stops": ["BAR", "MDM", "DDC", "DDJ", "ULT", "SDH"]
+    },
+    {
+      "id": "R-CHORD",
+      "name": "Bally–Dum Dum link local",
+      "mode": "rail",
+      "colorToken": "rail",
+      "stops": ["BLY", "DKW", "DDJ"]
+    },
+    {
+      "id": "R-SOUTH",
+      "name": "Sealdah South local",
+      "mode": "rail",
+      "colorToken": "rail",
+      "stops": ["SDH", "PKC", "BDG", "JDV", "GRB", "KVS"]
+    },
+    {
+      "id": "R-CIRC",
+      "name": "Circular Rail",
+      "mode": "rail",
+      "colorToken": "rail",
+      "stops": ["MJH", "BBG", "DLP", "SVB", "DDJ"]
+    },
+    {
+      "id": "F-HOOGHLY",
+      "name": "Howrah–Babughat ferry",
+      "mode": "ferry",
+      "colorToken": "ferry",
+      "stops": ["HWH", "BBG"]
+    },
+    {
+      "id": "B-HWH-SC5",
+      "name": "AC/Express Bus (HWH–Sector V)",
+      "mode": "bus",
+      "colorToken": "bus",
+      "stops": ["HWH", "DLP", "ESP", "SDH", "ULT", "KRM", "SC5"]
+    },
+    {
+      "id": "B-DKW-SC5",
+      "name": "Bus (Dakshineswar–Sector V)",
+      "mode": "bus",
+      "colorToken": "bus",
+      "stops": ["DKW", "BPN", "SHB", "ULT", "CTY", "SC5"]
+    },
+    {
+      "id": "B-STH-SC5",
+      "name": "Bus (Tollygunge–Ruby–Sector V)",
+      "mode": "bus",
+      "colorToken": "bus",
+      "stops": ["MHG", "RSB", "GRH", "JDV", "RBY", "SCT", "SC5"]
+    },
+    {
+      "id": "B-BHC-APT",
+      "name": "Bus (Behala–Esplanade–Airport)",
+      "mode": "bus",
+      "colorToken": "bus",
+      "stops": ["BHC", "MJH", "RBS", "ESP", "SHB", "DUM", "APT"]
+    },
+    {
+      "id": "B-NWT-APT",
+      "name": "Bus (Sector V–New Town–Airport)",
+      "mode": "bus",
+      "colorToken": "bus",
+      "stops": ["SC5", "NBM", "NWT", "CC2", "APT"]
+    },
+    {
+      "id": "A-ULT-SC5",
+      "name": "Shared Auto (Ultadanga–Sector V)",
+      "mode": "auto",
+      "colorToken": "auto",
+      "stops": ["ULT", "BGL", "CTY", "CTL", "KRM", "SC5"]
+    },
+    {
+      "id": "A-DUM-APT",
+      "name": "Shared Auto (Dum Dum–Airport)",
+      "mode": "auto",
+      "colorToken": "auto",
+      "stops": ["DUM", "DDC", "JSR", "APT"]
+    },
+    {
+      "id": "A-BLY-BPN",
+      "name": "Shared Auto (Bally–Dakshineswar)",
+      "mode": "auto",
+      "colorToken": "auto",
+      "stops": ["BLY", "DKW", "BPN"]
+    },
+    {
+      "id": "A-GRH-RBY",
+      "name": "Shared Auto (Ballygunge–Gariahat–Ruby)",
+      "mode": "auto",
+      "colorToken": "auto",
+      "stops": ["BDG", "GRH", "RBY"]
+    },
+    {
+      "id": "A-BBG-PKS",
+      "name": "Shared Auto (Babughat–Esplanade–Park St)",
+      "mode": "auto",
+      "colorToken": "auto",
+      "stops": ["BBG", "ESP", "PKS"]
+    }
+  ]
+}
