@@ -155,7 +155,23 @@
     { "id": "BHC", "name": "Behala Chowrasta", "lat": 22.4827, "lng": 88.3125, "place": true },
     { "id": "SKB", "name": "Sakher Bazar", "lat": 22.4733, "lng": 88.3106, "place": false },
     { "id": "THK", "name": "Thakurpukur", "lat": 22.4618, "lng": 88.3081, "place": false },
-    { "id": "JKA", "name": "Joka", "lat": 22.4508, "lng": 88.3052, "place": true }
+    { "id": "JKA", "name": "Joka", "lat": 22.4508, "lng": 88.3052, "place": true },
+    { "id": "ADST", "name": "Adisaptagram", "lat": 22.9488, "lng": 88.3878, "place": true },
+    { "id": "MUG", "name": "Magra", "lat": 22.9904, "lng": 88.3785, "place": true },
+    { "id": "TLO", "name": "Talandu", "lat": 23.0218, "lng": 88.3526, "place": true },
+    { "id": "KHN", "name": "Khanyan", "lat": 23.0468, "lng": 88.3168, "place": true },
+    { "id": "PDA", "name": "Pandua", "lat": 23.0764, "lng": 88.2827, "place": true },
+    { "id": "SLG", "name": "Simlagarh", "lat": 23.1099, "lng": 88.2484, "place": true },
+    { "id": "BOI", "name": "Bainchi", "lat": 23.1243, "lng": 88.2098, "place": true },
+    { "id": "DBP", "name": "Debipur", "lat": 23.1497, "lng": 88.1657, "place": true },
+    { "id": "MYM", "name": "Memari", "lat": 23.1729, "lng": 88.1112, "place": true },
+    { "id": "BGF", "name": "Bagila", "lat": 23.1856, "lng": 88.0757, "place": true },
+    { "id": "NMF", "name": "Nimo", "lat": 23.1945, "lng": 88.046, "place": true },
+    { "id": "RSLR", "name": "Rasulpur", "lat": 23.2041, "lng": 88.0147, "place": true },
+    { "id": "PLT", "name": "Palsit", "lat": 23.2141, "lng": 87.981, "place": true },
+    { "id": "SKG", "name": "Saktigarh", "lat": 23.2248, "lng": 87.9438, "place": true },
+    { "id": "GPR", "name": "Gangpur", "lat": 23.2371, "lng": 87.9044, "place": true },
+    { "id": "BWN", "name": "Bardhaman", "lat": 23.2504, "lng": 87.87, "place": true }
   ],
   "lines": [
     {
@@ -206,6 +222,17 @@
       "mode": "rail",
       "colorToken": "rail",
       "stops": ["SRP", "RSR", "KON", "UTP", "BLY", "BLR", "LLH", "HWH"]
+    },
+    {
+      "id": "rM",
+      "name": "Howrah–Bardhaman local",
+      "mode": "rail",
+      "colorToken": "rail",
+      "stops": [
+        "HWH", "LLH", "BLR", "BLY", "UTP", "KON", "RSR", "SRP",
+        "ADST", "MUG", "TLO", "KHN", "PDA", "SLG", "BOI", "DBP",
+        "MYM", "BGF", "NMF", "RSLR", "PLT", "SKG", "GPR", "BWN"
+      ]
     },
     {
       "id": "R-SDH-BKP",
