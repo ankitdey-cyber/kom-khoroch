@@ -1,0 +1,168 @@
+/* Shared Stitch Theme Tokens (Light & Dark) for Kom Khoroch */
+
+:root {
+  /* Core Surfaces */
+  --surface: #f7f9fb;
+  --surface-bright: #f7f9fb;
+  --surface-dim: #d8dadc;
+  --surface-variant: #e0e3e5;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #f2f4f6;
+  --surface-container: #eceef0;
+  --surface-container-high: #e6e8ea;
+  --surface-container-highest: #e0e3e5;
+
+  /* Text & Outlines */
+  --on-surface: #191c1e;
+  --on-surface-variant: #554336;
+  --outline: #887364;
+  --outline-variant: #dbc2b0;
+  --inverse-surface: #2d3133;
+  --inverse-on-surface: #eff1f3;
+
+  /* Brand Primary (Warm Terracotta / Amber) */
+  --primary: #8d4b00;
+  --primary-container: #b15f00;
+  --primary-fixed: #ffdcc3;
+  --primary-fixed-dim: #ffb77d;
+  --on-primary: #ffffff;
+  --on-primary-container: #fffbff;
+  --on-primary-fixed: #2f1500;
+  --on-primary-fixed-variant: #6e3900;
+  --inverse-primary: #ffb77d;
+
+  /* Brand Secondary (Civic Transit Emerald) */
+  --secondary: #006c4e;
+  --secondary-container: #97f5cc;
+  --secondary-fixed: #97f5cc;
+  --secondary-fixed-dim: #7bd8b1;
+  --on-secondary: #ffffff;
+  --on-secondary-container: #007353;
+  --on-secondary-fixed: #002115;
+  --on-secondary-fixed-variant: #00513a;
+
+  /* Brand Tertiary (Slate Indigo) */
+  --tertiary: #515c71;
+  --tertiary-container: #6a758a;
+  --tertiary-fixed: #d8e3fb;
+  --tertiary-fixed-dim: #bcc7de;
+  --on-tertiary: #ffffff;
+  --on-tertiary-container: #fefcff;
+  --on-tertiary-fixed: #111c2d;
+  --on-tertiary-fixed-variant: #3c475a;
+
+  /* Semantic Status */
+  --error: #ba1a1a;
+  --error-container: #ffdad6;
+  --on-error: #ffffff;
+  --on-error-container: #93000a;
+
+  /* Mode Strip Colors (DESIGN.md + Transit Lines) */
+  --c-blue: #2563c9;
+  --c-green: #006c4e;
+  --c-purple: #7c4dbb;
+  --c-orange: #b15f00;
+  --c-yellow: #c29400;
+  --c-rail: #8d4b00;
+  --c-bus: #0e8585;
+  --c-auto: #6f8200;
+  --c-cab: #333a48;
+  --c-bike: #cc3f84;
+  --c-ferry: #2f93c2;
+  --c-walk: #8a92a3;
+
+  /* Schematic Map */
+  --map-bg: #eef2f6;
+  --map-line: #cdd5df;
+  --map-river: #bae6fd;
+  --map-river-label: #0284c7;
+
+  /* Shadows & Radii */
+  --shadow-sm: 0 1px 4px rgba(25, 28, 30, 0.05);
+  --shadow-md: 0 6px 20px rgba(25, 28, 30, 0.07);
+  --radius-card: 0.75rem;
+  --radius-panel: 1rem;
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  /* Core Surfaces */
+  --surface: #0f1419;
+  --surface-bright: #171e26;
+  --surface-dim: #0a0d11;
+  --surface-variant: #27313d;
+  --surface-container-lowest: #161d26;
+  --surface-container-low: #1b232e;
+  --surface-container: #202935;
+  --surface-container-high: #263140;
+  --surface-container-highest: #2e3a4b;
+
+  /* Text & Outlines */
+  --on-surface: #e8edf2;
+  --on-surface-variant: #b8c2cd;
+  --outline: #8d97a4;
+  --outline-variant: #374353;
+  --inverse-surface: #e6e8ea;
+  --inverse-on-surface: #191c1e;
+
+  /* Brand Primary */
+  --primary: #ffb77d;
+  --primary-container: #c96e0c;
+  --primary-fixed: #4a2500;
+  --primary-fixed-dim: #ffb77d;
+  --on-primary: #2d1400;
+  --on-primary-container: #fffbff;
+  --on-primary-fixed: #ffdcc3;
+  --on-primary-fixed-variant: #ffb77d;
+  --inverse-primary: #8d4b00;
+
+  /* Brand Secondary */
+  --secondary: #6cd5ac;
+  --secondary-container: #00513a;
+  --secondary-fixed: #00513a;
+  --secondary-fixed-dim: #6cd5ac;
+  --on-secondary: #002115;
+  --on-secondary-container: #97f5cc;
+  --on-secondary-fixed: #97f5cc;
+  --on-secondary-fixed-variant: #97f5cc;
+
+  /* Brand Tertiary */
+  --tertiary: #bcc7de;
+  --tertiary-container: #49556b;
+  --tertiary-fixed: #232d40;
+  --tertiary-fixed-dim: #bcc7de;
+  --on-tertiary: #111c2d;
+  --on-tertiary-container: #f0f4ff;
+  --on-tertiary-fixed: #d8e3fb;
+  --on-tertiary-fixed-variant: #bcc7de;
+
+  /* Semantic Status */
+  --error: #ffb4ab;
+  --error-container: #691b1b;
+  --on-error: #410002;
+  --on-error-container: #ffdad6;
+
+  /* Mode Strip Colors (Dark contrast compensated) */
+  --c-blue: #6096f8;
+  --c-green: #42c994;
+  --c-purple: #a584e8;
+  --c-orange: #f59c56;
+  --c-yellow: #eab925;
+  --c-rail: #e89658;
+  --c-bus: #2ec2c2;
+  --c-auto: #adc722;
+  --c-cab: #cad2de;
+  --c-bike: #ea6aa9;
+  --c-ferry: #52b8e8;
+  --c-walk: #95a0b3;
+
+  /* Schematic Map */
+  --map-bg: #121821;
+  --map-line: #2a3545;
+  --map-river: #164e63;
+  --map-river-label: #7dd3fc;
+
+  --shadow-sm: 0 1px 6px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.45);
+  color-scheme: dark;
+}

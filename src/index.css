@@ -1,75 +1,60 @@
 @import "tailwindcss";
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+@import "./theme.css";
 
 @theme {
-  --font-display: "Archivo", "Arial Narrow", system-ui, sans-serif;
-  --font-body: "Hind", "Hind Siliguri", "Segoe UI", system-ui, sans-serif;
-  --color-bg: var(--bg);
+  --font-display: "Plus Jakarta Sans", "Hind Siliguri", system-ui, sans-serif;
+  --font-body: "Plus Jakarta Sans", "Hind Siliguri", system-ui, sans-serif;
+
   --color-surface: var(--surface);
-  --color-ink: var(--ink);
-  --color-muted: var(--muted);
-  --color-rule: var(--rule);
-  --color-accent: var(--accent);
-  --color-good: var(--good);
-  --color-bad: var(--bad);
-}
+  --color-surface-bright: var(--surface-bright);
+  --color-surface-dim: var(--surface-dim);
+  --color-surface-variant: var(--surface-variant);
+  --color-surface-container-lowest: var(--surface-container-lowest);
+  --color-surface-container-low: var(--surface-container-low);
+  --color-surface-container: var(--surface-container);
+  --color-surface-container-high: var(--surface-container-high);
+  --color-surface-container-highest: var(--surface-container-highest);
 
-:root {
-  --bg: #f3f4f7;
-  --surface: #ffffff;
-  --ink: #141b2d;
-  --muted: #5b6476;
-  --rule: #dde1e9;
-  --accent: #ffc61a;
-  --accent-ink: #141b2d;
-  --good: #1d7f47;
-  --bad: #b93526;
+  --color-on-surface: var(--on-surface);
+  --color-on-surface-variant: var(--on-surface-variant);
+  --color-outline: var(--outline);
+  --color-outline-variant: var(--outline-variant);
+  --color-inverse-surface: var(--inverse-surface);
+  --color-inverse-on-surface: var(--inverse-on-surface);
 
-  --c-blue: #2563c9;
-  --c-green: #1f9d57;
-  --c-purple: #7c4dbb;
-  --c-orange: #e5772b;
-  --c-yellow: #c29400;
-  --c-rail: #8f3a28;
-  --c-bus: #0e8585;
-  --c-auto: #6f8200;
-  --c-cab: #333a48;
-  --c-bike: #cc3f84;
-  --c-ferry: #2f93c2;
-  --c-walk: #8a92a3;
+  --color-primary: var(--primary);
+  --color-primary-container: var(--primary-container);
+  --color-primary-fixed: var(--primary-fixed);
+  --color-primary-fixed-dim: var(--primary-fixed-dim);
+  --color-on-primary: var(--on-primary);
+  --color-on-primary-container: var(--on-primary-container);
+  --color-on-primary-fixed: var(--on-primary-fixed);
+  --color-on-primary-fixed-variant: var(--on-primary-fixed-variant);
+  --color-inverse-primary: var(--inverse-primary);
 
-  --map-bg: #eef0f5;
-  --map-line: #c9ced9;
-  color-scheme: light;
-}
+  --color-secondary: var(--secondary);
+  --color-secondary-container: var(--secondary-container);
+  --color-secondary-fixed: var(--secondary-fixed);
+  --color-secondary-fixed-dim: var(--secondary-fixed-dim);
+  --color-on-secondary: var(--on-secondary);
+  --color-on-secondary-container: var(--on-secondary-container);
+  --color-on-secondary-fixed: var(--on-secondary-fixed);
+  --color-on-secondary-fixed-variant: var(--on-secondary-fixed-variant);
 
-:root[data-theme="dark"] {
-  --bg: #0d121d;
-  --surface: #161d2c;
-  --ink: #e8ebf2;
-  --muted: #9ba4b6;
-  --rule: #283044;
-  --accent: #ffc61a;
-  --accent-ink: #141b2d;
-  --good: #4cc283;
-  --bad: #ff7a66;
+  --color-tertiary: var(--tertiary);
+  --color-tertiary-container: var(--tertiary-container);
+  --color-tertiary-fixed: var(--tertiary-fixed);
+  --color-tertiary-fixed-dim: var(--tertiary-fixed-dim);
+  --color-on-tertiary: var(--on-tertiary);
+  --color-on-tertiary-container: var(--on-tertiary-container);
+  --color-on-tertiary-fixed: var(--on-tertiary-fixed);
+  --color-on-tertiary-fixed-variant: var(--on-tertiary-fixed-variant);
 
-  --c-blue: #5b8ff0;
-  --c-green: #2ec474;
-  --c-purple: #a07ee0;
-  --c-orange: #f08d49;
-  --c-yellow: #e0ae14;
-  --c-rail: #cf6e57;
-  --c-bus: #2bb3b3;
-  --c-auto: #a8bf1e;
-  --c-cab: #d6dae3;
-  --c-bike: #e666a4;
-  --c-ferry: #4db2e0;
-  --c-walk: #8f98aa;
-
-  --map-bg: #111827;
-  --map-line: #2c3549;
-  color-scheme: dark;
+  --color-error: var(--error);
+  --color-error-container: var(--error-container);
+  --color-on-error: var(--on-error);
+  --color-on-error-container: var(--on-error-container);
 }
 
 * {
@@ -79,10 +64,12 @@
 html,
 body {
   margin: 0;
-  background-color: var(--bg);
-  color: var(--ink);
-  font-family: "Hind", "Hind Siliguri", "Segoe UI", system-ui, sans-serif;
+  padding: 0;
+  background-color: var(--surface);
+  color: var(--on-surface);
+  font-family: "Plus Jakarta Sans", "Hind Siliguri", system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
+  overscroll-behavior: none;
 }
 
 .tabular-nums {
@@ -90,7 +77,7 @@ body {
 }
 
 input[type="range"] {
-  accent-color: var(--ink);
+  accent-color: var(--primary);
 }
 
 @media (prefers-reduced-motion: reduce) {

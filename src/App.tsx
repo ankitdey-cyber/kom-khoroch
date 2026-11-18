@@ -1,14 +1,16 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { AboutScreen } from './components/AboutScreen';
 import { BottomNav } from './components/BottomNav';
+import { Footer } from './components/Footer';
 import { Header } from './components/Header';
-import { OptionCard } from './components/OptionCard';
 import { PlanForm } from './components/PlanForm';
+import { ResultsScreen } from './components/ResultsScreen';
 import { RouteDetail } from './components/RouteDetail';
 import { SavedScreen } from './components/SavedScreen';
 import type {
   LangKey,
   PlanTripResult,
+  RouteOption,
   SavedCommute,
   TabKey,
   ThemeKey,
@@ -31,6 +33,8 @@ const DEFAULT_OPTIONS: TripOptions = {
   timeValuePer10Min: 20,
 };
 
+type PlanSubView = 'plan' | 'results' | 'detail';
+
 function getInitialTheme(): ThemeKey {
   try {
     const saved = localStorage.getItem('kom_khoroch_theme');
@@ -47,9 +51,19 @@ function getInitialTheme(): ThemeKey {
   return 'light';
 }
 
+function optionsMatch(a: TripOptions, b: TripOptions): boolean {
+  return (
+    a.peak === b.peak &&
+    a.smartCard === b.smartCard &&
+    a.maxWalkKm === b.maxWalkKm &&
+    a.timeValuePer10Min === b.timeValuePer10Min &&
+    a.avoid.join(',') === b.avoid.join(',')
+  );
+}
+
 export const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState<TabKey>('plan');
-  const [mobileDetailOpen, setMobileDetailOpen] = useState<boolean>(false);
+  const [planSubView, setPlanSubView] = useState<PlanSubView>('plan');
   const [theme, setTheme] = useState<ThemeKey>(getInitialTheme);
   const [lang, setLang] = useState<LangKey>('en');
 
@@ -65,8 +79,6 @@ export const App: React.FC = () => {
   const [savedCommutes, setSavedCommutes] = useState<SavedCommute[]>(() =>
     loadSavedCommutes()
   );
-
-  const resultsRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
@@ -127,25 +139,6 @@ export const App: React.FC = () => {
     );
   }, [tripResult, selectedSignature]);
 
-  const handleSwap = () => {
-    setFromText(toText);
-    setToText(fromText);
-    setMobileDetailOpen(false);
-  };
-
-  const handleFindRoutes = () => {
-    setMobileDetailOpen(false);
-    resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  };
-
-  const handleSelectOption = (signature: string) => {
-    setSelectedSignature(signature);
-    setMobileDetailOpen(true);
-    if (window.innerWidth < 1024) {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  };
-
   const fromName = resolvedStops.fromId
     ? STOP_MAP[resolvedStops.fromId]?.name ?? fromText
     : fromText;
@@ -153,28 +146,42 @@ export const App: React.FC = () => {
     ? STOP_MAP[resolvedStops.toId]?.name ?? toText
     : toText;
 
-  const currentSavedId = useMemo(() => {
-    if (!resolvedStops.fromId || !resolvedStops.toId || !activeOption) {
-      return null;
-    }
-    const found = savedCommutes.find(
-      (s) =>
-        s.fromId === resolvedStops.fromId &&
-        s.toId === resolvedStops.toId &&
-        s.options.peak === options.peak &&
-        s.options.smartCard === options.smartCard &&
-        s.options.maxWalkKm === options.maxWalkKm &&
-        s.options.timeValuePer10Min === options.timeValuePer10Min &&
-        s.options.avoid.join(',') === options.avoid.join(',')
+  const findSavedMatch = (opt: RouteOption | null): SavedCommute | null => {
+    if (!resolvedStops.fromId || !resolvedStops.toId || !opt) return null;
+    const summary = getModeSummary(opt);
+    return (
+      savedCommutes.find(
+        (s) =>
+          s.fromId === resolvedStops.fromId &&
+          s.toId === resolvedStops.toId &&
+          optionsMatch(s.options, options) &&
+          s.modeSummary === summary
+      ) ?? null
     );
-    return found?.id ?? null;
-  }, [savedCommutes, resolvedStops, activeOption, options]);
+  };
 
-  const handleToggleSaveCurrent = () => {
-    if (!resolvedStops.fromId || !resolvedStops.toId || !activeOption) return;
+  const savedSignatureSet = useMemo(() => {
+    const set = new Set<string>();
+    if (!tripResult || !resolvedStops.fromId || !resolvedStops.toId) return set;
+    for (const opt of tripResult.options) {
+      const summary = getModeSummary(opt);
+      const matched = savedCommutes.some(
+        (s) =>
+          s.fromId === resolvedStops.fromId &&
+          s.toId === resolvedStops.toId &&
+          optionsMatch(s.options, options) &&
+          s.modeSummary === summary
+      );
+      if (matched) set.add(opt.signature);
+    }
+    return set;
+  }, [tripResult, savedCommutes, resolvedStops, options]);
 
-    if (currentSavedId) {
-      const next = savedCommutes.filter((s) => s.id !== currentSavedId);
+  const handleToggleSaveOption = (opt: RouteOption) => {
+    if (!resolvedStops.fromId || !resolvedStops.toId) return;
+    const existing = findSavedMatch(opt);
+    if (existing) {
+      const next = savedCommutes.filter((s) => s.id !== existing.id);
       setSavedCommutes(next);
       persistSavedCommutes(next);
       return;
@@ -188,15 +195,45 @@ export const App: React.FC = () => {
       toName,
       options: { ...options, avoid: [...options.avoid] },
       budget,
-      lastFare: activeOption.totalFare,
-      lastMinutes: activeOption.totalMinutes,
-      modeSummary: getModeSummary(activeOption),
+      lastFare: opt.totalFare,
+      lastMinutes: opt.totalMinutes,
+      modeSummary: getModeSummary(opt),
       savedAt: Date.now(),
     };
-
     const next = [newEntry, ...savedCommutes];
     setSavedCommutes(next);
     persistSavedCommutes(next);
+  };
+
+  const handleQuickSaveRoute = (entry: SavedCommute) => {
+    const exists = savedCommutes.some(
+      (s) =>
+        s.fromId === entry.fromId &&
+        s.toId === entry.toId &&
+        optionsMatch(s.options, entry.options) &&
+        s.modeSummary === entry.modeSummary
+    );
+    if (exists) return;
+    const next = [entry, ...savedCommutes];
+    setSavedCommutes(next);
+    persistSavedCommutes(next);
+  };
+
+  const handleSwap = () => {
+    setFromText(toText);
+    setToText(fromText);
+  };
+
+  const handleFindRoutes = () => {
+    if (error) return;
+    setPlanSubView('results');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleSelectOption = (signature: string) => {
+    setSelectedSignature(signature);
+    setPlanSubView('detail');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleReplanSaved = (item: SavedCommute) => {
@@ -206,10 +243,8 @@ export const App: React.FC = () => {
     setBudget(item.budget);
     setSelectedSignature(null);
     setActiveTab('plan');
-    setMobileDetailOpen(false);
-    window.setTimeout(() => {
-      resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 60);
+    setPlanSubView('results');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleDeleteSaved = (id: string) => {
@@ -221,13 +256,17 @@ export const App: React.FC = () => {
   const handleTabChange = (tab: TabKey) => {
     setActiveTab(tab);
     if (tab === 'plan') {
-      setMobileDetailOpen(false);
+      setPlanSubView('plan');
     }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const activeIsSaved = activeOption
+    ? savedSignatureSet.has(activeOption.signature)
+    : false;
+
   return (
-    <div className="min-h-screen bg-bg text-ink">
+    <div className="flex min-h-screen flex-col bg-surface text-on-surface">
       <Header
         activeTab={activeTab}
         onSelectTab={handleTabChange}
@@ -236,134 +275,89 @@ export const App: React.FC = () => {
           setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'))
         }
         lang={lang}
-        onToggleLang={() => setLang((prev) => (prev === 'en' ? 'bn' : 'en'))}
+        onSetLang={setLang}
         savedCount={savedCommutes.length}
       />
 
-      <main className="mx-auto max-w-5xl px-4 pb-20 pt-4 sm:pb-12">
-        {activeTab === 'plan' && (
-          <>
-            {/* Mobile single-column Route Detail screen when an option is tapped */}
-            {mobileDetailOpen && activeOption ? (
-              <div className="lg:hidden">
-                <RouteDetail
-                  fromName={fromName}
-                  toName={toName}
-                  option={activeOption}
-                  cab={tripResult?.cab ?? null}
-                  isSaved={currentSavedId !== null}
-                  onSave={handleToggleSaveCurrent}
-                  onBack={() => setMobileDetailOpen(false)}
-                  lang={lang}
-                />
-              </div>
-            ) : null}
-
-            {/* Responsive layout: single column on mobile (hidden when detail open), 2-column on desktop */}
-            <div
-              className={`grid gap-6 lg:grid-cols-[400px_1fr] lg:items-start ${
-                mobileDetailOpen && activeOption ? 'hidden lg:grid' : 'grid'
-              }`}
-            >
-              <div className="grid gap-5">
-                <PlanForm
-                  fromText={fromText}
-                  toText={toText}
-                  onChangeFrom={setFromText}
-                  onChangeTo={setToText}
-                  onSwap={handleSwap}
-                  options={options}
-                  onChangeOptions={setOptions}
-                  budget={budget}
-                  onChangeBudget={setBudget}
-                  stops={network.stops}
-                  error={error}
-                  onSubmit={handleFindRoutes}
-                  lang={lang}
-                />
-
-                {/* Results list sits directly below PlanForm on mobile and in left rail or stacked cleanly */}
-                <section
-                  ref={resultsRef}
-                  aria-label="Route results"
-                  className="grid gap-3 scroll-mt-20"
-                >
-                  {tripResult && tripResult.options.length > 0 && (
-                    <>
-                      <div className="flex flex-wrap items-baseline justify-between gap-2 px-0.5">
-                        <h2 className="font-display text-base font-extrabold text-ink">
-                          {fromName} → {toName}
-                        </h2>
-                        <span className="text-xs text-muted">
-                          {options.peak ? 'Peak hour' : 'Off-peak'} · Fares are
-                          approximate
-                        </span>
-                      </div>
-
-                      <div className="grid gap-2.5">
-                        {tripResult.options.map((opt) => (
-                          <OptionCard
-                            key={opt.signature}
-                            option={opt}
-                            selected={activeOption?.signature === opt.signature}
-                            cab={tripResult.cab}
-                            budgetAmount={budgetAmount}
-                            onSelect={() => handleSelectOption(opt.signature)}
-                          />
-                        ))}
-                      </div>
-                    </>
-                  )}
-
-                  {tripResult && tripResult.options.length === 0 && (
-                    <div className="rounded-[12px] border border-rule bg-surface p-4 text-sm text-ink">
-                      <strong>No route found.</strong>{' '}
-                      <span className="text-muted">
-                        Allow more transport modes or increase your maximum walk
-                        distance and try again.
-                      </span>
-                    </div>
-                  )}
-                </section>
-              </div>
-
-              {/* Desktop persistent Route Detail panel alongside planner & results */}
-              <div className="hidden lg:sticky lg:top-20 lg:block">
-                {activeOption ? (
-                  <RouteDetail
-                    fromName={fromName}
-                    toName={toName}
-                    option={activeOption}
-                    cab={tripResult?.cab ?? null}
-                    isSaved={currentSavedId !== null}
-                    onSave={handleToggleSaveCurrent}
-                    onBack={() => setMobileDetailOpen(false)}
-                    showBackButton={false}
-                    lang={lang}
-                  />
-                ) : (
-                  <div className="rounded-[12px] border border-rule bg-surface p-6 text-sm text-muted">
-                    Select valid starting and destination stops to inspect the
-                    step-by-step itinerary and schematic transit map.
-                  </div>
-                )}
-              </div>
-            </div>
-          </>
+      <main className="mx-auto w-full max-w-7xl flex-1 px-4 pt-6 md:px-6 lg:px-10">
+        {activeTab === 'plan' && planSubView === 'plan' && (
+          <PlanForm
+            fromText={fromText}
+            toText={toText}
+            fromName={fromName}
+            toName={toName}
+            onChangeFrom={setFromText}
+            onChangeTo={setToText}
+            onSwap={handleSwap}
+            options={options}
+            onChangeOptions={setOptions}
+            budget={budget}
+            onChangeBudget={setBudget}
+            stops={network.stops}
+            error={error}
+            tripResult={tripResult}
+            onSubmit={handleFindRoutes}
+            onSelectOption={handleSelectOption}
+            onGoToAbout={() => handleTabChange('about')}
+            lang={lang}
+          />
         )}
+
+        {activeTab === 'plan' && planSubView === 'results' && (
+          <ResultsScreen
+            fromName={fromName}
+            toName={toName}
+            options={options}
+            onChangeOptions={setOptions}
+            tripResult={tripResult}
+            budgetAmount={budgetAmount}
+            selectedSignature={activeOption?.signature ?? null}
+            savedSignatureSet={savedSignatureSet}
+            onSelectOption={handleSelectOption}
+            onSaveOption={handleToggleSaveOption}
+            onBackToPlan={() => {
+              setPlanSubView('plan');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            lang={lang}
+          />
+        )}
+
+        {activeTab === 'plan' &&
+          planSubView === 'detail' &&
+          activeOption && (
+            <RouteDetail
+              fromName={fromName}
+              toName={toName}
+              option={activeOption}
+              cab={tripResult?.cab ?? null}
+              isSaved={activeIsSaved}
+              onSave={() => handleToggleSaveOption(activeOption)}
+              onBack={() => {
+                setPlanSubView('results');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              lang={lang}
+            />
+          )}
 
         {activeTab === 'saved' && (
           <SavedScreen
             saved={savedCommutes}
             onReplan={handleReplanSaved}
+            onQuickSaveRoute={handleQuickSaveRoute}
             onDelete={handleDeleteSaved}
             onGoToPlan={() => handleTabChange('plan')}
             lang={lang}
           />
         )}
 
-        {activeTab === 'about' && <AboutScreen lang={lang} />}
+        {activeTab === 'about' && (
+          <AboutScreen lang={lang} onSetLang={setLang} />
+        )}
       </main>
+
+      <Footer onSelectTab={handleTabChange} lang={lang} />
 
       <BottomNav
         activeTab={activeTab}

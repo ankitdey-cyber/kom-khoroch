@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"surface-container-highest":"#e0e3e5","on-error":"#ffffff","on-secondary":"#ffffff","inverse-primary":"#ffb77d","outline":"#887364","secondary":"#006c4e","on-secondary-fixed":"#002115","error":"#ba1a1a","surface-tint":"#904d00","on-background":"#191c1e","surface":"#f7f9fb","primary-fixed-dim":"#ffb77d","on-surface":"#191c1e","on-tertiary-fixed-variant":"#3c475a","background":"#f7f9fb","on-secondary-container":"#007353","surface-dim":"#d8dadc","on-primary-container":"#fffbff","secondary-container":"#97f5cc","tertiary-container":"#6a758a","on-secondary-fixed-variant":"#00513a","tertiary-fixed":"#d8e3fb","on-tertiary":"#ffffff","primary-fixed":"#ffdcc3","error-container":"#ffdad6","on-primary-fixed-variant":"#6e3900","primary":"#8d4b00","on-tertiary-fixed":"#111c2d","surface-container":"#eceef0","tertiary":"#515c71","surface-container-low":"#f2f4f6","outline-variant":"#dbc2b0","on-tertiary-container":"#fefcff","primary-container":"#b15f00","inverse-on-surface":"#eff1f3","on-primary":"#ffffff","on-surface-variant":"#554336","inverse-surface":"#2d3133","on-error-container":"#93000a","surface-bright":"#f7f9fb","secondary-fixed":"#97f5cc","on-primary-fixed":"#2f1500","surface-container-high":"#e6e8ea","surface-container-lowest":"#ffffff","surface-variant":"#e0e3e5","secondary-fixed-dim":"#7bd8b1","tertiary-fixed-dim":"#bcc7de"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"margin":"1rem","space-md":"0.75rem","margin-md":"1.5rem","space-sm":"0.5rem","space-lg":"1rem","space-xs":"0.25rem","gutter-sm":"0.75rem","margin-lg":"2.5rem","space-xl":"1.5rem","gutter":"1rem"},"fontFamily":{"display-lg-mobile":["Plus Jakarta Sans"],"title-lg":["Plus Jakarta Sans"],"body-lg":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"],"label-md":["Plus Jakarta Sans"],"title-md":["Plus Jakarta Sans"],"label-lg":["Plus Jakarta Sans"],"display-lg":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"label-sm":["Plus Jakarta Sans"]},"fontSize":{"display-lg-mobile":["32px",{"lineHeight":"38px","letterSpacing":"-0.02em","fontWeight":"800"}],"title-lg":["18px",{"lineHeight":"24px","fontWeight":"600"}],"body-lg":["16px",{"lineHeight":"24px","fontWeight":"400"}],"headline-lg":["28px",{"lineHeight":"34px","letterSpacing":"-0.015em","fontWeight":"700"}],"body-md":["14px",{"lineHeight":"20px","fontWeight":"400"}],"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.02em","fontWeight":"700"}],"title-md":["16px",{"lineHeight":"22px","fontWeight":"600"}],"label-lg":["14px",{"lineHeight":"18px","letterSpacing":"0.01em","fontWeight":"600"}],"display-lg":["40px",{"lineHeight":"48px","letterSpacing":"-0.02em","fontWeight":"800"}],"headline-md":["22px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"700"}],"label-sm":["11px",{"lineHeight":"14px","letterSpacing":"0.03em","fontWeight":"600"}]}}}}</script></head><body class="bg-surface font-body-md text-body-md text-on-surface min-h-screen flex flex-col"><header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-20 max-w-7xl mx-auto px-margin md:px-margin-md lg:px-margin-lg flex items-center justify-between"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-md"><img alt="Kom Khoroch Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrB7kIlZh7y7cxEfHnEvCKhw4hAPm0bP1M67AEcEKFPVTR5pVPoGkwr0UhDEGF-94DhO-xQ6Vl13g_Zpe0MhUb3Xl88KRc3oLrCjlO6Z3XVswRbe7EAJecQK5pCMjTxIjzd7LoZmCn1k2-ocrceWTw9viqJ12-AkpZEhDiik05KdX4c-uYcK44KkNf00P9XRq_aUsdoYdj4mGlXRHhhdQHZgt5503O1iAV614cevOBUz"/><div class="flex flex-col"><div class="flex items-baseline gap-space-xs"><span class="font-title-lg text-title-lg text-primary tracking-tight">Kom Khoroch</span><span class="font-label-md text-label-md text-secondary font-bold">কম খরচ</span></div><span class="font-label-sm text-label-sm text-on-surface-variant tracking-normal hidden sm:block">Lowest Fare Route Planner</span></div></div><div class="h-6 w-px bg-surface-container-highest hidden lg:block mx-space-xs"></div><div class="hidden lg:flex items-center gap-space-xs px-space-sm py-space-xs rounded-full bg-secondary-container/40 text-on-secondary-fixed-variant font-label-sm text-label-sm"><span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span><span>Kolkata Transit Live</span></div></div><nav class="flex items-center gap-space-xs md:gap-space-sm" data-active-classes="bg-primary-container text-on-primary font-bold rounded-lg px-space-md py-space-xs"><a aria-current="page" class="transition-colors bg-primary-container text-on-primary font-bold rounded-lg px-space-md py-space-xs" data-path="plan" href="#">Plan</a><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high px-space-md py-space-xs rounded-lg transition-colors" data-path="saved" href="#">Saved</a><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high px-space-md py-space-xs rounded-lg transition-colors" data-path="about" href="#">About</a></nav><div class="flex items-center gap-space-md"><div class="hidden sm:flex items-center rounded-lg bg-surface-container-low p-space-xs"><button class="px-space-sm py-space-xs font-label-sm text-label-sm rounded bg-surface-container-lowest text-on-surface shadow-[0_1px_4px_rgba(0,0,0,0.04)]" type="button">EN</button><button class="px-space-sm py-space-xs font-label-sm text-label-sm rounded text-on-surface-variant hover:text-on-surface transition-colors" type="button">বাংলা</button></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-20 bg-surface flex-1 max-w-7xl mx-auto px-margin md:px-margin-md lg:px-margin-lg"><div class="flex flex-col w-full pb-16">
+<!-- Top Visual Accent / Subtle Glow Container -->
+<div class="relative w-full overflow-hidden rounded-3xl bg-surface-container-low mb-8 shadow-sm">
+<div class="absolute -right-24 -top-24 w-96 h-96 rounded-full bg-secondary-container/40 blur-3xl pointer-events-none"></div>
+<div class="absolute -left-20 -bottom-20 w-80 h-80 rounded-full bg-primary-fixed/40 blur-3xl pointer-events-none"></div>
+<div class="relative px-margin md:px-margin-md lg:px-margin-lg py-8 md:py-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+<div class="flex flex-col max-w-3xl">
+<div class="flex flex-wrap items-center gap-2 mb-3">
+<span class="inline-flex items-center gap-1.5 px-space-sm py-space-xs rounded-full bg-secondary text-on-secondary font-label-sm text-label-sm font-bold shadow-xs">
+<span class="material-symbols-outlined text-[15px]" style="font-variation-settings: 'FILL' 1;">eco</span>
+            সবচেয়ে সাশ্রয়ী যাতায়াত
+          </span>
+<span class="inline-flex items-center gap-1 px-space-sm py-space-xs rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+            Kolkata &amp; Suburban Hubs
+          </span>
+<span class="text-tertiary font-label-sm text-label-sm">Updated Live Fares (2025)</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg md:font-display-lg md:text-display-lg text-on-surface tracking-tight">
+          Kom Khoroch <span class="text-primary font-normal">|</span> <span class="text-secondary">কম খরচ</span>
+</h1>
+<p class="font-title-md text-title-md text-on-surface-variant mt-1 font-medium">
+          Calculate the smartest, cheapest routes across Kolkata Metro (Blue, Green, Purple, Orange), Suburban Rail, Local Buses, Trams, Autos &amp; Ferries.
+        </p>
+</div>
+<!-- Quick Metrics Pill Grid -->
+<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-1 gap-2.5 min-w-[240px]">
+<div class="bg-surface-container-lowest p-space-sm rounded-xl shadow-xs flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-secondary-container text-on-secondary-fixed flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">currency_rupee</span>
+</div>
+<div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Avg Commute Savings</div>
+<div class="font-title-md text-title-md text-secondary font-bold">₹120 – ₹340 / day</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-space-sm rounded-xl shadow-xs flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-primary-fixed text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">directions_subway</span>
+</div>
+<div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Connected Lines</div>
+<div class="font-title-md text-title-md text-on-surface font-bold">4 Metro + 14 Local Rail</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Primary Planner & Complementary Side Panel Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Left Column: Master Form / Multi-modal Engine (7 Cols) -->
+<div class="lg:col-span-7 flex flex-col gap-6">
+<!-- AI Natural Language Prompt Box -->
+<div class="bg-surface-container-lowest rounded-2xl p-space-md md:p-space-lg shadow-sm">
+<div class="flex items-center justify-between mb-2">
+<label class="flex items-center gap-2 font-label-lg text-label-lg text-primary font-bold" for="ai-transit-query">
+<span class="material-symbols-outlined text-[18px] text-primary" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+            Ask in plain words <span class="text-on-surface-variant font-normal">(সহজ ভাষায় জানতে চান?)</span>
+</label>
+<span class="font-label-sm text-label-sm text-secondary bg-secondary-container/50 px-2 py-0.5 rounded-full font-semibold">AI Assistant</span>
+</div>
+<div class="relative flex items-center bg-surface-container-low rounded-xl focus-within:ring-2 focus-within:ring-primary/20 transition-all">
+<input class="w-full bg-transparent px-space-md py-3 font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant/60 focus:outline-none" id="ai-transit-query" placeholder="e.g. Fastest cheap way from Howrah to Airport before 9 AM" type="text" value="Cheapest way from Serampore to Sector V, no bus"/>
+<button class="mr-2 px-space-md py-1.5 rounded-lg bg-primary text-on-primary font-label-md text-label-md flex items-center gap-1 hover:bg-primary-container transition-colors shadow-xs" onclick="applyAiPrompt(document.getElementById('ai-transit-query').value)" type="button">
+<span>Analyze</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+<!-- Pre-cooked prompt pills -->
+<div class="flex flex-wrap items-center gap-2 mt-3 pt-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Try:</span>
+<button class="font-label-sm text-label-sm px-2.5 py-1 rounded-full bg-surface-container text-on-surface hover:bg-surface-container-high transition-colors" onclick="setQuery('Cheapest under ₹25 from Sealdah to Airport')" type="button">
+            ✨ Cheapest under ₹25
+          </button>
+<button class="font-label-sm text-label-sm px-2.5 py-1 rounded-full bg-surface-container text-on-surface hover:bg-surface-container-high transition-colors" onclick="setQuery('Avoid peak rush from Howrah to Salt Lake')" type="button">
+            🌿 Avoid peak rush
+          </button>
+<button class="font-label-sm text-label-sm px-2.5 py-1 rounded-full bg-surface-container text-on-surface hover:bg-surface-container-high transition-colors" onclick="setQuery('Metro + Shared Auto combination to New Town')" type="button">
+            ⚡ Metro + Auto combo
+          </button>
+</div>
+</div>
+<!-- Core Origin / Destination Transit Card -->
+<div class="bg-surface-container-lowest rounded-2xl p-space-md md:p-space-lg shadow-sm flex flex-col gap-5">
+<div class="flex items-center justify-between">
+<span class="font-title-md text-title-md text-on-surface font-bold">Plan Point-to-Point Route</span>
+<span class="font-label-sm text-label-sm text-secondary bg-secondary-container px-2 py-0.5 rounded font-bold">Fare Comparison Active</span>
+</div>
+<!-- Origin and Destination Stack with Swap -->
+<div class="relative flex flex-col gap-3">
+<!-- From Field -->
+<div class="relative flex items-center bg-surface-container-low rounded-xl px-space-md py-2.5 focus-within:ring-2 focus-within:ring-secondary/20 transition-all">
+<div class="w-8 h-8 rounded-full bg-secondary-container text-secondary flex items-center justify-center shrink-0 mr-3">
+<span class="material-symbols-outlined text-[18px]">radio_button_checked</span>
+</div>
+<div class="flex flex-col flex-1 min-w-0">
+<label class="font-label-sm text-label-sm text-on-surface-variant font-semibold" for="origin-station">From (উৎস - স্টেশন / বাসস্টপ)</label>
+<input class="w-full bg-transparent font-title-md text-title-md text-on-surface font-semibold focus:outline-none truncate" id="origin-station" placeholder="e.g. Serampore / Howrah / Dum Dum" type="text" value="Serampore Railway Station (SRP)"/>
+</div>
+<button class="text-on-surface-variant hover:text-on-surface p-1 rounded-lg" title="Current Location" type="button">
+<span class="material-symbols-outlined text-[20px]">my_location</span>
+</button>
+</div>
+<!-- Absolute Floating Swap Button -->
+<div class="absolute right-6 top-1/2 -translate-y-1/2 z-10">
+<button class="w-10 h-10 rounded-full bg-surface-container-lowest text-primary shadow-md flex items-center justify-center hover:scale-110 active:scale-95 transition-transform" id="swap-route-btn" onclick="swapPoints()" title="Swap Origin and Destination" type="button">
+<span class="material-symbols-outlined text-[20px] transition-transform duration-300" id="swap-icon">swap_vert</span>
+</button>
+</div>
+<!-- To Field -->
+<div class="relative flex items-center bg-surface-container-low rounded-xl px-space-md py-2.5 focus-within:ring-2 focus-within:ring-primary/20 transition-all">
+<div class="w-8 h-8 rounded-full bg-primary-fixed text-primary flex items-center justify-center shrink-0 mr-3">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+</div>
+<div class="flex flex-col flex-1 min-w-0">
+<label class="font-label-sm text-label-sm text-on-surface-variant font-semibold" for="dest-station">To (গন্তব্য - অফিস / কলেজ)</label>
+<input class="w-full bg-transparent font-title-md text-title-md text-on-surface font-semibold focus:outline-none truncate" id="dest-station" placeholder="e.g. Sector V / Esplanade / Park Street" type="text" value="Sector V Metro Station (Salt Lake)"/>
+</div>
+<button class="text-on-surface-variant hover:text-on-surface p-1 rounded-lg" title="Pick on Map" type="button">
+<span class="material-symbols-outlined text-[20px]">map</span>
+</button>
+</div>
+</div>
+<!-- Frequent Quick Nodes -->
+<div class="flex flex-wrap items-center gap-1.5 -mt-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant mr-1">Frequent:</span>
+<button class="font-label-sm text-label-sm px-2.5 py-1 rounded bg-surface-container text-on-surface hover:bg-surface-container-high transition-colors" onclick="setDest('Howrah Railway Station')" type="button">Howrah Jn</button>
+<button class="font-label-sm text-label-sm px-2.5 py-1 rounded bg-surface-container text-on-surface hover:bg-surface-container-high transition-colors" onclick="setDest('Sealdah Railway Station')" type="button">Sealdah</button>
+<button class="font-label-sm text-label-sm px-2.5 py-1 rounded bg-surface-container text-on-surface hover:bg-surface-container-high transition-colors" onclick="setDest('Esplanade Metro')" type="button">Esplanade</button>
+<button class="font-label-sm text-label-sm px-2.5 py-1 rounded bg-secondary-container text-on-secondary-fixed font-bold" onclick="setDest('Sector V Metro Station')" type="button">Sector V</button>
+<button class="font-label-sm text-label-sm px-2.5 py-1 rounded bg-surface-container text-on-surface hover:bg-surface-container-high transition-colors" onclick="setDest('Kolkata Airport (CCU)')" type="button">Airport</button>
+</div>
+<!-- Preferences & Commute State Toggles -->
+<div class="pt-2 flex flex-col gap-4">
+<div class="flex flex-wrap items-center justify-between gap-3">
+<span class="font-label-md text-label-md text-on-surface font-bold">Commute Condition &amp; Cards:</span>
+<div class="flex flex-wrap items-center gap-2">
+<!-- Peak Hour Toggle -->
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-primary-fixed text-primary font-label-sm text-label-sm font-bold shadow-2xs transition-colors" id="toggle-peakhour" onclick="toggleState(this)" type="button">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span>Peak hour (পিক আওয়ার)</span>
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+</button>
+<!-- Metro Smart Card Toggle -->
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-secondary-container text-on-secondary-fixed-variant font-label-sm text-label-sm font-bold shadow-2xs transition-colors" id="toggle-smartcard" onclick="toggleState(this)" type="button">
+<span class="material-symbols-outlined text-[16px]">credit_card</span>
+<span>Metro smart card (১০% ছাড়)</span>
+</button>
+</div>
+</div>
+<!-- Transit Modes to Avoid Section -->
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-semibold">Avoid (যেগুলো এড়াতে চান):</span>
+<span class="font-label-sm text-label-sm text-primary">Cab disabled by default</span>
+</div>
+<div class="flex flex-wrap gap-2">
+<!-- Cab Avoided (Active Strike) -->
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-error-container text-error font-label-sm text-label-sm font-bold shadow-2xs" title="Cab filtered out for lowest expense" type="button">
+<span class="material-symbols-outlined text-[16px]">local_taxi</span>
+<span class="line-through">Cab (ক্যাব)</span>
+<span class="material-symbols-outlined text-[14px]">close</span>
+</button>
+<!-- Bike taxi -->
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-colors" onclick="toggleChip(this)" type="button">
+<span class="material-symbols-outlined text-[16px]">two_wheeler</span>
+<span>Bike taxi (বাইক)</span>
+</button>
+<!-- Bus -->
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-colors" onclick="toggleChip(this)" type="button">
+<span class="material-symbols-outlined text-[16px]">directions_bus</span>
+<span>Bus (বাস)</span>
+</button>
+<!-- Auto -->
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-colors" onclick="toggleChip(this)" type="button">
+<span class="material-symbols-outlined text-[16px]">electric_rickshaw</span>
+<span>Auto (অটো)</span>
+</button>
+<!-- Ferry -->
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-colors" onclick="toggleChip(this)" type="button">
+<span class="material-symbols-outlined text-[16px]">directions_boat</span>
+<span>Ferry (লঞ্চ / ফেরি)</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Value of Time Cost vs Speed Slider -->
+<div class="bg-surface-container-low rounded-xl p-space-md flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[20px]">speed</span>
+<span class="font-label-md text-label-md text-on-surface font-bold">Value-of-Time Trade-off (সময় বনাম খরচ)</span>
+</div>
+<span class="font-title-md text-title-md text-primary font-bold" id="slider-readout">
+              10 min saved = ₹20
+            </span>
+</div>
+<div class="flex flex-col gap-1.5">
+<input class="w-full accent-primary h-2 bg-surface-container-highest rounded-lg cursor-pointer" id="time-cost-slider" max="100" min="0" oninput="updateSlider(this.value)" step="10" type="range" value="20"/>
+<div class="flex justify-between font-label-sm text-label-sm text-on-surface-variant">
+<span>₹0 (Pure Savings)</span>
+<span>₹20 (Balanced)</span>
+<span>₹50 (Faster)</span>
+<span>₹100+ (Fastest)</span>
+</div>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">
+            We balance walking, suburban EMU trains, Metro connections, and share-autos based on this value.
+          </p>
+</div>
+<!-- Primary High-Impact CTA -->
+<div class="flex flex-col gap-2 pt-1">
+<button class="w-full py-4 px-space-lg rounded-xl bg-primary text-on-primary font-headline-md text-headline-md text-center flex items-center justify-center gap-3 shadow-md hover:bg-primary-container active:scale-[0.99] transition-all" onclick="triggerRouteSearch()" type="button">
+<span>Find routes (রুট খুঁজুন)</span>
+<span class="material-symbols-outlined text-[24px]">trending_flat</span>
+</button>
+<div class="flex items-center justify-center gap-2 text-center font-label-sm text-label-sm text-secondary font-bold">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+<span>Save up to 65% (₹360 avg) vs direct app-cabs on this corridor</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Live Fare Preview & Popular Route Comparisons (5 Cols) -->
+<div class="lg:col-span-5 flex flex-col gap-6">
+<!-- Realtime Kolkata Transit Fare Matrix Card -->
+<div class="bg-surface-container-lowest rounded-2xl p-space-md shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[22px]">hub</span>
+<h2 class="font-title-md text-title-md text-on-surface font-bold">Recommended Lowest Fares</h2>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Live routes</span>
+</div>
+<!-- Route Card 1: Serampore to Sector V (Active Selection) -->
+<div class="bg-surface-container-low rounded-xl p-space-md mb-3 flex flex-col gap-3">
+<div class="flex items-start justify-between">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="px-2 py-0.5 rounded-full bg-secondary text-on-secondary font-label-sm text-label-sm font-bold">
+                  Kom Khoroch: ₹20
+                </span>
+<span class="px-2 py-0.5 rounded-full bg-primary-fixed text-primary font-label-sm text-label-sm font-semibold">
+                  48 min
+                </span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface font-bold">Serampore → Sector V (Salt Lake)</h3>
+</div>
+<div class="text-right">
+<span class="font-label-sm text-label-sm text-error font-medium line-through">Cab: ₹380</span>
+<div class="font-label-sm text-label-sm text-secondary font-bold">Save ₹360</div>
+</div>
+</div>
+<!-- Multi-modal Visual Segment Bar -->
+<div class="flex flex-col gap-1.5">
+<div class="h-2 w-full rounded-full bg-surface-container-highest overflow-hidden flex">
+<div class="bg-tertiary w-7/12" title="Howrah Main Suburban EMU (Serampore to Howrah)"></div>
+<div class="bg-surface-container w-1/12" title="Walk across subway / Ferry"></div>
+<div class="bg-secondary w-4/12" title="Green Line Underwater Metro (Howrah to Sector V)"></div>
+</div>
+<div class="flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant">
+<span class="flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span> Local Train (₹5)
+              </span>
+<span class="flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-secondary"></span> Green Metro (₹15)
+              </span>
+<span class="text-on-surface font-semibold">0 Cab legs</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-1 font-label-sm text-label-sm text-on-surface-variant">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-secondary">transfer_within_a_station</span>
+              1 simple interchange at Howrah
+            </span>
+<button class="text-primary font-bold hover:underline flex items-center gap-0.5" type="button">
+              Steps <span class="material-symbols-outlined text-[14px]">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Route Card 2: Howrah to Salt Lake Stadium -->
+<div class="bg-surface-container-low rounded-xl p-space-md mb-3 flex flex-col gap-2.5">
+<div class="flex items-start justify-between">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="px-2 py-0.5 rounded-full bg-secondary text-on-secondary font-label-sm text-label-sm font-bold">
+                  ₹10 Direct
+                </span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface font-label-sm text-label-sm">
+                  16 min
+                </span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface font-bold">Howrah Jn → Salt Lake Stadium</h3>
+</div>
+<div class="text-right">
+<span class="font-label-sm text-label-sm text-error line-through">Cab: ₹220</span>
+<div class="font-label-sm text-label-sm text-secondary font-bold">Underwater Metro</div>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+            Board Green Line Metro at Howrah Station, cross under the Hooghly river in 45 seconds straight to Salt Lake.
+          </p>
+</div>
+<!-- Route Card 3: Garia to BBD Bag -->
+<div class="bg-surface-container-low rounded-xl p-space-md flex flex-col gap-2.5">
+<div class="flex items-start justify-between">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="px-2 py-0.5 rounded-full bg-secondary text-on-secondary font-label-sm text-label-sm font-bold">
+                  ₹25 Combo
+                </span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface font-label-sm text-label-sm">
+                  38 min
+                </span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface font-bold">Kavi Subhash (Garia) → BBD Bag</h3>
+</div>
+<div class="text-right">
+<span class="font-label-sm text-label-sm text-error line-through">Cab: ₹310</span>
+<div class="font-label-sm text-label-sm text-secondary font-bold">Blue Metro + Bus</div>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+            Blue Line Metro to Esplanade (₹20), then WBTC electric mini-bus or tram loop to Dalhousie (₹5).
+          </p>
+</div>
+</div>
+<!-- Quick Kolkata Transit Network Map Card -->
+<div class="bg-surface-container-lowest rounded-2xl p-space-md shadow-sm flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">map</span>
+<span class="font-title-md text-title-md text-on-surface font-bold">Suburban Rail &amp; Metro Grid</span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary font-bold">Live Updates</span>
+</div>
+<!-- Interactive Map Container Component -->
+<div class="w-full h-44 rounded-xl bg-cover bg-center relative overflow-hidden shadow-inner flex items-end p-space-md" data-alt="A vivid stylized transit map overlay of Kolkata showing Howrah, the Hooghly River, Sealdah, Esplanade, and Salt Lake Sector V with glowing green and amber transit lines in high contrast civic mobility style." data-location="Howrah, Kolkata, West Bengal, India" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD03ZFwtUJG0LsFqIh7IWMUivtmRb7saVuB2ErIv0OeZcIVOIZq3ZYf1VrciYPUK16GAnEAd9M7lAKLxY4_3avZeQhxYmynk8jXduDpAYZ_IDnxjPwDI1bTqsyjV5I3RBuCwwxgVPHWy3wpxotHNCCGrRGl8YqmdgGrN4W8WxnsQTWQearCtYGatJEhHpEC0IutMDR8reFz913pKEWvuRtQXEA69mbK0W9sjN1KfRU')">
+<div class="bg-surface/90 backdrop-blur-md px-3 py-1.5 rounded-lg shadow-sm flex items-center justify-between w-full">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary animate-ping"></span>
+<span class="font-label-sm text-label-sm text-on-surface font-bold">Ganga Ghat Ferries Operating Regularly</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary font-bold">₹6 Flat</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-2 text-center pt-1">
+<div class="p-2 rounded-lg bg-surface-container-low flex flex-col items-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Blue Line Headway</span>
+<span class="font-title-md text-title-md text-on-surface font-bold">5 min</span>
+</div>
+<div class="p-2 rounded-lg bg-surface-container-low flex flex-col items-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Green Line (Underwater)</span>
+<span class="font-title-md text-title-md text-secondary font-bold">8 min</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Route Comparison Summary Bar at Bottom -->
+<div class="mt-8 bg-surface-container-lowest rounded-2xl p-space-md md:p-space-lg shadow-sm flex flex-col md:flex-row items-center justify-between gap-4">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-secondary-container text-on-secondary-fixed flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[28px]">savings</span>
+</div>
+<div>
+<h4 class="font-title-md text-title-md text-on-surface font-bold">Why daily commuters choose Kom Khoroch</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Calculated against app-cab surge pricing, auto union standard rates, and suburban monthly ticket splits.</p>
+</div>
+</div>
+<div class="flex items-center gap-3 shrink-0">
+<div class="text-right hidden sm:block">
+<div class="font-label-sm text-label-sm text-on-surface-variant">Crowdsourced fares from</div>
+<div class="font-label-md text-label-md text-primary font-bold">42,000+ Kolkata Commuters</div>
+</div>
+<button class="px-4 py-2 rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md hover:bg-surface-container-highest transition-colors" type="button">
+        View Fare Matrix
+      </button>
+</div>
+</div>
+</div>
+<script>
+  function swapPoints() {
+    const origin = document.getElementById('origin-station');
+    const dest = document.getElementById('dest-station');
+    const icon = document.getElementById('swap-icon');
+
+    const temp = origin.value;
+    origin.value = dest.value;
+    dest.value = temp;
+
+    icon.classList.add('rotate-180');
+    setTimeout(() => {
+      icon.classList.remove('rotate-180');
+    }, 300);
+  }
+
+  function setDest(destinationName) {
+    document.getElementById('dest-station').value = destinationName;
+  }
+
+  function setQuery(text) {
+    document.getElementById('ai-transit-query').value = text;
+    applyAiPrompt(text);
+  }
+
+  function applyAiPrompt(promptText) {
+    if (promptText.toLowerCase().includes('sector v')) {
+      document.getElementById('dest-station').value = 'Sector V Metro Station (Salt Lake)';
+    }
+    if (promptText.toLowerCase().includes('serampore')) {
+      document.getElementById('origin-station').value = 'Serampore Railway Station (SRP)';
+    }
+    if (promptText.toLowerCase().includes('sealdah')) {
+      document.getElementById('origin-station').value = 'Sealdah Railway Station';
+    }
+    if (promptText.toLowerCase().includes('airport')) {
+      document.getElementById('dest-station').value = 'Kolkata Airport (CCU)';
+    }
+  }
+
+  function updateSlider(val) {
+    const readout = document.getElementById('slider-readout');
+    if (val == 0) {
+      readout.textContent = '₹0: Lowest cost at all costs';
+    } else if (val >= 100) {
+      readout.textContent = '₹100+: Prioritize fastest arrival';
+    } else {
+      readout.textContent = `10 min saved = ₹${val}`;
+    }
+  }
+
+  function toggleChip(btn) {
+    const isAvoided = btn.classList.contains('bg-error-container');
+    if (isAvoided) {
+      btn.classList.remove('bg-error-container', 'text-error', 'font-bold');
+      btn.classList.add('bg-surface-container', 'text-on-surface-variant');
+      const cross = btn.querySelector('.close-icon');
+      if (cross) cross.remove();
+    } else {
+      btn.classList.remove('bg-surface-container', 'text-on-surface-variant');
+      btn.classList.add('bg-error-container', 'text-error', 'font-bold');
+      const closeSpan = document.createElement('span');
+      closeSpan.className = 'material-symbols-outlined text-[14px] close-icon';
+      closeSpan.textContent = 'close';
+      btn.appendChild(closeSpan);
+    }
+  }
+
+  function toggleState(btn) {
+    if (btn.classList.contains('opacity-60')) {
+      btn.classList.remove('opacity-60');
+    } else {
+      btn.classList.add('opacity-60');
+    }
+  }
+
+  function triggerRouteSearch() {
+    const origin = document.getElementById('origin-station').value;
+    const dest = document.getElementById('dest-station').value;
+    const sliderVal = document.getElementById('time-cost-slider').value;
+    
+    // Highlight active route cards smoothly
+    const cards = document.querySelectorAll('.lg\\:col-span-5 .bg-surface-container-low');
+    cards.forEach(card => {
+      card.classList.add('scale-[1.01]', 'ring-2', 'ring-secondary');
+      setTimeout(() => {
+        card.classList.remove('scale-[1.01]', 'ring-2', 'ring-secondary');
+      }, 700);
+    });
+  }
+</script></main><footer class="w-full bg-surface-container-low mt-auto"><div class="max-w-7xl mx-auto px-margin md:px-margin-md lg:px-margin-lg py-space-xl flex flex-col md:flex-row items-center justify-between gap-space-lg"><div class="flex flex-col gap-space-xs text-center md:text-left"><div class="flex items-center justify-center md:justify-start gap-space-sm"><span class="font-title-md text-title-md text-on-surface font-bold">Kom Khoroch</span><span class="font-label-md text-label-md text-secondary font-bold">কম খরচ</span><span class="px-space-xs py-space-xs font-label-sm text-label-sm rounded bg-secondary-container text-on-secondary-fixed font-bold">সবচেয়ে সাশ্রয়ী</span></div><p class="font-body-md text-body-md text-on-surface-variant">Smart multi-modal transit planner covering Metro, Local Trains, CSTC Buses, Ferries &amp; Auto-rickshaws across Kolkata &amp; Howrah.</p></div><div class="flex flex-wrap items-center justify-center gap-space-md"><div class="flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm"><span class="material-symbols-outlined text-secondary text-[16px]">subway</span><span>Blue &amp; Green Metro</span></div><div class="flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm"><span class="material-symbols-outlined text-primary text-[16px]">directions_bus</span><span>WBTC &amp; Private</span></div><div class="flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm"><span class="material-symbols-outlined text-tertiary text-[16px]">directions_boat</span><span>Ganga Ferries</span></div><div class="flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm"><span class="material-symbols-outlined text-on-surface text-[16px]">train</span><span>Sealdah &amp; Howrah Local</span></div></div></div><div class="bg-surface-container-high py-space-md"><div class="max-w-7xl mx-auto px-margin md:px-margin-md lg:px-margin-lg flex flex-col sm:flex-row items-center justify-between gap-space-sm text-center font-label-sm text-label-sm text-on-surface-variant"><span>© 2025 Kom Khoroch Kolkata. Civic Smart Mobility Project.</span><div class="flex items-center gap-space-lg"><a class="hover:text-on-surface transition-colors" data-path="about" href="#">Fare Matrix</a><a class="hover:text-on-surface transition-colors" data-path="about" href="#">Transit Alerts</a><a class="hover:text-on-surface transition-colors" data-path="about" href="#">Bengali Guide (বাংলা নির্দেশিকা)</a></div></div></div></footer></body></html>

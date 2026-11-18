@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"surface-container-highest":"#e0e3e5","on-error":"#ffffff","on-secondary":"#ffffff","inverse-primary":"#ffb77d","outline":"#887364","secondary":"#006c4e","on-secondary-fixed":"#002115","error":"#ba1a1a","surface-tint":"#904d00","on-background":"#191c1e","surface":"#f7f9fb","primary-fixed-dim":"#ffb77d","on-surface":"#191c1e","on-tertiary-fixed-variant":"#3c475a","background":"#f7f9fb","on-secondary-container":"#007353","surface-dim":"#d8dadc","on-primary-container":"#fffbff","secondary-container":"#97f5cc","tertiary-container":"#6a758a","on-secondary-fixed-variant":"#00513a","tertiary-fixed":"#d8e3fb","on-tertiary":"#ffffff","primary-fixed":"#ffdcc3","error-container":"#ffdad6","on-primary-fixed-variant":"#6e3900","primary":"#8d4b00","on-tertiary-fixed":"#111c2d","surface-container":"#eceef0","tertiary":"#515c71","surface-container-low":"#f2f4f6","outline-variant":"#dbc2b0","on-tertiary-container":"#fefcff","primary-container":"#b15f00","inverse-on-surface":"#eff1f3","on-primary":"#ffffff","on-surface-variant":"#554336","inverse-surface":"#2d3133","on-error-container":"#93000a","surface-bright":"#f7f9fb","secondary-fixed":"#97f5cc","on-primary-fixed":"#2f1500","surface-container-high":"#e6e8ea","surface-container-lowest":"#ffffff","surface-variant":"#e0e3e5","secondary-fixed-dim":"#7bd8b1","tertiary-fixed-dim":"#bcc7de"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"margin":"1rem","space-md":"0.75rem","margin-md":"1.5rem","space-sm":"0.5rem","space-lg":"1rem","space-xs":"0.25rem","gutter-sm":"0.75rem","margin-lg":"2.5rem","space-xl":"1.5rem","gutter":"1rem"},"fontFamily":{"display-lg-mobile":["Plus Jakarta Sans"],"title-lg":["Plus Jakarta Sans"],"body-lg":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"],"label-md":["Plus Jakarta Sans"],"title-md":["Plus Jakarta Sans"],"label-lg":["Plus Jakarta Sans"],"display-lg":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"label-sm":["Plus Jakarta Sans"]},"fontSize":{"display-lg-mobile":["32px",{"lineHeight":"38px","letterSpacing":"-0.02em","fontWeight":"800"}],"title-lg":["18px",{"lineHeight":"24px","fontWeight":"600"}],"body-lg":["16px",{"lineHeight":"24px","fontWeight":"400"}],"headline-lg":["28px",{"lineHeight":"34px","letterSpacing":"-0.015em","fontWeight":"700"}],"body-md":["14px",{"lineHeight":"20px","fontWeight":"400"}],"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.02em","fontWeight":"700"}],"title-md":["16px",{"lineHeight":"22px","fontWeight":"600"}],"label-lg":["14px",{"lineHeight":"18px","letterSpacing":"0.01em","fontWeight":"600"}],"display-lg":["40px",{"lineHeight":"48px","letterSpacing":"-0.02em","fontWeight":"800"}],"headline-md":["22px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"700"}],"label-sm":["11px",{"lineHeight":"14px","letterSpacing":"0.03em","fontWeight":"600"}]}}}}</script></head><body class="bg-surface font-body-md text-body-md text-on-surface min-h-screen flex flex-col"><header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-20 max-w-7xl mx-auto px-margin md:px-margin-md lg:px-margin-lg flex items-center justify-between"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-md"><img alt="Kom Khoroch Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrB7kIlZh7y7cxEfHnEvCKhw4hAPm0bP1M67AEcEKFPVTR5pVPoGkwr0UhDEGF-94DhO-xQ6Vl13g_Zpe0MhUb3Xl88KRc3oLrCjlO6Z3XVswRbe7EAJecQK5pCMjTxIjzd7LoZmCn1k2-ocrceWTw9viqJ12-AkpZEhDiik05KdX4c-uYcK44KkNf00P9XRq_aUsdoYdj4mGlXRHhhdQHZgt5503O1iAV614cevOBUz"/><div class="flex flex-col"><div class="flex items-baseline gap-space-xs"><span class="font-title-lg text-title-lg text-primary tracking-tight">Kom Khoroch</span><span class="font-label-md text-label-md text-secondary font-bold">কম খরচ</span></div><span class="font-label-sm text-label-sm text-on-surface-variant tracking-normal hidden sm:block">Lowest Fare Route Planner</span></div></div><div class="h-6 w-px bg-surface-container-highest hidden lg:block mx-space-xs"></div><div class="hidden lg:flex items-center gap-space-xs px-space-sm py-space-xs rounded-full bg-secondary-container/40 text-on-secondary-fixed-variant font-label-sm text-label-sm"><span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span><span>Kolkata Transit Live</span></div></div><nav class="flex items-center gap-space-xs md:gap-space-sm" data-active-classes="bg-primary-container text-on-primary font-bold rounded-lg px-space-md py-space-xs"><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high px-space-md py-space-xs rounded-lg transition-colors" data-path="plan" href="#">Plan</a><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high px-space-md py-space-xs rounded-lg transition-colors" data-path="saved" href="#">Saved</a><a class="font-label-lg text-label-lg bg-primary-container text-on-primary font-bold rounded-lg px-space-md py-space-xs" data-path="about" href="#">About</a></nav><div class="flex items-center gap-space-md"><div class="hidden sm:flex items-center rounded-lg bg-surface-container-low p-space-xs"><button class="px-space-sm py-space-xs font-label-sm text-label-sm rounded bg-surface-container-lowest text-on-surface shadow-[0_1px_4px_rgba(0,0,0,0.04)]" type="button">EN</button><button class="px-space-sm py-space-xs font-label-sm text-label-sm rounded text-on-surface-variant hover:text-on-surface transition-colors" type="button">বাংলা</button></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-20 bg-surface flex-1 max-w-7xl mx-auto px-margin md:px-margin-md lg:px-margin-lg"><div class="flex flex-col w-full">
+<!-- Breadcrumbs & Live Mission Pill -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm mb-space-lg">
+<div class="flex items-center gap-space-xs font-label-md text-label-md text-on-surface-variant">
+<span class="text-primary font-bold">Kom Khoroch</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span>About the Project</span>
+<span class="text-outline hidden sm:inline">•</span>
+<span class="text-secondary font-bold hidden sm:inline">প্রকল্প পরিচিতি</span>
+</div>
+<div class="flex items-center gap-space-xs px-space-md py-space-xs rounded-full bg-secondary-container/40 text-on-secondary-fixed-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px] text-secondary">verified_user</span>
+<span class="font-bold">Civic Open Transit Standard • WB 2025</span>
+</div>
+</div>
+<!-- Hero Header Section with Bilingual Title and Interactive Script Pill Switcher -->
+<section class="relative w-full rounded-2xl bg-surface-container-lowest p-space-lg md:p-space-xl shadow-sm mb-space-xl overflow-hidden">
+<div class="absolute -right-16 -top-16 w-64 h-64 rounded-full bg-primary-fixed/20 pointer-events-none blur-3xl"></div>
+<div class="absolute -left-12 -bottom-12 w-56 h-56 rounded-full bg-secondary-container/20 pointer-events-none blur-2xl"></div>
+<div class="relative z-10 flex flex-col md:flex-row md:items-start justify-between gap-space-lg">
+<div class="max-w-3xl flex flex-col gap-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="inline-flex items-center gap-1 px-space-xs py-0.5 rounded bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm font-bold uppercase tracking-wider">
+<span class="material-symbols-outlined text-[13px]">payments</span> Lowest-Fare Algorithm
+          </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">Kolkata • Howrah • Hooghly • South 24 Pgs</span>
+</div>
+<h1 class="font-display-lg text-display-lg text-on-surface tracking-tight leading-tight">
+          About Kom Khoroch
+          <span class="block text-primary font-bold text-headline-lg md:text-display-lg">কম খরচ সম্পর্কে</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl leading-relaxed mt-space-xs">
+          Kolkata’s independent civic transit intelligence engine. We map 2,400+ heavily subsidized state transport nodes—suburban EMU locals, India’s first underwater Green Line metro, CSTC electric buses, and Ganga ferries—to help millions keep monthly commute expenses under ₹450 without losing hours.
+        </p>
+</div>
+<!-- Language Toggle Bar for Dual Script Rendering -->
+<div class="flex-shrink-0 flex flex-col items-start md:items-end gap-space-xs bg-surface-container-low p-space-xs rounded-xl shadow-inner">
+<span class="font-label-sm text-label-sm text-on-surface-variant px-space-xs">Dual Script Interface / ভাষা বদল</span>
+<div class="flex items-center p-1 bg-surface-container-lowest rounded-lg shadow-sm" id="lang-toggle-group">
+<button class="px-space-md py-space-xs font-label-md text-label-md rounded-md bg-primary text-on-primary font-bold shadow-xs transition-all flex items-center gap-1" id="btn-en" onclick="setLanguage('en')">
+<span class="material-symbols-outlined text-[14px]">translate</span> English
+          </button>
+<button class="px-space-md py-space-xs font-label-md text-label-md rounded-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high font-bold transition-all flex items-center gap-1" id="btn-bn" onclick="setLanguage('bn')">
+<span>বাংলা</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Quick Stats Metric Strip -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-space-md mt-space-xl pt-space-lg bg-surface-container-low/60 -mx-space-lg -mb-space-lg md:-mx-space-xl md:-mb-space-xl px-space-lg md:px-space-xl pb-space-lg">
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-secondary font-extrabold tracking-tight">₹5.00</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">Starting Local Train Fare</span>
+<span class="font-label-sm text-label-sm text-secondary">নূন্যতম ইএমইউ ভাড়া</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-primary font-extrabold tracking-tight">6 Modes</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">Unified Into One Graph</span>
+<span class="font-label-sm text-label-sm text-primary">৬টি গণপরিবহন সমন্বয়</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-on-surface font-extrabold tracking-tight">72%</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">Avg. Savings vs App Cabs</span>
+<span class="font-label-sm text-label-sm text-on-surface">ক্যাব খরচের চেয়ে সাশ্রয়ী</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-secondary font-extrabold tracking-tight">₹6.00</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">Flat River Ghat Crossing</span>
+<span class="font-label-sm text-label-sm text-secondary">গঙ্গা ফেরি পারাপার</span>
+</div>
+</div>
+</section>
+<!-- Editorial Section: "How It Works" in 3 Short Points -->
+<section class="mb-space-xl">
+<div class="flex flex-col gap-space-xs mb-space-lg">
+<div class="flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-primary"></span>
+<span class="font-label-sm text-label-sm text-primary uppercase font-bold tracking-wider">Civic Routing Architecture</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface font-extrabold tracking-tight">
+        How It Works <span class="text-on-surface-variant font-normal">| যেভাবে কাজ করে</span>
+</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-xl">
+        Most routing apps prioritize venture-backed cab aggregators and high-fare private alternatives. Kom Khoroch reverses this incentive by giving civic transit the highest routing weight.
+      </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg">
+<!-- Card 1: One City Graph -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+<div class="flex flex-col gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-secondary-container/50 text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[28px]">hub</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-secondary font-bold uppercase tracking-wider">Point 01 • ইন্টারলিঙ্ক</span>
+<h3 class="font-title-lg text-title-lg text-on-surface font-bold mt-1">One City Graph</h3>
+<span class="font-label-md text-label-md text-on-surface-variant block font-semibold mb-space-sm">একটি সংযুক্ত ট্রানজিট নেটওয়ার্ক</span>
+</div>
+<ul class="flex flex-col gap-space-xs font-body-md text-body-md text-on-surface-variant">
+<li class="flex items-start gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-secondary mt-0.5">check_circle</span>
+<span><strong>Suburban EMU:</strong> Eastern (Sealdah) &amp; South Eastern (Howrah) locals integrated down to platform-level walking times.</span>
+</li>
+<li class="flex items-start gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-secondary mt-0.5">check_circle</span>
+<span><strong>Metro Hubs:</strong> North-South Blue Line, East-West Underwater Green Line, Joka Purple, and Airport Orange Line.</span>
+</li>
+<li class="flex items-start gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-secondary mt-0.5">check_circle</span>
+<span><strong>Last Mile:</strong> Kolkata auto-rickshaw stages with fixed union fares, synced with Howrah-Babughat Ganga jetty services.</span>
+</li>
+</ul>
+</div>
+<div class="mt-space-lg pt-space-md bg-surface-container-low rounded-lg p-space-sm flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[20px]">sync_alt</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">Synchronized intermodal transfer concourses</span>
+</div>
+</div>
+<!-- Card 2: Cheapest vs Fastest -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+<div class="flex flex-col gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-primary-fixed/50 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[28px]">price_check</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-primary font-bold uppercase tracking-wider">Point 02 • খরচ বনাম সময়</span>
+<h3 class="font-title-lg text-title-lg text-on-surface font-bold mt-1">Cheapest vs Fastest</h3>
+<span class="font-label-md text-label-md text-on-surface-variant block font-semibold mb-space-sm">সবচেয়ে কম খরচ বনাম দ্রুততম পথ</span>
+</div>
+<ul class="flex flex-col gap-space-xs font-body-md text-body-md text-on-surface-variant">
+<li class="flex items-start gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-primary mt-0.5">check_circle</span>
+<span><strong>Algorithmic Transparency:</strong> Shows heavily subsidized fares (EMU rail from ₹5, underwater metro ₹10) side-by-side with app cabs.</span>
+</li>
+<li class="flex items-start gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-primary mt-0.5">check_circle</span>
+<span><strong>Surge Disarm:</strong> Exposes ₹350 peak surge surcharges during monsoon or puja rush hours vs unvarying fixed civic rates.</span>
+</li>
+<li class="flex items-start gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-primary mt-0.5">check_circle</span>
+<span><strong>Pre-departure clarity:</strong> Exact breakdown of walking distance, interchange stair climbing, and fare slabs before departure.</span>
+</li>
+</ul>
+</div>
+<div class="mt-space-lg pt-space-md bg-surface-container-low rounded-lg p-space-sm flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">savings</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">Save ₹3,000–₹5,500 every single month</span>
+</div>
+</div>
+<!-- Card 3: Your Time Value -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+<div class="flex flex-col gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-tertiary-fixed text-tertiary flex items-center justify-center">
+<span class="material-symbols-outlined text-[28px]">tune</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-tertiary font-bold uppercase tracking-wider">Point 03 • নিজস্ব নিয়ন্ত্রণ</span>
+<h3 class="font-title-lg text-title-lg text-on-surface font-bold mt-1">Your Time Value</h3>
+<span class="font-label-md text-label-md text-on-surface-variant block font-semibold mb-space-sm">আপনার সময়ের সঠিক মূল্যায়ন</span>
+</div>
+<ul class="flex flex-col gap-space-xs font-body-md text-body-md text-on-surface-variant">
+<li class="flex items-start gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-tertiary mt-0.5">check_circle</span>
+<span><strong>Custom Tradeoff Slider:</strong> Adjust what saving 10 minutes is worth to your pocket (from ₹0 for ultra-budget to ₹25+).</span>
+</li>
+<li class="flex items-start gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-tertiary mt-0.5">check_circle</span>
+<span><strong>Galloping vs Regular EMU:</strong> Intelligently matches Sealdah galloping fast locals when rush hour demands speed.</span>
+</li>
+<li class="flex items-start gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-tertiary mt-0.5">check_circle</span>
+<span><strong>Zero Blind Handoffs:</strong> Balances 15 min leisurely ferry ride against 45 min stuck on jammed Rabindra Setu (Howrah Bridge).</span>
+</li>
+</ul>
+</div>
+<div class="mt-space-lg pt-space-md bg-surface-container-low rounded-lg p-space-sm flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-tertiary text-[20px]">hourglass_top</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">Dynamic cost-per-minute personal optimization</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Interactive Visual Element: Modal Cost Comparison Calculator Preview -->
+<section class="w-full bg-surface-container-lowest rounded-2xl p-space-lg md:p-space-xl shadow-sm mb-space-xl">
+<div class="flex flex-col lg:flex-row items-center justify-between gap-space-xl">
+<div class="w-full lg:w-1/2 flex flex-col gap-space-sm">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm text-secondary font-bold uppercase tracking-wider">
+<span class="material-symbols-outlined text-[15px]">compare_arrows</span> Live Benchmark Route: Howrah Stn ➔ Sector V, Salt Lake
+        </span>
+<h3 class="font-headline-md text-headline-md text-on-surface font-extrabold">
+          Real World Commute Comparison
+        </h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+          See how multi-modal transit utilizing the Green Line underwater tunnel slices peak-hour expenditure compared to direct app cabs on the second Hooghly Bridge.
+        </p>
+<!-- Route Breakdown Pill -->
+<div class="flex flex-col gap-space-xs bg-surface-container-low p-space-md rounded-xl mt-space-xs">
+<div class="flex items-center justify-between text-on-surface font-label-md text-label-md">
+<span class="flex items-center gap-1 font-bold text-secondary">
+<span class="material-symbols-outlined text-[18px]">directions_subway</span> Kom Khoroch Choice (Green Line Metro)
+            </span>
+<span class="font-headline-md text-headline-md text-secondary font-bold">₹20</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Howrah Rly Stn ➔ Underwater River Hooghly ➔ Esplanade Interchange ➔ Salt Lake Sector V • 28 mins</span>
+</div>
+<div class="flex flex-col gap-space-xs bg-surface-container-low p-space-md rounded-xl">
+<div class="flex items-center justify-between text-on-surface font-label-md text-label-md">
+<span class="flex items-center gap-1 font-bold text-error">
+<span class="material-symbols-outlined text-[18px]">local_taxi</span> Peak App Cab (Uber / Ola / Yatri Sathi)
+            </span>
+<span class="font-headline-md text-headline-md text-error font-bold">₹420+</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Howrah Bridge congestion ➔ MG Road bottleneck ➔ EM Bypass surge • 65–85 mins</span>
+</div>
+</div>
+<!-- Inline SVG Chart: Cost & Time Comparison Bar Graph -->
+<div class="w-full lg:w-1/2 flex flex-col bg-surface-container-low p-space-lg rounded-xl">
+<div class="flex items-center justify-between mb-space-md">
+<span class="font-title-md text-title-md text-on-surface font-bold">Cost vs Transit Time Matrix</span>
+<span class="px-2 py-0.5 rounded bg-secondary-container text-on-secondary-fixed text-label-sm font-bold">Save 95% Cost</span>
+</div>
+<!-- SVG Cost Bar Chart -->
+<div class="w-full flex flex-col gap-space-md">
+<!-- Metro Mode -->
+<div class="flex flex-col gap-1">
+<div class="flex justify-between font-label-sm text-label-sm text-on-surface font-semibold">
+<span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-secondary"></span> Green Line Underwater Metro</span>
+<span class="text-secondary font-bold">₹20 | 28 mins</span>
+</div>
+<div class="w-full h-4 bg-surface-container-highest rounded-full overflow-hidden flex">
+<div class="h-full bg-secondary rounded-full" style="width: 8%;"></div>
+</div>
+</div>
+<!-- WBTC Bus Route -->
+<div class="flex flex-col gap-1">
+<div class="flex justify-between font-label-sm text-label-sm text-on-surface font-semibold">
+<span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-primary"></span> WBTC S-12 Express Bus</span>
+<span class="text-primary font-bold">₹15 | 58 mins</span>
+</div>
+<div class="w-full h-4 bg-surface-container-highest rounded-full overflow-hidden flex">
+<div class="h-full bg-primary rounded-full" style="width: 6%;"></div>
+</div>
+</div>
+<!-- Ferry + Auto Combo -->
+<div class="flex flex-col gap-1">
+<div class="flex justify-between font-label-sm text-label-sm text-on-surface font-semibold">
+<span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-tertiary"></span> Ferry (Babughat) + Shared Auto</span>
+<span class="text-tertiary font-bold">₹22 | 44 mins</span>
+</div>
+<div class="w-full h-4 bg-surface-container-highest rounded-full overflow-hidden flex">
+<div class="h-full bg-tertiary rounded-full" style="width: 9%;"></div>
+</div>
+</div>
+<!-- Commercial Cab Surge -->
+<div class="flex flex-col gap-1">
+<div class="flex justify-between font-label-sm text-label-sm text-on-surface font-semibold">
+<span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-error"></span> App Cab (Peak Surge)</span>
+<span class="text-error font-bold">₹420 | 75 mins</span>
+</div>
+<div class="w-full h-4 bg-surface-container-highest rounded-full overflow-hidden flex">
+<div class="h-full bg-error rounded-full" style="width: 100%;"></div>
+</div>
+</div>
+</div>
+<div class="mt-space-md pt-space-sm flex items-center justify-between text-label-sm font-label-sm text-on-surface-variant">
+<span>*Calculated based on 2025 West Bengal Transport Dept notifications</span>
+<span class="font-bold text-secondary">Verified Data</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Complete Fare Matrix Section (Fare Table by Mode) -->
+<section class="mb-space-xl">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-sm mb-space-lg">
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+<span class="font-label-sm text-label-sm text-secondary uppercase font-bold tracking-wider">Official Civic Tariffs</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface font-extrabold tracking-tight">
+          Fare Table by Mode <span class="text-on-surface-variant font-normal">| যানবাহন অনুযায়ী ভাড়ার তালিকা</span>
+</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mt-1">
+          Regulated baseline rate cards across Kolkata &amp; Howrah metropolitan transit authorities. Updated for fiscal year 2025.
+        </p>
+</div>
+<div class="flex items-center gap-space-xs text-label-sm font-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-secondary">schedule</span>
+<span>Source: ER, SER, Metro Railway &amp; WBTC Schedules</span>
+</div>
+</div>
+<!-- Responsive Card Grid Fare Table -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-md">
+<!-- 1. Suburban EMU Local Trains -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<div class="w-9 h-9 rounded-lg bg-surface-container-high text-on-surface flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">train</span>
+</div>
+<div>
+<h4 class="font-title-md text-title-md text-on-surface font-bold">Suburban EMU Trains</h4>
+<span class="font-label-sm text-label-sm text-on-surface-variant">লোকাল ট্রেন (Eastern &amp; SER)</span>
+</div>
+</div>
+<span class="px-space-xs py-0.5 rounded bg-secondary-container text-on-secondary-fixed text-label-sm font-bold">Min ₹5</span>
+</div>
+<div class="flex flex-col gap-space-xs mt-space-sm">
+<div class="flex justify-between items-center py-1 bg-surface-container-low px-space-sm rounded">
+<span class="font-body-md text-body-md text-on-surface">Up to 20 km (0 - 20 কিমি)</span>
+<span class="font-label-lg text-label-lg font-bold text-secondary">₹5</span>
+</div>
+<div class="flex justify-between items-center py-1 bg-surface-container-low px-space-sm rounded">
+<span class="font-body-md text-body-md text-on-surface">21 – 45 km (২১ - ৪৫ কিমি)</span>
+<span class="font-label-lg text-label-lg font-bold text-secondary">₹10</span>
+</div>
+<div class="flex justify-between items-center py-1 bg-surface-container-low px-space-sm rounded">
+<span class="font-body-md text-body-md text-on-surface">46 – 70 km (৪৬ - ৭০ কিমি)</span>
+<span class="font-label-lg text-label-lg font-bold text-secondary">₹15</span>
+</div>
+<div class="flex justify-between items-center py-1 bg-surface-container-low px-space-sm rounded">
+<span class="font-body-md text-body-md text-on-surface">71 – 100 km (৭১ - ১০০ কিমি)</span>
+<span class="font-label-lg text-label-lg font-bold text-secondary">₹20</span>
+</div>
+</div>
+</div>
+<div class="mt-space-md pt-space-xs flex items-center justify-between text-label-sm font-label-sm text-on-surface-variant">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">smartphone</span> UTS Paperless QR Supported</span>
+<span class="text-secondary font-bold">Sealdah / Howrah</span>
+</div>
+</div>
+<!-- 2. Kolkata Metro -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<div class="w-9 h-9 rounded-lg bg-secondary-container/40 text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">subway</span>
+</div>
+<div>
+<h4 class="font-title-md text-title-md text-on-surface font-bold">Kolkata Metro</h4>
+<span class="font-label-sm text-label-sm text-on-surface-variant">কলকাতা মেট্রো (Blue &amp; Green)</span>
+</div>
+</div>
+<span class="px-space-xs py-0.5 rounded bg-secondary-container text-on-secondary-fixed text-label-sm font-bold">Min ₹5</span>
+</div>
+<div class="flex flex-col gap-space-xs mt-space-sm">
+<div class="flex justify-between items-center py-1 bg-surface-container-low px-space-sm rounded">
+<span class="font-body-md text-body-md text-on-surface">0 – 2 km (Zone 1)</span>
+<span class="font-label-lg text-label-lg font-bold text-secondary">₹5</span>
+</div>
+<div class="flex justify-between items-center py-1 bg-surface-container-low px-space-sm rounded">
+<span class="font-body-md text-body-md text-on-surface">2 – 5 km (Zone 2)</span>
+<span class="font-label-lg text-label-lg font-bold text-secondary">₹10</span>
+</div>
+<div class="flex justify-between items-center py-1 bg-surface-container-low px-space-sm rounded">
+<span class="font-body-md text-body-md text-on-surface">5 – 10 km (Zone 3)</span>
+<span class="font-label-lg text-label-lg font-bold text-secondary">₹15</span>
+</div>
+<div class="flex justify-between items-center py-1 bg-surface-container-low px-space-sm rounded">
+<span class="font-body-md text-body-md text-on-surface">10 – 20 km (Zone 4)</span>
+<span class="font-label-lg text-label-lg font-bold text-secondary">₹20 - ₹25</span>
+</div>
+</div>
+</div>
+<div class="mt-space-md pt-space-xs flex items-center justify-between text-label-sm font-label-sm text-on-surface-variant">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">credit_card</span> 10% Extra Metro Smart Card Bonus</span>
+<span class="text-secondary font-bold">Max ₹30</span>
+</div>
+</div>
+<!-- 3. Government CSTC / WBTC Buses -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<div class="w-9 h-9 rounded-lg bg-primary-fixed/40 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">directions_bus</span>
+</div>
+<div>
+<h4 class="font-title-md text-title-md text-on-surface font-bold">CSTC &amp; WBTC (Non-AC)</h4>
+<span class="font-label-sm text-label-sm text-on-surface-variant">সরকারি সাধারণ বাস</span>
+</div>
+</div>
+<span class="px-space-xs py-0.5 rounded bg-primary-fixed text-on-primary-fixed text-label-sm font-bold">Min ₹8</span>
+</div>
+<div class="flex flex-col gap-space-xs mt-space-sm">
+<div class="flex justify-between items-center py-1 bg-surface-container-low px-space-sm rounded">
+<span class="font-body-md text-body-md text-on-surface">First 4 km (প্রথম ৪ কিমি)</span>
+<span class="font-label-lg text-label-lg font-bold text-primary">₹8</span>
+</div>
+<div class="flex justify-between items-center py-1 bg-surface-container-low px-space-sm rounded">
+<span class="font-body-md text-body-md text-on-surface">5 – 8 km (৫ - ৮ কিমি)</span>
+<span class="font-label-lg text-label-lg font-bold text-primary">₹10</span>
+</div>
+<div class="flex justify-between items-center py-1 bg-surface-container-low px-space-sm rounded">
+<span class="font-body-md text-body-md text-on-surface">9 – 12 km (৯ - ১২ কিমি)</span>
+<span class="font-label-lg text-label-lg font-bold text-primary">₹12</span>
+</div>
+<div class="flex justify-between items-center py-1 bg-surface-container-low px-space-sm rounded">
+<span class="font-body-md text-body-md text-on-surface">13+ km (১৩ কিমি বা তদূর্ধ্ব)</span>
+<span class="font-label-lg text-label-lg font-bold text-primary">₹15</span>
+</div>
+</div>
+</div>
+<div class="mt-space-md pt-space-xs flex items-center justify-between text-label-sm font-label-sm text-on-surface-variant">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">confirmation_number</span> Conductor issued stage tickets</span>
+<span class="text-primary font-bold">Citywide</span>
+</div>
+</div>
+<!-- 4. WBTC Electric & AC Volvo -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<div class="w-9 h-9 rounded-lg bg-surface-container-high text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">electric_bolt</span>
+</div>
+<div>
+<h4 class="font-title-md text-title-md text-on-surface font-bold">WBTC Electric &amp; AC Bus</h4>
+<span class="font-label-sm text-label-sm text-on-surface-variant">শীতাতপ নিয়ন্ত্রিত ও ই-বাস</span>
+</div>
+</div>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-high text-on-surface text-label-sm font-bold">Slab ₹20–₹50</span>
+</div>
+<div class="flex flex-col gap-space-xs mt-space-sm">
+<div class="flex justify-between items-center py-1 bg-surface-container-low px-space-sm rounded">
+<span class="font-body-md text-body-md text-on-surface">0 – 5 km Base AC Fare</span>
+<span class="font-label-lg text-label-lg font-bold text-primary">₹20</span>
+</div>
+<div class="flex justify-between items-center py-1 bg-surface-container-low px-space-sm rounded">
+<span class="font-body-md text-body-md text-on-surface">6 – 10 km Intermediate</span>
+<span class="font-label-lg text-label-lg font-bold text-primary">₹25</span>
+</div>
+<div class="flex justify-between items-center py-1 bg-surface-container-low px-space-sm rounded">
+<span class="font-body-md text-body-md text-on-surface">11 – 15 km Urban Express</span>
+<span class="font-label-lg text-label-lg font-bold text-primary">₹30</span>
+</div>
+<div class="flex justify-between items-center py-1 bg-surface-container-low px-space-sm rounded">
+<span class="font-body-md text-body-md text-on-surface">Airport / Long Corridor</span>
+<span class="font-label-lg text-label-lg font-bold text-primary">₹40 – ₹50</span>
+</div>
+</div>
+</div>
+<div class="mt-space-md pt-space-xs flex items-center justify-between text-label-sm font-label-sm text-on-surface-variant">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">ac_unit</span> Full Air Conditioning</span>
+<span class="text-primary font-bold">Major Arterials</span>
+</div>
+</div>
+<!-- 5. Hooghly River Ganga Ferries -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<div class="w-9 h-9 rounded-lg bg-tertiary-fixed text-tertiary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">directions_boat</span>
+</div>
+<div>
+<h4 class="font-title-md text-title-md text-on-surface font-bold">Ganga River Ferries</h4>
+<span class="font-label-sm text-label-sm text-on-surface-variant">হুগলী নদী জলপথ পরিবহন</span>
+</div>
+</div>
+<span class="px-space-xs py-0.5 rounded bg-secondary-container text-on-secondary-fixed text-label-sm font-bold">Flat ₹6</span>
+</div>
+<div class="flex flex-col gap-space-xs mt-space-sm">
+<div class="flex justify-between items-center py-1 bg-surface-container-low px-space-sm rounded">
+<span class="font-body-md text-body-md text-on-surface">Howrah Ghat ➔ Fairlie Ghat</span>
+<span class="font-label-lg text-label-lg font-bold text-secondary">₹6</span>
+</div>
+<div class="flex justify-between items-center py-1 bg-surface-container-low px-space-sm rounded">
+<span class="font-body-md text-body-md text-on-surface">Howrah Ghat ➔ Babughat</span>
+<span class="font-label-lg text-label-lg font-bold text-secondary">₹6</span>
+</div>
+<div class="flex justify-between items-center py-1 bg-surface-container-low px-space-sm rounded">
+<span class="font-body-md text-body-md text-on-surface">Howrah Ghat ➔ Bagbazar</span>
+<span class="font-label-lg text-label-lg font-bold text-secondary">₹6</span>
+</div>
+<div class="flex justify-between items-center py-1 bg-surface-container-low px-space-sm rounded">
+<span class="font-body-md text-body-md text-on-surface">Dakshineswar ➔ Belur Math</span>
+<span class="font-label-lg text-label-lg font-bold text-secondary">₹11</span>
+</div>
+</div>
+</div>
+<div class="mt-space-md pt-space-xs flex items-center justify-between text-label-sm font-label-sm text-on-surface-variant">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">traffic</span> Bypasses all road traffic jams</span>
+<span class="text-secondary font-bold">Fastest River Crossing</span>
+</div>
+</div>
+<!-- 6. Shared Auto-Rickshaws & App Cab Contrast -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<div class="w-9 h-9 rounded-lg bg-surface-container-high text-on-surface flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">two_wheeler</span>
+</div>
+<div>
+<h4 class="font-title-md text-title-md text-on-surface font-bold">Shared Auto-Rickshaws</h4>
+<span class="font-label-sm text-label-sm text-on-surface-variant">শেয়ার অটো-রিকশা রুট</span>
+</div>
+</div>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-high text-on-surface text-label-sm font-bold">₹12 – ₹20</span>
+</div>
+<div class="flex flex-col gap-space-xs mt-space-sm">
+<div class="flex justify-between items-center py-1 bg-surface-container-low px-space-sm rounded">
+<span class="font-body-md text-body-md text-on-surface">Standard Local Stage Fare</span>
+<span class="font-label-lg text-label-lg font-bold text-on-surface">₹12 - ₹15</span>
+</div>
+<div class="flex justify-between items-center py-1 bg-surface-container-low px-space-sm rounded">
+<span class="font-body-md text-body-md text-on-surface">Longer Cross-Subway Run</span>
+<span class="font-label-lg text-label-lg font-bold text-on-surface">₹18 - ₹20</span>
+</div>
+<div class="flex justify-between items-center py-1 bg-surface-container-high/60 px-space-sm rounded">
+<span class="font-body-md text-body-md text-error font-medium">App Cabs (Uber/Ola baseline)</span>
+<span class="font-label-lg text-label-lg font-bold text-error">₹150 - ₹700+</span>
+</div>
+<div class="flex justify-between items-center py-1 bg-surface-container-high/60 px-space-sm rounded">
+<span class="font-body-md text-body-md text-on-surface-variant">App Surge Multiplier</span>
+<span class="font-label-lg text-label-lg font-bold text-error">1.5x - 2.8x</span>
+</div>
+</div>
+</div>
+<div class="mt-space-md pt-space-xs flex items-center justify-between text-label-sm font-label-sm text-on-surface-variant">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">groups</span> Fixed Union Point-to-Point Tariffs</span>
+<span class="text-on-surface font-bold">Zero Surge Ever</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Civic Mission, Open Data & Commuter Guide Details -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-space-lg mb-space-xl">
+<!-- Built for Kolkata Commuters Trust Card -->
+<div class="lg:col-span-2 bg-surface-container-lowest rounded-2xl p-space-lg md:p-space-xl shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]">public</span>
+</div>
+<div>
+<span class="font-title-md text-title-md text-on-surface font-bold block">Open Transit Intelligence</span>
+<span class="font-label-sm text-label-sm text-secondary font-bold">নাগরিক উন্মুক্ত পরিবহন প্রকল্প</span>
+</div>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant px-space-sm py-1 bg-surface-container-low rounded-full font-bold">
+            v2.4 Live
+          </span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface font-extrabold tracking-tight mb-space-sm">
+          Built for Kolkata, Howrah &amp; Hooghly Commuters
+        </h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-space-md">
+          Kom Khoroch was born out of everyday passenger frustrations on crowded platforms like Sealdah Main, Howrah Station concourse, and Shyambazar five-point crossing. Commuters were frequently forced into expensive private taxis simply because multi-modal train-to-ferry or metro-to-auto combinations were never mapped on mainstream navigation apps.
+        </p>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+          We maintain an open-source civic transit schedule graph with active contributions from daily passengers, student unions, and transport workers across West Bengal. Every calculated rupee directly stays in the working commuter’s household budget.
+        </p>
+<!-- Feature Points -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md mt-space-lg">
+<div class="flex items-start gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[20px] mt-0.5">dataset</span>
+<div>
+<span class="font-label-lg text-label-lg text-on-surface font-bold block">Open Data Integration</span>
+<span class="font-body-md text-body-md text-on-surface-variant">Direct feeds mirroring Indian Railways Cris and WBTC notification tables.</span>
+</div>
+</div>
+<div class="flex items-start gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px] mt-0.5">lock_open</span>
+<div>
+<span class="font-label-lg text-label-lg text-on-surface font-bold block">Zero Ads, Zero Commissions</span>
+<span class="font-body-md text-body-md text-on-surface-variant">We never receive referral payouts from cab companies or commercial tollways.</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Footer -->
+<div class="mt-space-xl pt-space-md bg-surface-container-low rounded-xl p-space-md flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[20px] text-secondary">handshake</span>
+<span class="font-label-md text-label-md text-on-surface font-semibold">Have a fare correction or missing auto route?</span>
+</div>
+<button class="px-space-md py-space-xs rounded-lg bg-primary text-on-primary font-label-md text-label-md font-bold shadow-xs hover:bg-primary-container transition-colors flex items-center gap-1" onclick="alert('Thank you for contributing to Kolkata open civic mobility! Community reporting form is open.')">
+<span class="material-symbols-outlined text-[16px]">edit_note</span> Submit Transit Data
+        </button>
+</div>
+</div>
+<!-- Frequently Asked Questions / Commuter FAQ Guide -->
+<div class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-space-xs mb-space-sm">
+<span class="material-symbols-outlined text-primary text-[22px]">help_outline</span>
+<h3 class="font-title-lg text-title-lg text-on-surface font-bold">Commuter FAQ</h3>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block mb-space-md">সাধারণ জিজ্ঞাসা ও নির্দেশিকা</span>
+<div class="flex flex-col gap-space-sm">
+<!-- Accordion 1 -->
+<details class="group bg-surface-container-low rounded-xl p-space-sm cursor-pointer transition-colors open:bg-surface-container-high/40">
+<summary class="font-label-lg text-label-lg text-on-surface font-bold flex items-center justify-between list-none">
+<span>How are fare calculations kept updated?</span>
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2 pt-2 text-xs leading-normal">
+              Our volunteers verify changes against official State Transport Dept gazettes, Eastern Railway suburban rate revisions, and physical fare boards posted at auto stands across Kolkata and Howrah.
+            </p>
+</details>
+<!-- Accordion 2 -->
+<details class="group bg-surface-container-low rounded-xl p-space-sm cursor-pointer transition-colors open:bg-surface-container-high/40">
+<summary class="font-label-lg text-label-lg text-on-surface font-bold flex items-center justify-between list-none">
+<span>Does Kom Khoroch calculate walking transfers?</span>
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2 pt-2 text-xs leading-normal">
+              Yes! We calculate safe walking distances across concourses (like Howrah Station subway to Howrah Ferry Ghat or Esplanade Blue-Green interchange) so you never miss a connection.
+            </p>
+</details>
+<!-- Accordion 3 -->
+<details class="group bg-surface-container-low rounded-xl p-space-sm cursor-pointer transition-colors open:bg-surface-container-high/40">
+<summary class="font-label-lg text-label-lg text-on-surface font-bold flex items-center justify-between list-none">
+<span>How does the Time Value slider work?</span>
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2 pt-2 text-xs leading-normal">
+              When planning, set what 10 minutes saved is worth to you. Set to ₹0 to see strictly cheapest routes (e.g., ₹5 train + ₹8 bus), or slide higher to include rapid Metro hops.
+            </p>
+</details>
+<!-- Accordion 4 -->
+<details class="group bg-surface-container-low rounded-xl p-space-sm cursor-pointer transition-colors open:bg-surface-container-high/40">
+<summary class="font-label-lg text-label-lg text-on-surface font-bold flex items-center justify-between list-none">
+<span>Is underwater Metro included?</span>
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2 pt-2 text-xs leading-normal">
+              Yes, the Green Line stretch linking Howrah Station under the Hooghly River to Esplanade is fully integrated with updated ₹10 base ticketing.
+            </p>
+</details>
+</div>
+</div>
+<!-- Bengali Guide Direct Link Pill -->
+<div class="mt-space-md pt-space-sm bg-secondary-container/30 rounded-xl p-space-sm flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[20px]">menu_book</span>
+<span class="font-label-sm text-label-sm text-on-secondary-fixed-variant font-bold">বাংলা সহায়িকা পড়ুন</span>
+</div>
+<span class="material-symbols-outlined text-secondary text-[18px]">arrow_forward</span>
+</div>
+</div>
+</section>
+<!-- Interactive Script for Language Toggle micro-behavior -->
+<script>
+    function setLanguage(lang) {
+      const btnEn = document.getElementById('btn-en');
+      const btnBn = document.getElementById('btn-bn');
+
+      if (lang === 'bn') {
+        btnBn.className = 'px-space-md py-space-xs font-label-md text-label-md rounded-md bg-secondary text-on-secondary font-bold shadow-xs transition-all flex items-center gap-1';
+        btnEn.className = 'px-space-md py-space-xs font-label-md text-label-md rounded-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high font-bold transition-all flex items-center gap-1';
+      } else {
+        btnEn.className = 'px-space-md py-space-xs font-label-md text-label-md rounded-md bg-primary text-on-primary font-bold shadow-xs transition-all flex items-center gap-1';
+        btnBn.className = 'px-space-md py-space-xs font-label-md text-label-md rounded-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high font-bold transition-all flex items-center gap-1';
+      }
+    }
+  </script>
+</div></main><footer class="w-full bg-surface-container-low mt-auto"><div class="max-w-7xl mx-auto px-margin md:px-margin-md lg:px-margin-lg py-space-xl flex flex-col md:flex-row items-center justify-between gap-space-lg"><div class="flex flex-col gap-space-xs text-center md:text-left"><div class="flex items-center justify-center md:justify-start gap-space-sm"><span class="font-title-md text-title-md text-on-surface font-bold">Kom Khoroch</span><span class="font-label-md text-label-md text-secondary font-bold">কম খরচ</span><span class="px-space-xs py-space-xs font-label-sm text-label-sm rounded bg-secondary-container text-on-secondary-fixed font-bold">সবচেয়ে সাশ্রয়ী</span></div><p class="font-body-md text-body-md text-on-surface-variant">Smart multi-modal transit planner covering Metro, Local Trains, CSTC Buses, Ferries &amp; Auto-rickshaws across Kolkata &amp; Howrah.</p></div><div class="flex flex-wrap items-center justify-center gap-space-md"><div class="flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm"><span class="material-symbols-outlined text-secondary text-[16px]">subway</span><span>Blue &amp; Green Metro</span></div><div class="flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm"><span class="material-symbols-outlined text-primary text-[16px]">directions_bus</span><span>WBTC &amp; Private</span></div><div class="flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm"><span class="material-symbols-outlined text-tertiary text-[16px]">directions_boat</span><span>Ganga Ferries</span></div><div class="flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm"><span class="material-symbols-outlined text-on-surface text-[16px]">train</span><span>Sealdah &amp; Howrah Local</span></div></div></div><div class="bg-surface-container-high py-space-md"><div class="max-w-7xl mx-auto px-margin md:px-margin-md lg:px-margin-lg flex flex-col sm:flex-row items-center justify-between gap-space-sm text-center font-label-sm text-label-sm text-on-surface-variant"><span>© 2025 Kom Khoroch Kolkata. Civic Smart Mobility Project.</span><div class="flex items-center gap-space-lg"><a class="hover:text-on-surface transition-colors" data-path="about" href="#">Fare Matrix</a><a class="hover:text-on-surface transition-colors" data-path="about" href="#">Transit Alerts</a><a class="hover:text-on-surface transition-colors" data-path="about" href="#">Bengali Guide (বাংলা নির্দেশিকা)</a></div></div></div></footer></body></html>

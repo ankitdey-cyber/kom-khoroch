@@ -1,11 +1,6 @@
 import React, { useMemo } from 'react';
 import type { RouteOption } from '../types';
-import {
-  LINE_MAP,
-  STOP_MAP,
-  getLegColor,
-  network,
-} from '../utils/transit';
+import { LINE_MAP, STOP_MAP, getLegColor, network } from '../utils/transit';
 
 interface RouteMapProps {
   option: RouteOption;
@@ -60,7 +55,7 @@ export const RouteMap: React.FC<RouteMapProps> = ({ option }) => {
       h = nh;
     }
 
-    const fs = Math.max(w, h) / 28;
+    const fs = Math.max(w, h) / 26;
     const sw = fs * 0.55;
 
     const baseLines = network.lines
@@ -103,23 +98,32 @@ export const RouteMap: React.FC<RouteMapProps> = ({ option }) => {
 
   if (!svgData) return null;
 
-  const { x0, w, viewBox, fs, sw, baseLines, stopsOnRoute, endpointIds, legend } =
-    svgData;
+  const {
+    x0,
+    w,
+    viewBox,
+    fs,
+    sw,
+    baseLines,
+    stopsOnRoute,
+    endpointIds,
+    legend,
+  } = svgData;
   const endpointSet = new Set(endpointIds);
   const startId = option.legs[0]?.from;
   const endId = option.legs[option.legs.length - 1]?.to;
 
   return (
-    <div className="grid gap-2.5">
+    <div className="flex flex-col gap-3">
       <div
-        className="overflow-hidden rounded-[10px] border border-rule"
+        className="overflow-hidden rounded-xl border border-outline-variant/30 p-2"
         style={{ backgroundColor: 'var(--map-bg)' }}
       >
         <svg
           viewBox={viewBox}
           role="img"
           aria-label="Schematic transit map of the selected route"
-          className="block h-auto max-h-[360px] w-full"
+          className="block h-auto max-h-[320px] w-full"
         >
           {/* Background metro & local rail grid */}
           {baseLines.map((line) => (
@@ -146,7 +150,7 @@ export const RouteMap: React.FC<RouteMapProps> = ({ option }) => {
                 points={pts}
                 fill="none"
                 stroke={getLegColor(leg)}
-                strokeWidth={leg.mode === 'walk' ? sw * 0.75 : sw * 1.35}
+                strokeWidth={leg.mode === 'walk' ? sw * 0.8 : sw * 1.4}
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeDasharray={
@@ -169,19 +173,23 @@ export const RouteMap: React.FC<RouteMapProps> = ({ option }) => {
                 cx={cx}
                 cy={cy}
                 r={isOriginOrDest ? sw * 1.45 : isEnd ? sw * 1.2 : sw * 0.55}
-                fill={isOriginOrDest ? 'var(--accent)' : 'var(--surface)'}
-                stroke="var(--ink)"
+                fill={
+                  isOriginOrDest
+                    ? 'var(--primary)'
+                    : 'var(--surface-container-lowest)'
+                }
+                stroke="var(--on-surface)"
                 strokeWidth={isEnd ? sw * 0.5 : sw * 0.28}
               />
             );
           })}
 
-          {/* Labels for leg endpoints with smart left/right anchor */}
+          {/* Labels for leg endpoints */}
           {endpointIds.map((id, idx) => {
             const [x, y] = project(id);
             const name = STOP_MAP[id]?.name ?? id;
             const onRightSide = x > x0 + w * 0.62;
-            const yOffset = idx % 2 === 0 ? -fs * 0.25 : fs * 0.65;
+            const yOffset = idx % 2 === 0 ? -fs * 0.3 : fs * 0.7;
             return (
               <text
                 key={`label-${id}`}
@@ -189,13 +197,14 @@ export const RouteMap: React.FC<RouteMapProps> = ({ option }) => {
                 y={y + yOffset}
                 textAnchor={onRightSide ? 'end' : 'start'}
                 style={{
-                  fontFamily: 'Hind, Hind Siliguri, system-ui, sans-serif',
-                  fontWeight: 600,
+                  fontFamily:
+                    '"Plus Jakarta Sans", "Hind Siliguri", system-ui, sans-serif',
+                  fontWeight: 700,
                   fontSize: `${fs}px`,
-                  fill: 'var(--ink)',
+                  fill: 'var(--on-surface)',
                   paintOrder: 'stroke',
                   stroke: 'var(--map-bg)',
-                  strokeWidth: `${fs * 0.3}px`,
+                  strokeWidth: `${fs * 0.35}px`,
                 }}
               >
                 {name}
@@ -205,12 +214,12 @@ export const RouteMap: React.FC<RouteMapProps> = ({ option }) => {
         </svg>
       </div>
 
-      {/* Map legend */}
-      <div className="flex flex-wrap gap-x-4 gap-y-1.5 text-xs text-muted">
+      {/* Legend */}
+      <div className="flex flex-wrap gap-x-4 gap-y-1.5 border-t border-outline-variant/30 pt-2.5 text-[11px] font-semibold text-on-surface-variant">
         {legend.map(([name, color]) => (
           <span key={name} className="inline-flex items-center gap-1.5">
             <span
-              className="inline-block h-1.5 w-3.5 rounded-sm"
+              className="inline-block h-2 w-2.5 rounded-full"
               style={{ backgroundColor: color }}
               aria-hidden="true"
             />
