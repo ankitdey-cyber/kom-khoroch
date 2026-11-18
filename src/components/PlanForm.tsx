@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import type {
   AvoidableMode,
   LangKey,
@@ -106,10 +106,24 @@ export const PlanForm: React.FC<PlanFormProps> = ({
 }) => {
   const [phrase, setPhrase] = useState<string>('');
   const [analyzing, setAnalyzing] = useState<boolean>(false);
+  const [isOnline, setIsOnline] = useState<boolean>(() =>
+    typeof navigator !== 'undefined' ? navigator.onLine : true
+  );
   const [phraseFeedback, setPhraseFeedback] = useState<{
     kind: 'ok' | 'err';
     text: string;
   } | null>(null);
+
+  useEffect(() => {
+    const handleOnline = () => setIsOnline(true);
+    const handleOffline = () => setIsOnline(false);
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
+  }, []);
 
   const metroLineCount = useMemo(
     () => network.lines.filter((l) => l.mode === 'metro').length,
@@ -136,7 +150,7 @@ export const PlanForm: React.FC<PlanFormProps> = ({
   };
 
   const applyPhrase = async (textToParse: string) => {
-    if (analyzing) return;
+    if (analyzing || !isOnline) return;
     setAnalyzing(true);
     setPhraseFeedback(null);
 
@@ -309,16 +323,30 @@ export const PlanForm: React.FC<PlanFormProps> = ({
                   </span>
                 </span>
               </label>
-              <span className="text-[11px] font-semibold text-secondary">
-                AI Route Parser
-              </span>
+              {isOnline ? (
+                <span className="text-[11px] font-semibold text-secondary">
+                  AI Route Parser
+                </span>
+              ) : (
+                <span
+                  role="status"
+                  className="rounded-full bg-surface-container-high px-2.5 py-0.5 text-[11px] font-semibold text-on-surface-variant"
+                >
+                  Needs internet
+                </span>
+              )}
             </div>
 
-            <div className="flex items-center gap-2 rounded-xl bg-surface-container-low p-1.5 transition-all focus-within:ring-2 focus-within:ring-primary/25">
+            <div
+              className={`flex items-center gap-2 rounded-xl bg-surface-container-low p-1.5 transition-all focus-within:ring-2 focus-within:ring-primary/25 ${
+                !isOnline ? 'cursor-not-allowed opacity-60' : ''
+              }`}
+            >
               <input
                 id="ai-transit-query"
                 type="text"
-                value={phrase}
+                value={isOnline ? phrase : ''}
+                disabled={!isOnline}
                 onChange={(e) => {
                   setPhrase(e.target.value);
                   if (phraseFeedback) setPhraseFeedback(null);
@@ -329,17 +357,29 @@ export const PlanForm: React.FC<PlanFormProps> = ({
                     void applyPhrase(phrase);
                   }
                 }}
-                placeholder="cheapest way from Serampore to Sector V, no bus"
-                className="min-h-[40px] min-w-0 flex-1 bg-transparent px-2.5 text-sm text-on-surface placeholder:text-on-surface-variant/65 focus:outline-none"
+                placeholder={
+                  isOnline
+                    ? 'cheapest way from Serampore to Sector V, no bus'
+                    : 'Needs internet'
+                }
+                className="min-h-[40px] min-w-0 flex-1 bg-transparent px-2.5 text-sm text-on-surface placeholder:text-on-surface-variant/65 focus:outline-none disabled:cursor-not-allowed"
               />
               <button
                 type="button"
-                disabled={analyzing}
+                disabled={analyzing || !isOnline}
                 onClick={() => void applyPhrase(phrase)}
-                className="inline-flex min-h-[40px] shrink-0 items-center gap-1.5 rounded-lg bg-primary px-3.5 py-2 text-xs font-bold text-on-primary shadow-[var(--shadow-sm)] transition-colors hover:bg-primary-container disabled:opacity-60"
+                className="inline-flex min-h-[40px] shrink-0 items-center gap-1.5 rounded-lg bg-primary px-3.5 py-2 text-xs font-bold text-on-primary shadow-[var(--shadow-sm)] transition-colors hover:bg-primary-container disabled:cursor-not-allowed disabled:opacity-60"
               >
-                <span>{analyzing ? 'Parsing...' : 'Analyze'}</span>
-                <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+                <span>
+                  {!isOnline
+                    ? 'Needs internet'
+                    : analyzing
+                      ? 'Parsing...'
+                      : 'Analyze'}
+                </span>
+                {isOnline && (
+                  <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+                )}
               </button>
             </div>
 
@@ -352,12 +392,12 @@ export const PlanForm: React.FC<PlanFormProps> = ({
                 <button
                   key={item.query}
                   type="button"
-                  disabled={analyzing}
+                  disabled={analyzing || !isOnline}
                   onClick={() => {
                     setPhrase(item.query);
                     void applyPhrase(item.query);
                   }}
-                  className="min-h-[32px] rounded-full bg-surface-container px-3 py-1 text-[11px] font-semibold text-on-surface transition-colors hover:bg-surface-container-high disabled:opacity-60"
+                  className="min-h-[32px] rounded-full bg-surface-container px-3 py-1 text-[11px] font-semibold text-on-surface transition-colors hover:bg-surface-container-high disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {item.label}
                 </button>
