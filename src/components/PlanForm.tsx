@@ -190,13 +190,20 @@ export const PlanForm: React.FC<PlanFormProps> = ({
         res.maxWalkKm !== undefined ? res.maxWalkKm : options.maxWalkKm,
     });
 
-    setPhraseFeedback({
-      kind: 'ok',
-      text:
-        res.summaryParts.length > 0
-          ? `Applied: ${res.summaryParts.join(' · ')}`
-          : 'Trip preferences updated.',
-    });
+    if (res.fallbackNotice) {
+      setPhraseFeedback({
+        kind: 'err',
+        text: res.fallbackNotice,
+      });
+    } else {
+      setPhraseFeedback({
+        kind: 'ok',
+        text:
+          res.summaryParts.length > 0
+            ? `Applied: ${res.summaryParts.join(' · ')}`
+            : 'Trip preferences updated.',
+      });
+    }
   };
 
   const sliderReadout =

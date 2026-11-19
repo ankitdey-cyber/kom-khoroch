@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import type { LangKey, ModeKey } from '../types';
 import {
   formatRupee,
@@ -12,11 +12,15 @@ import {
   CheckCircle2,
   ChevronDown,
   Gauge,
+  GraduationCap,
   HelpCircle,
   IndianRupee,
   ModeIcon,
   Route,
+  ShieldAlert,
   TrendingDown,
+  Truck,
+  Waves,
 } from './Icons';
 
 interface AboutScreenProps {
@@ -35,7 +39,54 @@ const MODE_ORDER: ModeKey[] = [
   'walk',
 ];
 
+const CREATOR_PROJECTS = [
+  {
+    name: 'Kom Khoroch',
+    tag: 'Transit',
+    current: true,
+    description:
+      'A budget commute planner for Kolkata that mixes local trains, metro, buses, and autos to find the cheapest route.',
+    descriptionBn:
+      'কলকাতার জন্য একটি বাজেট কমিউট প্ল্যানার, যা লোকাল ট্রেন, মেট্রো, বাস এবং অটো মিলিয়ে সবচেয়ে সাশ্রয়ী পথ খুঁজে দেয়।',
+    accentClass: 'bg-secondary-container/60 text-secondary',
+    icon: Route,
+  },
+  {
+    name: 'FloodX',
+    tag: 'Monitoring',
+    current: false,
+    description: 'A flood prediction and monitoring system.',
+    descriptionBn: 'বন্যা পূর্বাভাস ও পর্যবেক্ষণ ব্যবস্থা।',
+    accentClass: 'bg-tertiary-fixed text-tertiary',
+    icon: Waves,
+  },
+  {
+    name: 'MineVexAI',
+    tag: 'AI Vision',
+    current: false,
+    description:
+      'Helps guide the movement of trucks in mines during foggy weather conditions.',
+    descriptionBn:
+      'কুয়াশাচ্ছন্ন আবহাওয়ায় খনিতে ট্রাক চলাচলে সহায়তা করে।',
+    accentClass: 'bg-primary-fixed/70 text-primary',
+    icon: Truck,
+  },
+  {
+    name: 'Smart Rider Safety System',
+    tag: 'Safety',
+    current: false,
+    description:
+      'A smart riding system that detects crashes and sends location and a help message to family members and emergency numbers.',
+    descriptionBn:
+      'একটি স্মার্ট রাইডিং সিস্টেম, যা দুর্ঘটনার পর পরিবার ও জরুরি নম্বরে লোকেশন ও সাহায্যের বার্তা পাঠায়।',
+    accentClass: 'bg-error-container/70 text-error',
+    icon: ShieldAlert,
+  },
+] as const;
+
 export const AboutScreen: React.FC<AboutScreenProps> = ({ lang, onSetLang }) => {
+  const [photoFailed, setPhotoFailed] = useState(false);
+
   const benchmark = useMemo(() => {
     const res = planner.planTrip('HWH', 'SC5', {
       peak: true,
@@ -166,6 +217,135 @@ export const AboutScreen: React.FC<AboutScreenProps> = ({ lang, onSetLang }) => 
             <span className="text-xs font-medium text-on-surface-variant">
               Flat River Ghat Crossing
             </span>
+          </div>
+        </div>
+      </section>
+
+      {/* Creator & Projects Section */}
+      <section className="mb-8">
+        <div className="mb-5 flex flex-col gap-1">
+          <span className="text-[11px] font-bold uppercase tracking-wider text-primary">
+            Creator &amp; Portfolio
+          </span>
+          <h2 className="font-display text-2xl font-extrabold tracking-tight text-on-surface">
+            {lang === 'bn' ? 'নির্মাতা পরিচিতি' : 'About the Creator'}{' '}
+            <span className="font-normal text-on-surface-variant">
+              {lang === 'bn' ? '| About the Creator' : '| নির্মাতা পরিচিতি'}
+            </span>
+          </h2>
+        </div>
+
+        <div className="rounded-2xl bg-surface-container-lowest p-5 shadow-[var(--shadow-sm)] sm:p-6 md:p-8">
+          <div className="flex flex-col gap-6 sm:flex-row sm:items-start">
+            {/* Creator Photo */}
+            <div className="shrink-0">
+              {photoFailed ? (
+                <div
+                  className="flex h-28 w-28 flex-col items-center justify-center rounded-2xl bg-primary-fixed text-on-primary-fixed shadow-[var(--shadow-sm)] sm:h-32 sm:w-32"
+                  aria-label="Ankit Dey portrait placeholder"
+                >
+                  <span className="font-display text-3xl font-extrabold tracking-tight">
+                    AD
+                  </span>
+                  <span className="mt-0.5 text-[10px] font-bold uppercase tracking-wider text-on-primary-fixed-variant">
+                    GCETTS
+                  </span>
+                </div>
+              ) : (
+                <img
+                  src="/creator-ankit.jpg"
+                  alt="Ankit Dey speaking at GCETTS Serampore"
+                  onError={() => setPhotoFailed(true)}
+                  className="h-28 w-28 rounded-2xl object-cover object-top shadow-[var(--shadow-sm)] ring-2 ring-surface-container-high sm:h-32 sm:w-32"
+                />
+              )}
+            </div>
+
+            {/* Creator Bio */}
+            <div className="flex min-w-0 flex-1 flex-col gap-2">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="rounded bg-primary-fixed px-2 py-0.5 text-[11px] font-bold uppercase tracking-wider text-on-primary-fixed">
+                  Creator
+                </span>
+                <span className="rounded bg-secondary-container/70 px-2 py-0.5 text-[11px] font-bold text-on-secondary-fixed">
+                  GCETTS, Serampore
+                </span>
+              </div>
+
+              <h3 className="font-display text-2xl font-extrabold tracking-tight text-on-surface">
+                Ankit Dey
+              </h3>
+
+              <div className="flex items-start gap-2 text-xs font-semibold text-on-surface-variant sm:text-sm">
+                <GraduationCap
+                  className="mt-0.5 h-4 w-4 shrink-0 text-primary"
+                  aria-hidden="true"
+                />
+                <span>
+                  1st-year B.Tech, Information Technology · Govt. College of
+                  Engineering and Textile Technology (GCETTS), Serampore
+                </span>
+              </div>
+
+              <p className="mt-1 text-xs leading-relaxed text-on-surface sm:text-sm">
+                {lang === 'bn'
+                  ? 'দৈনন্দিন সমস্যার ব্যবহারিক ও AI-ভিত্তিক সমাধান তৈরি করতে আমি ভালোবাসি।'
+                  : 'I enjoy building practical, AI-powered solutions to everyday problems.'}
+              </p>
+            </div>
+          </div>
+
+          {/* Creator Projects */}
+          <div className="mt-6 border-t border-surface-container-high pt-6">
+            <div className="mb-4 flex items-center justify-between gap-2">
+              <h4 className="font-display text-base font-extrabold text-on-surface sm:text-lg">
+                {lang === 'bn' ? 'আমার প্রকল্পসমূহ' : 'My Projects'}
+              </h4>
+              <span className="text-[11px] font-bold uppercase tracking-wider text-on-surface-variant">
+                {CREATOR_PROJECTS.length} Projects
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              {CREATOR_PROJECTS.map((project) => {
+                const Icon = project.icon;
+                return (
+                  <div
+                    key={project.name}
+                    className="flex flex-col gap-2.5 rounded-xl bg-surface-container-low p-4"
+                  >
+                    <div className="flex items-center justify-between gap-2">
+                      <div className="flex items-center gap-2.5">
+                        <span
+                          className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ${project.accentClass}`}
+                        >
+                          <Icon className="h-4 w-4" aria-hidden="true" />
+                        </span>
+                        <h5 className="font-display text-sm font-extrabold text-on-surface sm:text-base">
+                          {project.name}
+                        </h5>
+                      </div>
+
+                      <span
+                        className={`shrink-0 rounded px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ${
+                          project.current
+                            ? 'bg-secondary-container text-on-secondary-fixed'
+                            : 'bg-surface-container-high text-on-surface-variant'
+                        }`}
+                      >
+                        {project.current ? 'This App' : project.tag}
+                      </span>
+                    </div>
+
+                    <p className="text-xs leading-relaxed text-on-surface-variant">
+                      {lang === 'bn'
+                        ? project.descriptionBn
+                        : project.description}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>

@@ -2,5 +2,7 @@
   "name": "Kom Khoroch",
   "description": "Budget commute planner for Kolkata and Hooghly comparing multi-modal Metro, Local Rail, Bus, Auto, Ferry, Bike taxi, and Cab fares.",
   "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
 }
