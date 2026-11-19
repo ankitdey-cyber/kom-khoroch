@@ -11,6 +11,7 @@ import {
 import {
   CheckCircle2,
   ChevronDown,
+  ExternalLink,
   Gauge,
   GraduationCap,
   HelpCircle,
@@ -20,6 +21,7 @@ import {
   ShieldAlert,
   TrendingDown,
   Truck,
+  User,
   Waves,
 } from './Icons';
 
@@ -27,6 +29,20 @@ interface AboutScreenProps {
   lang: LangKey;
   onSetLang: (lang: LangKey) => void;
 }
+
+interface CreatorPhoto {
+  src: string;
+  altEn: string;
+  altBn: string;
+}
+
+const CREATOR_PHOTOS: CreatorPhoto[] = [
+  {
+    src: '/assets/creator/creator-1.jpg',
+    altEn: 'Ankit Dey, creator of Kom Khoroch, speaking at a podium',
+    altBn: 'কম খরচের নির্মাতা অঙ্কিত দে মঞ্চে বক্তব্য রাখছেন',
+  },
+];
 
 const MODE_ORDER: ModeKey[] = [
   'metro',
@@ -619,6 +635,93 @@ export const AboutScreen: React.FC<AboutScreenProps> = ({ lang, onSetLang }) => 
               </div>
             );
           })}
+        </div>
+      </section>
+
+      {/* About the Creator */}
+      <section
+        id="creator"
+        aria-labelledby="creator-heading"
+        className="mb-8 rounded-2xl bg-surface-container-lowest p-6 shadow-[var(--shadow-sm)] md:p-8"
+      >
+        <div className="mb-5 flex flex-col gap-1">
+          <span className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-primary">
+            <User className="h-3.5 w-3.5" aria-hidden="true" />
+            <span>{lang === 'bn' ? 'নির্মাতা পরিচিতি' : 'About the Creator'}</span>
+          </span>
+          <h2
+            id="creator-heading"
+            className="font-display text-2xl font-extrabold tracking-tight text-on-surface"
+          >
+            {lang === 'bn' ? 'নির্মাতা' : 'Meet the Creator'}{' '}
+            <span className="font-normal text-on-surface-variant">
+              {lang === 'bn' ? '| Meet the Creator' : '| নির্মাতা'}
+            </span>
+          </h2>
+        </div>
+
+        <div className="flex flex-col items-center gap-6 md:flex-row md:items-start">
+          <div className="w-full max-w-[260px] shrink-0 sm:max-w-[280px]">
+            <div
+              className={`grid gap-3 ${
+                CREATOR_PHOTOS.length > 1 ? 'grid-cols-2' : 'grid-cols-1'
+              }`}
+            >
+              {CREATOR_PHOTOS.map((photo, index) => (
+                <figure
+                  key={photo.src}
+                  className={`overflow-hidden rounded-2xl bg-surface-container-low ring-1 ring-outline-variant/40 shadow-[var(--shadow-sm)] ${
+                    CREATOR_PHOTOS.length > 1 && index === 0 ? 'col-span-2' : ''
+                  }`}
+                >
+                  <img
+                    src={photo.src}
+                    alt={lang === 'bn' ? photo.altBn : photo.altEn}
+                    loading="lazy"
+                    className="aspect-square w-full object-cover object-top"
+                  />
+                </figure>
+              ))}
+            </div>
+          </div>
+
+          <div className="flex flex-1 flex-col gap-3 text-center md:text-left">
+            <div className="flex flex-wrap items-center justify-center gap-2 md:justify-start">
+              <span className="rounded bg-primary-fixed px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider text-on-primary-fixed">
+                {lang === 'bn' ? 'নির্মাতা ও ডেভেলপার' : 'Creator & Developer'}
+              </span>
+              <span className="rounded bg-secondary-container/60 px-2.5 py-0.5 text-[11px] font-bold text-on-secondary-fixed-variant">
+                Kolkata · Hooghly
+              </span>
+            </div>
+
+            <div>
+              <h3 className="font-display text-xl font-extrabold text-on-surface sm:text-2xl">
+                {lang === 'bn' ? 'অঙ্কিত দে' : 'Ankit Dey'}
+              </h3>
+              <p className="text-xs font-semibold text-on-surface-variant">
+                {lang === 'bn' ? 'Ankit Dey' : 'অঙ্কিত দে'}
+              </p>
+            </div>
+
+            <p className="max-w-2xl text-xs leading-relaxed text-on-surface-variant sm:text-sm">
+              {lang === 'bn'
+                ? 'কম খরচের নির্মাতা — কলকাতা, হাওড়া এবং হুগলির প্রতিদিনের যাত্রীদের জন্য মেট্রো, লোকাল ট্রেন, বাস, শেয়ার অটো এবং গঙ্গা ফেরির সবচেয়ে সাশ্রয়ী পথ এক জায়গায় সহজে তুলনা করার উদ্দেশ্যে তৈরি।'
+                : 'Creator of Kom Khoroch — built to help daily commuters across Kolkata, Howrah, and Hooghly compare Metro, suburban rail, bus, shared auto, and Ganga ferry routes in one place without overpaying for cabs.'}
+            </p>
+
+            <div className="mt-1 flex flex-wrap items-center justify-center gap-2 md:justify-start">
+              <a
+                href="https://github.com/ankitdey-cyber"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex min-h-[44px] min-w-[44px] items-center gap-2 rounded-xl bg-surface-container-low px-4 py-2 text-xs font-bold text-on-surface transition-colors hover:bg-surface-container-high hover:text-primary"
+              >
+                <span>GitHub (@ankitdey-cyber)</span>
+                <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 
