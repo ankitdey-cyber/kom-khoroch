@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { AboutScreen } from './components/AboutScreen';
 import { BottomNav } from './components/BottomNav';
 import { Footer } from './components/Footer';
@@ -7,6 +7,7 @@ import { PlanForm } from './components/PlanForm';
 import { ResultsScreen } from './components/ResultsScreen';
 import { RouteDetail } from './components/RouteDetail';
 import { SavedScreen } from './components/SavedScreen';
+import { SplashScreen } from './components/SplashScreen';
 import type {
   GpsOrigin,
   LangKey,
@@ -64,10 +65,15 @@ function optionsMatch(a: TripOptions, b: TripOptions): boolean {
 }
 
 export const App: React.FC = () => {
+  const [showSplash, setShowSplash] = useState<boolean>(true);
   const [activeTab, setActiveTab] = useState<TabKey>('plan');
   const [planSubView, setPlanSubView] = useState<PlanSubView>('plan');
   const [theme, setTheme] = useState<ThemeKey>(getInitialTheme);
   const [lang, setLang] = useState<LangKey>('en');
+
+  const handleSplashComplete = useCallback(() => {
+    setShowSplash(false);
+  }, []);
 
   // Default example on first load: Serampore to Salt Lake Sector V, peak hour on
   const [fromText, setFromText] = useState<string>('Serampore');
@@ -412,6 +418,8 @@ export const App: React.FC = () => {
 
   return (
     <div className="flex min-h-screen flex-col bg-surface text-on-surface">
+      {showSplash && <SplashScreen onComplete={handleSplashComplete} />}
+
       <Header
         activeTab={activeTab}
         onSelectTab={handleTabChange}
